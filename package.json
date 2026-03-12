@@ -1,0 +1,32 @@
+{
+  "name": "@stysys/design-system",
+  "version": "1.0.0",
+  "description": "Shared design system utilities for typography and design tokens",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stysys/styledsystem-ds.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "design-system",
+    "typography",
+    "type-scale",
+    "stysys"
+  ],
+  "author": "Stysys",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
+}
