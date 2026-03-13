@@ -1,0 +1,76 @@
+/* Overlay (Activation Overlay) Component Styles */
+@layer components {
+  .overlay {
+    @apply fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 backdrop-blur-md;
+  }
+  .overlay.hidden {
+    @apply hidden;
+  }
+  .overlay__card {
+    @apply flex w-full max-w-[400px] flex-col overflow-hidden rounded-2xl text-center shadow-lg;
+  }
+  .overlay__image {
+    @apply bg-surface mx-auto aspect-square h-auto w-full object-contain;
+  }
+  .overlay__content {
+    @apply bg-surface flex w-full flex-col px-4 pt-5 pb-2;
+  }
+  .overlay__content > * {
+    @apply w-full flex-1;
+  }
+  .overlay__title {
+    @apply mb-2;
+  }
+  .overlay__subtitle {
+    @apply mb-6;
+  }
+  .overlay__desc {
+    @apply space-y-4 text-left text-sm text-neutral-500;
+  }
+  .overlay__actions {
+    @apply bg-surface flex justify-between;
+  }
+  .overlay__action {
+    @apply hover:text-theme-primary cursor-pointer p-4 underline transition-colors;
+  }
+  .overlay__action--skip,
+  .onboarding__action--skip {
+    @apply text-muted hover:text-muted;
+  }
+  .overlay__action--next {
+    @apply hover:text-theme-primary;
+  }
+  .overlay__input {
+    @apply bg-canvas focus:ring-primary-500 w-full rounded-md border border-neutral-700 px-4 py-2 text-sm text-neutral-50 focus:border-transparent focus:ring-2 focus:outline-none;
+  }
+  .overlay__input--verification {
+    @apply text-center font-mono tracking-wider;
+  }
+  .overlay__input::placeholder {
+    @apply text-neutral-500;
+  }
+  .overlay__email-display {
+    @apply text-sm text-neutral-300;
+  }
+  .overlay__btn {
+    @apply mx-auto flex;
+  }
+  .overlay__btn--verify {
+    @apply bg-theme-primary;
+  }
+  .overlay__link {
+    @apply text-warning-400 text-sm;
+  }
+  .overlay__message-area {
+    @apply mt-4;
+  }
+  .overlay__message-area p {
+    @apply min-h-[20px];
+  }
+  .overlay__message {
+    @apply rounded-md p-3 text-sm;
+  }
+  .overlay__message-area--error p {
+    @apply text-error-400;
+  }
+}

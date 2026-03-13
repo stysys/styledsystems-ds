@@ -1,0 +1,57 @@
+@import "./_theme.css";
+
+@layer components {
+  /* --- Development Toggle --- */
+  /* Development Toggle Styles */
+  .development-toggle {
+    @apply bg-warning-900 border-warning-700 mb-4 rounded-lg border p-3 text-xs;
+  }
+
+  .development-toggle__header {
+    @apply text-warning-200 mb-2 font-bold;
+  }
+
+  .development-toggle__controls {
+    @apply flex items-center gap-2;
+  }
+
+  .development-toggle__switch {
+    @apply flex cursor-pointer items-center gap-2;
+  }
+
+  .development-toggle__switch input[type="checkbox"] {
+    /* Tailwind can't do appearance, background, border-radius, width, height, transition, position */
+    appearance: none;
+    background: var(--color-neutral-700);
+    cursor: pointer;
+    border-radius: 10px;
+    width: 36px;
+    height: 20px;
+    transition: background-color 0.2s;
+    position: relative;
+  }
+
+  .development-toggle__switch input[type="checkbox"]:checked {
+    background: var(--color-success-600);
+  }
+
+  .development-toggle__switch input[type="checkbox"]:before {
+    content: "";
+    background: #fff;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    transition: transform 0.2s;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+  }
+
+  .development-toggle__switch input[type="checkbox"]:checked:before {
+    transform: translateX(16px);
+  }
+
+  .development-toggle__label {
+    @apply text-warning-200 font-medium;
+  }
+}

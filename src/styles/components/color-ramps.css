@@ -1,0 +1,6 @@
+/* Color Ramp (color-dot and related) styles */
+@layer components {
+  .color-dot {
+    @apply mr-2 inline-block h-3 w-3 rounded-full border border-neutral-800;
+  }
+}

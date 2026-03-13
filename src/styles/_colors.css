@@ -1,0 +1,53 @@
+/* 
+ * Plugin Suite Color System
+ * Foundation colors for the entire plugin package
+ * Each plugin can inherit and extend this base system
+ */
+
+:root {
+  /* === BRAND IDENTITY === */
+  /* Primary brand color - main identity across all plugins */
+  --base-primary: #e7ff0f;
+
+  /* Secondary brand color - trust, reliability */
+  --base-secondary: #3b82f6;
+
+  /* Accent brand color - excitement, highlights */
+  --base-accent: #f50b97;
+
+  /* === NEUTRALS === */
+  /* Neutral colors for UI structure and text */
+  --base-neutral: #1b1b16;
+
+  /* === SEMANTIC COLORS === */
+  /* Success - confirmations, positive actions */
+  --base-success: #10b981;
+
+  /* Warning - cautions, important notices */
+  --base-warning: #f59e0b;
+
+  /* Error - problems, failures */
+  --base-error: #ef4444;
+
+  /* === EXTENDED PALETTE === */
+  /* Info - informational content, help, tips */
+  --base-info: #06d44b;
+
+  /* Purple - premium features, pro content */
+  --base-premium: #8b5cf6;
+
+  /* Indigo - data, analytics, insights */
+  --base-data: #6366f1;
+
+  /* Emerald - growth, progress, achievements */
+  --base-growth: #059669;
+
+  /* Orange - creativity, design tools */
+  --base-creative: #ea580c;
+
+  /* Pink - community, social features */
+  --base-social: #ec4899;
+
+  /* Teal - tools, utilities, productivity */
+  --base-utility: #0d9488;
+}

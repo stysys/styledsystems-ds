@@ -1,0 +1,143 @@
+@import "./_theme.css";
+@utility grid-12 {
+  @apply grid grid-cols-12;
+}
+@layer base {
+  /* Ensure complete coverage and override Figma iframe defaults */
+  html {
+    @apply m-0 p-0;
+  }
+  body {
+    @apply bg-canvas text-foreground m-0 h-full w-full p-4 font-sans text-sm;
+  }
+  .header {
+    @apply bg-canvas border-surface fixed inset-x-0 top-0 z-[9999] items-center border-b shadow-xl shadow-neutral-950;
+  }
+  .header__inner {
+    @apply mx-auto flex justify-between px-4;
+  }
+}
+@layer base {
+  /* Section containers for preview, config, controls */
+  section[class*="-preview"],
+  section[class*="-config"],
+  section[class*="-controls"] {
+    @apply bg-surface flex flex-col gap-3 rounded-sm p-2;
+  }
+}
+@layer components {
+  /* --- Styled Systems Info (Footer Dropdown) --- */
+  .styled-systems-info {
+    @apply flex items-center;
+  }
+  .styled-systems-info svg {
+    @apply mr-2 h-4 w-4;
+  }
+  .styled-systems-info__label {
+    margin-right: 0.5em;
+  }
+  /* --- Tab Navigation --- */
+  .tabs {
+    @apply flex items-center justify-between gap-x-4;
+  }
+  .tabs__nav {
+    @apply flex gap-x-4;
+  }
+  .tab {
+    @apply cursor-pointer bg-transparent py-2 text-sm font-medium text-neutral-400 transition-colors;
+  }
+
+  .tab:hover {
+    @apply text-neutral-200;
+  }
+
+  .tab--active {
+    @apply text-primary-500 border-primary-500 border-b-2;
+  }
+
+  .tab--active {
+    @apply text-theme-primary border-theme-primary hover:text-theme-hover hover:border-theme-hover border-b-2;
+  }
+
+  .tab--active {
+    @apply text-theme-primary border-theme-primary hover:text-theme-hover hover:border-theme-hover border-b-2;
+  }
+
+  .tab--disabled {
+    @apply cursor-not-allowed opacity-50;
+  }
+
+  .tab--disabled:hover {
+    @apply text-neutral-400;
+  }
+
+  /* --- Tab Content --- */
+  .tab-content {
+    @apply hidden;
+  }
+  .tab-content {
+    /* Inherits styles from shared-ui */
+    display: none;
+  }
+  .tab-content--active {
+    @apply block;
+  }
+
+  .tab-content--active {
+    /* Inherits styles from shared-ui */
+    display: block;
+  }
+
+  .account-btn {
+    @apply flex h-6 w-6 shrink-0 items-center justify-center text-lg transition-colors hover:bg-gray-100;
+  }
+
+  .account-btn-wrapper {
+    @apply flex items-center gap-3 pr-4;
+  }
+
+  .account-btn-email {
+    @apply text-sm font-medium text-gray-700;
+  }
+
+  /* --- Footer --- */
+  .footer {
+    @apply text-muted bg-surface fixed inset-x-0 bottom-0 left-0 mt-4 flex flex-col items-center justify-between pt-2 pb-2;
+  }
+  .footer__inner {
+    @apply w-full px-4;
+  }
+  .btn-wrapper {
+    @apply flex w-full justify-between;
+  }
+  .footer__info {
+    @apply fixed right-0 bottom-0 left-0 z-100 mt-3 flex w-full items-center justify-between px-4 pb-3 text-xs text-neutral-700;
+  }
+  .footer__info a {
+    @apply cursor-pointer no-underline transition-colors hover:text-neutral-600;
+  }
+  .footer__credits {
+    @apply right-0 bottom-0 left-0 z-100 flex w-full flex-1 items-center justify-end gap-4 text-xs text-neutral-700;
+  }
+  .footer__credits a {
+    @apply cursor-pointer no-underline transition-colors hover:text-neutral-600;
+  }
+  .footer__credits {
+    @apply flex gap-4;
+  }
+  .footer__version,
+  .footer__copyright {
+    @apply text-xs;
+  }
+  .footer__brand {
+    @apply flex-1 text-xs;
+  }
+  #credits-overlay .overlay__content,
+  #gd-foundry-overlay .overlay__content {
+    @apply text-left;
+  }
+  #credits-overlay .overlay__actions,
+  #gd-foundry-overlay .overlay__actions {
+    @apply justify-center;
+  }
+}

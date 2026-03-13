@@ -1,0 +1,53 @@
+@import "./_theme.css";
+
+@utility headings {
+  @apply font-display leading-headings;
+}
+@utility body {
+  @apply font-body leading-body;
+}
+@utility label {
+  @apply headings text-xs font-medium;
+}
+@layer components {
+  label {
+    @apply label;
+  }
+}
+@layer base {
+  h2.title {
+    @apply text-4xl;
+  }
+  h3[class*="__title"] {
+    @apply text-sm;
+  }
+
+  #main-ui {
+    @apply relative w-full pt-8;
+  }
+
+  .info-section__title {
+    @apply font-display text-muted mb-3 text-xs font-medium tracking-wider;
+  }
+
+  .form__label {
+  }
+
+  .scale-row__label {
+    @apply font-display font-normal;
+  }
+
+  p a {
+    @apply text-theme-primary font-bold;
+  }
+}
+@layer components {
+  /* Shared label classes for form and item labels */
+  .form__label,
+  .item__label {
+    @apply mb-2 text-sm font-medium;
+  }
+  .item__input {
+    @apply font-body leading-[1.5];
+  }
+}

@@ -1,0 +1,40 @@
+/* Type Scale Config Component */
+@layer base {
+  .type-scale-preview-controls {
+  }
+  .type-scale-config__grid {
+    @apply mb-3 flex flex-row gap-3;
+  }
+  .type-scale-config__grid--columns {
+    @apply grid grid-cols-2 gap-3;
+  }
+  .type-scale-config__grid--row {
+    @apply flex flex-wrap overflow-hidden;
+  }
+  .type-scale-config__group {
+    @apply z-50 grid grid-cols-12 gap-3 rounded border border-neutral-100 p-2;
+  }
+  .type-scale-config__group--min {
+    @apply border-l-4 border-blue-400;
+  }
+  .type-scale-config__group--max {
+    @apply border-l-4 border-red-400;
+  }
+  .type-scale-config__field {
+    @apply col-span-4 gap-2;
+  }
+  .type-scale-config__label {
+  }
+  .type-scale-config__input {
+    @apply w-full rounded border border-slate-300 px-2 py-1.5 text-sm outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-100;
+  }
+  .type-scale-config__info {
+    @apply text-xs leading-relaxed;
+  }
+  .type-scale-config__info strong {
+    @apply font-semibold;
+  }
+  .type-scale-config__input:focus {
+    @apply border-blue-500 ring-4 ring-blue-100 outline-none;
+  }
+}

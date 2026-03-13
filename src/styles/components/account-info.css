@@ -1,0 +1,28 @@
+/* =========================
+   ACCOUNT INFO SECTION
+   ========================= */
+
+.account-info-section {
+  @apply mb-6 font-mono;
+}
+.account-info-item {
+  @apply border-subtle flex justify-between border-b py-2;
+}
+.account-info-item__label {
+  @apply text-sm;
+}
+.account-info-item__value {
+  @apply text-sm font-medium;
+}
+.account-info-item__value.account-info-item__value--verified {
+  @apply text-green-500;
+}
+.account-info-item__value.account-info-item__value--unverified {
+  @apply text-orange-400;
+}
+.account-info-links {
+  @apply flex flex-col gap-2;
+}
+.account-info-link {
+  @apply text-theme-primary hover:text-theme-hover text-sm underline transition-colors;
+}

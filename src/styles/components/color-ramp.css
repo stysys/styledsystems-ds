@@ -1,0 +1,102 @@
+@import "./button.css";
+
+/* Color Ramp and Swatch styles (moved from _layout.css) */
+@layer components {
+  .picker-modal {
+    @apply pointer-events-auto fixed top-0 right-0 bottom-0 left-0 z-[9999] hidden items-center justify-center bg-black/30;
+  }
+  .picker-modal__title {
+    @apply p-2 uppercase;
+  }
+  .picker-modal__content {
+    @apply flex flex-col items-center gap-0 rounded-xl shadow-lg shadow-black/20;
+  }
+
+  .picker-modal .IroSlider {
+    margin-top: 0 !important;
+  }
+  .picker-modal .IroSliderGradient,
+  .picker-modal .IroBox {
+    border-radius: 0 !important;
+  }
+  .picker-modal .picker-modal__input {
+    @apply w-full text-center;
+  }
+
+  .picker-modal .btn-wrapper {
+    @apply flex gap-2 p-2;
+  }
+  .picker-modal .btn-wrapper .btn {
+    @apply w-full;
+  }
+
+  .color-ramps {
+    @apply flex flex-col gap-2;
+  }
+  .color-ramp {
+    @apply flex flex-col gap-0 overflow-hidden rounded-lg;
+  }
+  .color-ramp-section {
+    @apply flex flex-col overflow-hidden rounded transition-[border] duration-200;
+  }
+  .color-ramp-section.color-ramp--changed {
+    @apply border-4 border-blue-500;
+  }
+  .color-ramp--changed {
+    @apply border-4 border-blue-500;
+  }
+  .color-ramp__label {
+    @apply flex cursor-pointer items-center justify-between gap-2 px-3 py-1 text-xs font-semibold transition-all hover:opacity-80;
+    background-color: var(--label-bg, #000);
+    color: var(--label-text, #fff);
+  }
+  .color-ramp__label input {
+    @apply w-40 max-w-40;
+  }
+  .color-ramp__label code {
+    @apply font-mono text-xs opacity-75;
+  }
+  .color-ramp__name-container {
+    @apply flex min-w-0 flex-1 items-center gap-1.5;
+  }
+  .color-ramp__name {
+    @apply flex-1 cursor-text overflow-hidden text-ellipsis;
+  }
+  .color-ramp__edit-btn {
+    @apply cursor-pointer border-none bg-none px-1 py-0.5 text-xs opacity-60 transition-opacity duration-200;
+  }
+  .color-ramp__edit-btn:hover {
+    @apply opacity-100;
+  }
+  .color-ramp__edit-btn--locked {
+    @apply cursor-not-allowed opacity-30;
+  }
+  .color-ramp__edit-btn--locked:hover {
+    @apply opacity-30;
+  }
+  .color-ramp__hex-code {
+    @apply cursor-pointer rounded px-1.5 py-0.5 text-xs opacity-80 transition-colors duration-200;
+  }
+  .color-ramp__hex-code:hover {
+    @apply bg-black/10;
+  }
+  .color-ramp__name-input {
+    @apply box-border min-w-0 flex-1 border-b-2 border-none border-current bg-inherit px-1 py-0 text-inherit;
+  }
+  .color-ramp__swatches {
+    @apply flex h-10 gap-0;
+  }
+  .color-swatch {
+    @apply flex flex-1 cursor-pointer flex-col items-center justify-between border-r border-neutral-200/50 p-1 text-xs text-black uppercase transition-transform hover:scale-y-125;
+  }
+  .color-swatch__label {
+    @apply self-start text-xs leading-none;
+  }
+  .color-swatch__hex {
+    @apply self-end text-xs leading-none;
+  }
+  .color-swatch__label,
+  .color-swatch__hex {
+    @apply mix-blend-luminosity;
+  }
+}

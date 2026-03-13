@@ -1,0 +1,26 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+@import "./_theme.css";
+
+@import "tailwindcss";
+
+@layer components {
+  /* Dimmed/disabled state for text style group */
+  .text-style-group--disabled {
+    @apply pointer-events-none cursor-not-allowed opacity-50;
+    /* Tailwind can't do filter: grayscale(0.7); */
+    filter: grayscale(0.7);
+  }
+  .input-wrapper--disabled {
+    @apply pointer-events-none cursor-not-allowed opacity-50;
+    /* Tailwind can't do filter: grayscale(0.7); */
+    filter: grayscale(0.7);
+  }
+  /* Error message for code input */
+  .code-error-message {
+    @apply mt-1 min-h-0 text-[0.95em] text-red-700 transition-opacity duration-200;
+    /* Tailwind can't do color: #d32f2f; so use closest text-red-700 */
+  }
+  .code-error-message.hidden {
+    @apply hidden opacity-0;
+  }
+}

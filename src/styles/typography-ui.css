@@ -1,0 +1,5 @@
+@import "./_theme.css";
+@import "./components/typography-area.css";
+@import "./components/type-scale-config.css";
+@import "./components/type-scale-preview-display.css";
+@import "./components/type-scale-preview-controls.css";

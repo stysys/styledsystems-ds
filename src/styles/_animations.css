@@ -1,0 +1,16 @@
+/* Custom keyframes and animation variables for all plugins */
+
+@theme inline {
+  --animate-wiggle: wiggle 2s ease-in-out infinite;
+
+  @keyframes wiggle {
+    0%,
+    100% {
+      /* Tailwind can't set color via @apply, keep as is */
+      color: var(--color-secondary-200);
+    }
+    50% {
+      color: var(--color-white);
+    }
+  }
+}

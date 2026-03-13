@@ -1,0 +1,19 @@
+/* Type Scale Preview Display Component */
+@import "./../_theme.css";
+@layer component {
+  .type-scale-preview {
+    @apply flex flex-col gap-2 overflow-hidden;
+  }
+  .type-scale-preview__row {
+    @apply border-subtle hover:bg-subtle grid grid-cols-4 items-start gap-2 rounded border p-3 transition-colors duration-200;
+  }
+
+  .type-scale-preview__label {
+    @apply headings leading-0;
+    line-height: 100% !important;
+    font-family: var(--font-display) !important;
+  }
+  .type-scale-preview__value {
+    @apply text-right font-mono text-xs;
+  }
+}

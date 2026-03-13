@@ -1,7 +1,6 @@
 /**
  * @stysys/design-system
- * Shared design system utilities for typography and design tokens
+ * Shared design system foundation: styles, fonts, and type definitions
  */
 
-export * from "./typography/typography";
 export * from "./types/index";

@@ -1,0 +1,42 @@
+/* Type Scale Preview Controls Component */
+@layer component {
+  .type-scale-preview-section {
+    @apply flex flex-col gap-4;
+  }
+  .type-scale-preview-section__controls {
+  }
+  .type-scale-preview-section__display {
+  }
+  .type-scale-preview-controls {
+    @apply flex justify-between;
+  }
+  .type-scale-preview-controls__btn-group {
+    @apply flex items-center justify-between gap-4;
+  }
+  .type-scale-preview-controls__btn-set {
+    @apply flex items-center gap-1;
+  }
+  .type-scale-preview-controls__btn {
+    @apply h-5 w-5 cursor-pointer rounded-full border border-slate-300 bg-slate-50 p-0 text-xs transition-colors duration-200;
+  }
+  .type-scale-preview-controls__btn:hover {
+    @apply bg-slate-100;
+  }
+  .type-scale-preview-controls__btn:active {
+    @apply bg-slate-200;
+  }
+  .type-scale-preview-controls__btn--remove-small {
+    @apply text-blue-400;
+  }
+  .type-scale-preview-controls__btn--add-small {
+    @apply text-blue-400;
+  }
+  .type-scale-preview-controls__btn--remove-large {
+    @apply text-red-400;
+  }
+  .type-scale-preview-controls__btn--add-large {
+    @apply text-red-400;
+  }
+  .type-scale-preview-controls__label {
+  }
+}

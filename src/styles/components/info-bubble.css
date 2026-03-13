@@ -1,0 +1,23 @@
+/* Info Bubble and Disabled Input Styles */
+@layer components {
+  .info-bubble {
+    @apply absolute top-full left-0 z-10 mt-2 w-9 rounded-lg bg-neutral-900 px-3 py-1.5 text-xs whitespace-nowrap text-white shadow-lg transition-opacity duration-200;
+    transform: translateY(0);
+    opacity: 0;
+    pointer-events: none;
+  }
+  .input-wrapper--disabled {
+    @apply pointer-events-auto relative cursor-not-allowed opacity-50;
+  }
+  .input-wrapper--disabled:hover .info-bubble,
+  #text-style-group.input-wrapper--disabled:hover .info-bubble {
+    @apply pointer-events-auto opacity-100;
+  }
+  .input-wrapper--disabled input:disabled {
+    @apply pointer-events-none;
+  }
+  #text-style-group.input-wrapper--disabled {
+    @apply pointer-events-none cursor-not-allowed opacity-50;
+    filter: grayscale(0.7);
+  }
+}

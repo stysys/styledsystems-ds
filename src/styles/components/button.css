@@ -1,0 +1,37 @@
+/* Button styles (moved from _components.css) */
+@utility btn {
+  @apply flex cursor-pointer rounded-md p-4 py-2 font-mono text-xs font-medium uppercase transition-all duration-200;
+}
+
+@layer components {
+  button {
+  }
+  .btn {
+    @apply inline-flex w-fit rounded-md border px-6 py-2 text-sm font-semibold tracking-wider transition-all duration-200;
+  }
+  .btn:hover {
+    @apply scale-[1.02] shadow-lg;
+  }
+  .btn:active {
+    @apply scale-[0.98];
+  }
+  .btn--primary {
+    @apply bg-neutral-50 text-neutral-950;
+  }
+  .btn--primary:hover {
+    @apply bg-neutral-100 shadow-neutral-900/20;
+  }
+  .btn--secondary {
+    @apply border-2 border-neutral-800 bg-transparent text-white;
+  }
+  .btn--secondary:hover {
+    @apply border-neutral-700 bg-neutral-800 text-neutral-100;
+  }
+  .btn--cancel {
+    @apply bg-green-500;
+  }
+
+  .btn-wrapper {
+    @apply flex w-full justify-between;
+  }
+}

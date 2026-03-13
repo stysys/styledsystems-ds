@@ -1,0 +1,19 @@
+/* === Info Icon & Tooltips === */
+.info-icon {
+  @apply text-muted ml-1 cursor-help;
+}
+[data-tooltip] {
+  @apply relative cursor-help;
+}
+[data-tooltip]:hover::after {
+  content: attr(data-tooltip);
+  @apply bg-surface-elevated pointer-events-none absolute top-full left-0 z-50 mt-2 rounded-md border border-neutral-800 px-3 py-2 text-xs font-medium text-neutral-100 shadow-lg;
+  width: 10rem;
+  max-width: 15rem;
+  white-space: normal;
+  word-wrap: break-word;
+}
+[data-tooltip]:hover::before {
+  content: "";
+  @apply pointer-events-none absolute top-full left-2 z-100 mt-1 border-4 border-transparent border-b-neutral-800;
+}
