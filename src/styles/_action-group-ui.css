@@ -3,67 +3,64 @@
  * Semantic container for CRUD action buttons
  * Used across tabs for create, update, delete, sync operations
  */
-@layer components {
-  .action-group {
-    @apply fixed bottom-20 left-0 w-full px-4;
-  }
+
+/* Block: action-group */
+.action-group {
+  @apply mt-2 flex gap-2;
 }
-@layer component {
-  /* Block: action-group */
-  .action-group {
-    @apply mt-2 flex gap-2;
-  }
 
-  /* Element: button */
-  .action-group__btn {
-    @apply flex-1 cursor-pointer rounded border-none px-4 py-2 text-sm font-medium transition-all duration-200;
-  }
+/* Element: button */
+.action-group__btn {
+  flex: 1;
+  cursor: pointer;
+  @apply rounded border-none text-sm font-medium transition-all duration-200;
+  padding: calc(var(--spacing-2) * 1) calc(var(--spacing-4) * 1);
+}
 
-  .action-group__btn:hover {
-    @apply shadow-md;
-  }
+.action-group__btn:hover {
+  @apply shadow-md;
+}
 
-  .action-group__btn:active {
-    @apply scale-98;
-  }
+.action-group__btn:active {
+  @apply scale-98;
+}
 
-  .action-group__btn:disabled {
-    @apply cursor-not-allowed opacity-60;
-  }
+.action-group__btn:disabled {
+  @apply cursor-not-allowed opacity-60;
+}
 
-  /* Modifier: primary action */
-  .action-group__btn--primary {
-    @apply bg-blue-500 text-white;
-  }
+/* Modifier: primary action */
+.action-group__btn--primary {
+  @apply bg-blue-500 text-white;
+}
 
-  .action-group__btn--primary:hover:not(:disabled) {
-    @apply bg-blue-600;
-  }
+.action-group__btn--primary:hover:not(:disabled) {
+  @apply bg-blue-600;
+}
 
-  /* Modifier: secondary action */
-  .action-group__btn--secondary {
-    @apply bg-slate-200 text-slate-800;
-  }
+/* Modifier: secondary action */
+.action-group__btn--secondary {
+  @apply bg-slate-200 text-slate-800;
+}
 
-  .action-group__btn--secondary:hover:not(:disabled) {
-    @apply bg-slate-300;
-  }
+.action-group__btn--secondary:hover:not(:disabled) {
+  @apply bg-slate-300;
+}
 
-  /* Modifier: danger action */
-  .action-group__btn--danger {
-    @apply bg-red-500 text-white;
-  }
+/* Modifier: danger action */
+.action-group__btn--danger {
+  @apply bg-red-500 text-white;
+}
 
-  .action-group__btn--danger:hover:not(:disabled) {
-    @apply bg-red-600;
-  }
+.action-group__btn--danger:hover:not(:disabled) {
+  @apply bg-red-600;
+}
 
-  /* Modifier: success action */
-  .action-group__btn--success {
-    @apply bg-emerald-500 text-white;
-  }
+/* Modifier: success action */
+.action-group__btn--success {
+  @apply bg-emerald-500 text-white;
+}
 
-  .action-group__btn--success:hover:not(:disabled) {
-    @apply bg-emerald-600;
-  }
+.action-group__btn--success:hover:not(:disabled) {
+  @apply bg-emerald-600;
 }
