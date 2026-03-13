@@ -16,10 +16,10 @@
 
 /* GDGaioTrial Variable Italic */
 @font-face {
-  font-family: "GDOctoVF";
+  font-family: "GDOctioVF";
   src:
-    url("../fonts/GDOctoVF.woff2") format("woff2"),
-    url("../fonts/GDOctoVF.woff") format("woff");
+    url("../fonts/GDOctioVF.woff2") format("woff2"),
+    url("../fonts/GDOctioVF.woff") format("woff");
   font-weight: 100 900;
   font-style: italic;
   font-display: swap;
@@ -34,7 +34,7 @@
   --spacing-body: 1.25;
   --font-body: "GDGaioVF", sans-serif;
   --font-display: "GDGaioVF", sans-serif;
-  --font-mono: "GDOctoVF", monospace;
+  --font-mono: "GDOctioVF", monospace;
 
   --font-weight-bold: 600;
 
