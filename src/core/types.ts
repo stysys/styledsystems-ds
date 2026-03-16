@@ -71,7 +71,7 @@ export interface VerifyActivationRequest {
   platformId: PlatformId;
   platformUserId: string;
   email: string;
-  code: string;
+  verificationCode: string;
   pluginId: string;
 }
 
