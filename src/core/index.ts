@@ -4,10 +4,10 @@
  */
 
 // Activation functionality
-export * from "./activation";
+export * from "./activation.js";
 
 // Types & interfaces
-export * from "./types";
+export * from "./types.js";
 
 // User utilities
-export * from "./user";
+export * from "./user.js";

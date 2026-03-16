@@ -13,7 +13,7 @@ import type {
   VerifyActivationRequest,
   TrackUsageRequest,
   APIResponse,
-} from "./types";
+} from "./types.js";
 
 const API_BASE_URL = "https://styled.systems";
 

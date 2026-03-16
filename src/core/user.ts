@@ -2,7 +2,7 @@
  * User-related utilities
  */
 
-import type { PlatformId } from "./types";
+import type { PlatformId } from "./types.js";
 
 /**
  * Get the current user's ID from the environment

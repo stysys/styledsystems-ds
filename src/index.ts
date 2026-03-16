@@ -4,7 +4,7 @@
  */
 
 // Main types and components
-export * from "./types/index";
+export * from "./types/index.js";
 
 // Activation system (namespaced to avoid conflicts)
-export * as activation from "./core/index";
+export * as activation from "./core/index.js";
