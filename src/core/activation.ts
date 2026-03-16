@@ -152,7 +152,11 @@ export async function fetchActivationStatus(
       platformUserId,
       email: data.email || null,
       emailVerified,
-      subscriptionTier: (data.subscriptionTier || "free") as "free" | "pro" | "bundle" | "lifetime",
+      subscriptionTier: (data.subscriptionTier || "free") as
+        | "free"
+        | "pro"
+        | "bundle"
+        | "lifetime",
       hasBasicAccess: data.hasBasicAccess || false,
       hasCSSExport: calculatedHasCSSExport,
       hasProFeatures: data.hasProFeatures || false,
