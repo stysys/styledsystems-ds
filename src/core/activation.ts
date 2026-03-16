@@ -121,7 +121,7 @@ export async function fetchActivationStatus(
   }
 
   try {
-    const response = await fetch(`${API_BASE_URL}/api/${platformId}`, {
+    const response = await fetch(`${API_BASE_URL}/api/figma`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -185,7 +185,7 @@ export async function ensureUser(
   }
 
   try {
-    const response = await fetch(`${API_BASE_URL}/api/${request.platformId}`, {
+    const response = await fetch(`${API_BASE_URL}/api/figma`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -222,7 +222,7 @@ export async function requestActivation(
   }
 
   try {
-    const response = await fetch(`${API_BASE_URL}/api/${request.platformId}`, {
+    const response = await fetch(`${API_BASE_URL}/api/figma`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -264,7 +264,7 @@ export async function verifyActivation(
   }
 
   try {
-    const response = await fetch(`${API_BASE_URL}/api/${request.platformId}`, {
+    const response = await fetch(`${API_BASE_URL}/api/figma`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -302,7 +302,7 @@ export async function trackUsage(request: TrackUsageRequest): Promise<void> {
   }
 
   try {
-    const response = await fetch(`${API_BASE_URL}/api/${request.platformId}`, {
+    const response = await fetch(`${API_BASE_URL}/api/figma`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
