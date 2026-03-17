@@ -14,7 +14,7 @@
     "access": "public"
   },
   "scripts": {
-    "build": "tsc && npm run copy:styles && npm run copy:assets && npm run copy:types",
+    "build": "tsc && node fix-imports.cjs && npm run copy:styles && npm run copy:assets && npm run copy:types",
     "copy:styles": "mkdir -p dist/styles/components && cp src/styles/*.css dist/styles/ 2>/dev/null || true && cp -r src/styles/components/*.css dist/styles/components/ 2>/dev/null || true",
     "copy:assets": "mkdir -p dist/fonts && cp -r src/fonts/* dist/fonts/ 2>/dev/null || true",
     "copy:types": "mkdir -p dist/types && cp -r src/types/* dist/types/ 2>/dev/null || true",
