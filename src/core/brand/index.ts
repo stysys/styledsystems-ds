@@ -2,4 +2,4 @@
  * @stysys/core/brand - Brand system exports
  */
 
-export * from "./brand";
+export * from "./brand.js";

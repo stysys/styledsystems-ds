@@ -3,9 +3,9 @@
  * Core typography utilities (platform-agnostic)
  */
 
-export * from "./typography";
-export * from "./typography-semantic";
-export * from "./typography-css";
+export * from "./typography.js";
+export * from "./typography-semantic.js";
+export * from "./typography-css.js";
 
 // Platform-specific exports - import separately in plugins that need them
 // Figma-specific UI & operations

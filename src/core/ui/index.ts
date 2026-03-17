@@ -2,10 +2,10 @@
  * @styled/core/ui - UI components exports
  */
 
-export * from "./tabs";
-export * from "./footer-component";
-export * from "./footer-overlays";
-export * from "./info-component";
-export * from "./plugin-info";
-export * from "./action-group-ui";
-export { initializeOverlayHandlers } from "./overlay";
+export * from "./tabs.js";
+export * from "./footer-component.js";
+export * from "./footer-overlays.js";
+export * from "./info-component.js";
+export * from "./plugin-info.js";
+export * from "./action-group-ui.js";
+export { initializeOverlayHandlers } from "./overlay.js";

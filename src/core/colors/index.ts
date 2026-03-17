@@ -3,10 +3,10 @@
  * Core color utilities (platform-agnostic)
  */
 
-export * from "./colors";
-export * from "./color-scale";
-export * from "./color-picker-modal-ui";
-export * from "./database-colors";
+export * from "./colors.js";
+export * from "./color-scale.js";
+export * from "./color-picker-modal-ui.js";
+export * from "./database-colors.js";
 
 // Platform-specific operations - import separately in plugins that need them
 // Figma-specific

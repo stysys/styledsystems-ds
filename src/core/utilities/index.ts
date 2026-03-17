@@ -2,5 +2,5 @@
  * @styled/core/utilities - Utility functions and helpers exports
  */
 
-export * from "./utilities";
-export * from "./preview-helpers";
+export * from "./utilities.js";
+export * from "./preview-helpers.js";
