@@ -1,10 +1,25 @@
 /**
  * @stysys/design-system
- * Shared design system foundation: styles, fonts, and type definitions
+ * Shared design system foundation: styles, fonts, types, and comprehensive core modules
  */
 
-// Main types and components
-export * from "./types/index.js";
+// Core Functionality (includes types)
+export * from "./core/activation.js";
+export * from "./core/types.js";
+export * from "./core/user.js";
+export * from "./core/utilities/index.js";
 
-// Activation system (namespaced to avoid conflicts)
-export * as activation from "./core/index.js";
+// Tabs & Navigation
+export * from "./core/ui/index.js";
+
+// Brand System
+export * from "./core/brand/index.js";
+
+// Color System
+export * from "./core/colors/index.js";
+
+// Typography System
+export * from "./core/typography/index.js";
+
+// Namespaced activation for backward compatibility
+export * as activation from "./core/activation.js";

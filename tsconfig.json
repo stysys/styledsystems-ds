@@ -14,5 +14,15 @@
     "moduleResolution": "node"
   },
   "include": ["src"],
-  "exclude": ["node_modules", "dist"]
+  "exclude": [
+    "node_modules",
+    "dist",
+    "src/core/colors/figma-*.ts",
+    "src/core/colors/color-storage.ts",
+    "src/core/typography/typography-figma-*.ts",
+    "src/core/typography/typography-fonts.ts",
+    "src/core/typography/typography-mappings.ts",
+    "src/core/typography/ensure-core-lineheight-vars.ts",
+    "src/core/typography/type-scale-*-ui.ts"
+  ]
 }

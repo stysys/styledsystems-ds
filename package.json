@@ -1,7 +1,7 @@
 {
   "name": "@stysys/design-system",
-  "version": "1.0.9",
-  "description": "Shared design system utilities for typography and design tokens",
+  "version": "1.1.0",
+  "description": "Comprehensive design system utilities: colors, typography, UI components, brand system, and design tokens",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "type": "module",
