@@ -20,34 +20,65 @@ function walkDir(dir, callback) {
   });
 }
 
+function resolveImportPath(importPath, fromDir) {
+  // Skip already fixed imports, external packages, or data URLs
+  if (importPath.includes('.js') || importPath.startsWith('@') || importPath.startsWith('data:')) {
+    return null;
+  }
+  // Skip built-in Node modules
+  if (importPath.startsWith('node:') || ['path', 'fs', 'util', 'stream', 'events'].includes(importPath)) {
+    return null;
+  }
+  // Only process relative imports
+  if (!importPath.startsWith('.')) {
+    return null;
+  }
+  
+  // Resolve the import path relative to the current file's directory
+  const resolvedPath = path.resolve(fromDir, importPath);
+  
+  // Check if it resolves to a directory with an index.js
+  if (fs.existsSync(resolvedPath) && fs.statSync(resolvedPath).isDirectory()) {
+    const indexPath = path.join(resolvedPath, 'index.js');
+    if (fs.existsSync(indexPath)) {
+      return importPath + '/index.js';
+    }
+  }
+  
+  // Check if it resolves to a .js file directly
+  if (fs.existsSync(resolvedPath + '.js')) {
+    return importPath + '.js';
+  }
+  
+  // Check if it resolves to a .ts file (will be .js after compilation)
+  if (fs.existsSync(resolvedPath + '.ts')) {
+    return importPath + '.js';
+  }
+  
+  // Default: add .js (could be an external module or error will appear later)
+  return importPath + '.js';
+}
+
 function fixImportExtensions(filePath) {
   if (!filePath.endsWith('.js')) return;
   
   let content = fs.readFileSync(filePath, 'utf8');
   const originalContent = content;
+  const fromDir = path.dirname(filePath);
   
-  // Fix from ... import patterns: from "path" -> from"path.js"
-  // But skip if already has .js or is external (like @stysys/)
+  // Fix from ... import patterns
   content = content.replace(
     /from\s+["']([^"']+)["']/g,
     (match, importPath) => {
-      // Skip already fixed imports, external packages, or data URLs
-      if (importPath.includes('.js') || importPath.startsWith('@') || importPath.startsWith('data:')) {
-        return match;
-      }
-      // Skip built-in Node modules
-      if (importPath.startsWith('node:') || ['path', 'fs', 'util', 'stream', 'events'].includes(importPath)) {
-        return match;
-      }
-      // Add .js extension to relative imports
-      if (importPath.startsWith('.')) {
-        return `from "${importPath}.js"`;
+      const resolved = resolveImportPath(importPath, fromDir);
+      if (resolved) {
+        return `from "${resolved}"`;
       }
       return match;
     }
   );
   
-  // Fix .js.js double extensions
+  // Fix double extensions that might have been created
   content = content.replace(/\.js\.js"/g, '.js"');
   
   if (content !== originalContent) {
@@ -59,3 +90,4 @@ function fixImportExtensions(filePath) {
 console.log('Fixing import extensions in dist files...');
 walkDir('./dist', fixImportExtensions);
 console.log('✅ Done!');
+
