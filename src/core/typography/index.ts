@@ -6,6 +6,7 @@
 export * from "./typography.js";
 export * from "./typography-semantic.js";
 export * from "./typography-css.js";
+export * from "./typography-token-builder.js";
 
 // Platform-specific exports - import separately in plugins that need them
 // Figma-specific UI & operations
