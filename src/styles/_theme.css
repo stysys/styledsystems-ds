@@ -1,5 +1,5 @@
 /* 
- * Auto-generated theme file
+ * Auto-generated theme file (Tailwind v4 compliant)
  * DO NOT EDIT MANUALLY - Edit colors.css instead
  * Generated from: primary: #e7ff0f, secondary: #3b82f6, accent: #f50b97, neutral: #1b1b16, success: #10b981, warning: #f59e0b, error: #ef4444, info: #06d44b, premium: #8b5cf6, data: #6366f1, growth: #059669, creative: #ea580c, social: #ec4899, utility: #0d9488
  */
@@ -28,37 +28,23 @@
 @theme {
   /* Reset default Tailwind colors */
   --color-*: initial;
-  /* GDGaioTrial Variable Font */
 
-  --spacing-headings: 1.3;
-  --spacing-body: 1.25;
+  /* Typography - Font Families */
   --font-body: "GDGaioVF", sans-serif;
   --font-display: "GDGaioVF", sans-serif;
   --font-mono: "GDOctioVF", monospace;
 
+  /* Typography - Font Weights */
   --font-weight-bold: 600;
 
-  --inset-shadow-md: inset 0 200px 200px rgba(0, 0, 0, 0.25);
-  --color-primary: black;
-
-  --color-theme-primary: var(--color-neutral-50);
-  --color-theme-hover: var(--color-theme-primary);
-
-  --color-theme-pro-bg: var(--color-theme-primary);
-  --color-theme-pro-fg: var(--color-theme-primary);
-
-  --color-theme-pro-bg-hover: var(--color-theme-primary);
-
-  --color-uppsell-bg: var(--color-theme-pro-bg);
-  --color-uppsell-fg: var(--color-theme-pro-fg);
-
-  --accent-theme-primary: var(--color-theme-primary);
-
+  /* Spacing */
   --spacing-headings: 1.3;
   --spacing-body: 1.25;
-  --font-display: "GDGaioVF", sans-serif;
-  --font-weight-bold: 600;
 
+  /* Shadows */
+  --inset-shadow-md: inset 0 200px 200px rgba(0, 0, 0, 0.25);
+
+  /* Typography - Scales (Literal values) */
   --text-5xl: clamp(2.9863rem, 1.56125rem + 6.3333vw, 6.3113rem);
   --text-4xl: clamp(2.4881rem, 1.5251785714285715rem + 4.2798vw, 4.735rem);
   --text-3xl: clamp(2.0737rem, 1.440267857142857rem + 2.8155vw, 3.5519rem);
@@ -69,47 +55,93 @@
   --text-sm: clamp(0.8331rem, 0.8285714285714286rem + 0.0202vw, 0.8438rem);
   --text-xs: clamp(0.6944rem, 0.720625rem + -0.1167vw, 0.6331rem);
 
-  --spacing-headings: var(--spacing-headings, 1.1);
-  --spacing-body: var(--spacing-body, 1.5);
+  /* Primary color scale - with literal values */
+  --color-primary-50: oklch(97% 0.096 109);
+  --color-primary-100: oklch(94% 0.193 109);
+  --color-primary-200: oklch(86% 0.386 109);
+  --color-primary-300: oklch(77% 0.579 109);
+  --color-primary-400: oklch(66% 0.772 109);
+  --color-primary-500: #e7ff0f;
+  --color-primary-600: oklch(48% 0.965 109);
+  --color-primary-700: oklch(38% 0.965 109);
+  --color-primary-800: oklch(28% 0.868 109);
+  --color-primary-900: oklch(18% 0.772 109);
+  --color-primary-950: oklch(8% 0.675 109);
 
-  /* Semantic color mappings - subtle layering */
-  --color-canvas: var(--color-neutral-950);
-  --color-surface: var(--color-neutral-900);
-  --color-surface-elevated: var(--color-neutral-850);
-  --color-foreground: var(--color-neutral-100);
-  --color-theme-primary: red;
+  /* Secondary color scale */
+  --color-secondary-50: oklch(97% 0.067 285);
+  --color-secondary-100: oklch(94% 0.134 285);
+  --color-secondary-200: oklch(86% 0.267 285);
+  --color-secondary-300: oklch(77% 0.401 285);
+  --color-secondary-400: oklch(66% 0.534 285);
+  --color-secondary-500: #3b82f6;
+  --color-secondary-600: oklch(48% 0.668 285);
+  --color-secondary-700: oklch(38% 0.668 285);
+  --color-secondary-800: oklch(28% 0.601 285);
+  --color-secondary-900: oklch(18% 0.534 285);
+  --color-secondary-950: oklch(8% 0.467 285);
 
-  /* Legacy accent colors for compatibility */
-  --color-accent-primary: var(--color-primary-500);
-  --color-accent-secondary: var(--color-secondary-600);
-  --color-accent-text: var(--color-accent-900);
+  /* Accent color scale */
+  --color-accent-50: oklch(97% 0.084 352);
+  --color-accent-100: oklch(94% 0.169 352);
+  --color-accent-200: oklch(86% 0.337 352);
+  --color-accent-300: oklch(77% 0.506 352);
+  --color-accent-400: oklch(66% 0.675 352);
+  --color-accent-500: #f50b97;
+  --color-accent-600: oklch(48% 0.843 352);
+  --color-accent-700: oklch(38% 0.843 352);
+  --color-accent-800: oklch(28% 0.759 352);
+  --color-accent-900: oklch(18% 0.675 352);
+  --color-accent-950: oklch(8% 0.59 352);
 
-  /* Status colors - use dedicated scales */
-  --color-success: var(--color-success-500);
-  --color-success-bg: var(--color-success-900);
-  --color-warning: var(--color-warning-500);
-  --color-warning-bg: var(--color-warning-900);
-  --color-error: var(--color-error-500);
-  --color-error-bg: var(--color-error-900);
+  /* Neutral color scale */
+  --color-neutral-50: hsl(60, 1.1%, 97%);
+  --color-neutral-100: hsl(60, 1.6%, 94%);
+  --color-neutral-200: hsl(60, 2.1%, 87%);
+  --color-neutral-300: hsl(60, 2.7%, 78%);
+  --color-neutral-400: hsl(60, 3.2%, 68%);
+  --color-neutral-500: hsl(60, 4.3%, 58%);
+  --color-neutral-600: hsl(60, 5.4%, 45%);
+  --color-neutral-700: hsl(60, 6.4%, 35%);
+  --color-neutral-800: hsl(60, 7.5%, 14.4%);
+  --color-neutral-850: hsl(60, 8.6%, 12.4%);
+  --color-neutral-900: hsl(60, 9.6%, 11.4%);
+  --color-neutral-950: hsl(60, 10.7%, 10.4%);
 
-  /* Text colors */
+  /* Success color scale */
+  --color-success-50: oklch(97% 0.055 161);
+  --color-success-100: oklch(94% 0.11 161);
+  --color-success-200: oklch(86% 0.22 161);
+  --color-success-300: oklch(77% 0.331 161);
+  --color-success-400: oklch(66% 0.441 161);
+  --color-success-500: #10b981;
+  --color-success-600: oklch(48% 0.551 161);
+  --color-success-700: oklch(38% 0.551 161);
+  --color-success-800: oklch(28% 0.496 161);
+  --color-success-900: oklch(18% 0.441 161);
+  --color-success-950: oklch(8% 0.386 161);
 
-  /* Border colors */
-  --color-border-primary: var(--color-neutral-600);
-  --color-border-secondary: var(--color-neutral-700);
-  --color-border-focus: var(--color-primary-400);
-  /* Semantic border colors for design clarity */
-  --color-subtle: var(--color-neutral-500);
-  --color-muted: var(--color-neutral-700);
-  --color-interactive: var(--color-neutral-600);
+  /* Warning color scale */
+  --color-warning-50: oklch(97% 0.079 73);
+  --color-warning-100: oklch(94% 0.158 73);
+  --color-warning-200: oklch(86% 0.315 73);
+  --color-warning-300: oklch(77% 0.473 73);
+  --color-warning-400: oklch(66% 0.63 73);
+  --color-warning-500: #f59e0b;
+  --color-warning-600: oklch(48% 0.788 73);
+  --color-warning-700: oklch(38% 0.788 73);
+  --color-warning-800: oklch(28% 0.709 73);
+  --color-warning-900: oklch(18% 0.63 73);
+  --color-warning-950: oklch(8% 0.552 73);
 
-  /* Interactive colors */
-  --color-interactive-hover: var(--color-neutral-700);
-  --color-interactive-active: var(--color-neutral-600);
-  --color-interactive-disabled: var(--color-neutral-800);
-}
-
-@theme {
+  /* Error color scale */
+  --color-error-50: oklch(97% 0.076 31);
+  --color-error-100: oklch(94% 0.151 31);
+  --color-error-200: oklch(86% 0.302 31);
+  --color-error-300: oklch(77% 0.454 31);
+  --color-error-400: oklch(66% 0.605 31);
+  --color-error-500: #ef4444;
+  --color-error-600: oklch(48% 0.756 31);
   /* Custom color scales */
   /* Primary colors */
   --color-primary-50: oklch(97% 0.096 109);
@@ -203,7 +235,7 @@
   --color-error-900: oklch(18% 0.605 31);
   --color-error-950: oklch(8% 0.529 31);
 
-  /* Info colors */
+  /* Info color scale */
   --color-info-50: oklch(97% 0.089 143);
   --color-info-100: oklch(94% 0.178 143);
   --color-info-200: oklch(86% 0.355 143);
@@ -216,7 +248,7 @@
   --color-info-900: oklch(18% 0.711 143);
   --color-info-950: oklch(8% 0.622 143);
 
-  /* Premium colors */
+  /* Premium color scale */
   --color-premium-50: oklch(97% 0.088 307);
   --color-premium-100: oklch(94% 0.177 307);
   --color-premium-200: oklch(86% 0.354 307);
@@ -229,7 +261,7 @@
   --color-premium-900: oklch(18% 0.708 307);
   --color-premium-950: oklch(8% 0.619 307);
 
-  /* Data colors */
+  /* Data color scale */
   --color-data-50: oklch(97% 0.08 299);
   --color-data-100: oklch(94% 0.161 299);
   --color-data-200: oklch(86% 0.322 299);
@@ -242,7 +274,7 @@
   --color-data-900: oklch(18% 0.643 299);
   --color-data-950: oklch(8% 0.563 299);
 
-  /* Growth colors */
+  /* Growth color scale */
   --color-growth-50: oklch(97% 0.047 162);
   --color-growth-100: oklch(94% 0.094 162);
   --color-growth-200: oklch(86% 0.188 162);
@@ -255,7 +287,7 @@
   --color-growth-900: oklch(18% 0.376 162);
   --color-growth-950: oklch(8% 0.329 162);
 
-  /* Creative colors */
+  /* Creative color scale */
   --color-creative-50: oklch(97% 0.084 50);
   --color-creative-100: oklch(94% 0.167 50);
   --color-creative-200: oklch(86% 0.335 50);
@@ -268,7 +300,7 @@
   --color-creative-900: oklch(18% 0.669 50);
   --color-creative-950: oklch(8% 0.586 50);
 
-  /* Social colors */
+  /* Social color scale */
   --color-social-50: oklch(97% 0.069 353);
   --color-social-100: oklch(94% 0.139 353);
   --color-social-200: oklch(86% 0.277 353);
@@ -281,7 +313,7 @@
   --color-social-900: oklch(18% 0.554 353);
   --color-social-950: oklch(8% 0.485 353);
 
-  /* Utility colors */
+  /* Utility color scale */
   --color-utility-50: oklch(97% 0.035 185);
   --color-utility-100: oklch(94% 0.071 185);
   --color-utility-200: oklch(86% 0.141 185);
@@ -293,4 +325,52 @@
   --color-utility-800: oklch(28% 0.317 185);
   --color-utility-900: oklch(18% 0.282 185);
   --color-utility-950: oklch(8% 0.247 185);
+}
+
+/* Semantic tokens and theme-specific mappings with var() references */
+@theme inline {
+  /* Primary theme */
+  --color-theme-primary: var(--color-neutral-50);
+  --color-theme-hover: var(--color-primary-600);
+  --color-theme-pro-bg: var(--color-primary-500);
+  --color-theme-pro-fg: var(--color-primary-950);
+  --color-theme-pro-bg-hover: var(--color-primary-600);
+  --color-uppsell-bg: var(--color-primary-500);
+  --color-uppsell-fg: var(--color-primary-950);
+  --accent-theme-primary: var(--color-accent-500);
+
+  /* Semantic color mappings - UI layers */
+  --color-canvas: var(--color-neutral-950);
+  --color-surface: var(--color-neutral-900);
+  --color-surface-elevated: var(--color-neutral-850);
+  --color-foreground: var(--color-neutral-100);
+  --color-primary: var(--color-primary-500);
+
+  /* Legacy accent colors for compatibility */
+  --color-accent-primary: var(--color-primary-500);
+  --color-accent-secondary: var(--color-secondary-600);
+  --color-accent-text: var(--color-accent-900);
+
+  /* Status colors - using dedicated scales */
+  --color-success: var(--color-success-500);
+  --color-success-bg: var(--color-success-900);
+  --color-warning: var(--color-warning-500);
+  --color-warning-bg: var(--color-warning-900);
+  --color-error: var(--color-error-500);
+  --color-error-bg: var(--color-error-900);
+
+  /* Border colors */
+  --color-border-primary: var(--color-neutral-600);
+  --color-border-secondary: var(--color-neutral-700);
+  --color-border-focus: var(--color-primary-400);
+
+  /* Semantic border colors for design clarity */
+  --color-subtle: var(--color-neutral-500);
+  --color-muted: var(--color-neutral-700);
+  --color-interactive: var(--color-neutral-600);
+
+  /* Interactive states */
+  --color-interactive-hover: var(--color-neutral-700);
+  --color-interactive-active: var(--color-neutral-600);
+  --color-interactive-disabled: var(--color-neutral-800);
 }

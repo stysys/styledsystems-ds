@@ -7,7 +7,7 @@
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/stysys/styledsystem-ds.git"
+    "url": "git+https://github.com/stysys/styledsystems-ds.git"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com",
@@ -38,6 +38,6 @@
     "branches": [
       "main"
     ],
-    "repositoryUrl": "https://github.com/stysys/styledsystem-ds"
+    "repositoryUrl": "https://github.com/stysys/styledsystems-ds"
   }
 }
