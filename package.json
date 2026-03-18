@@ -19,7 +19,8 @@
     "copy:assets": "mkdir -p dist/fonts && cp -r src/fonts/* dist/fonts/ 2>/dev/null || true",
     "copy:types": "mkdir -p dist/types && cp -r src/types/* dist/types/ 2>/dev/null || true",
     "watch": "tsc --watch",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "release": "semantic-release"
   },
   "keywords": [
     "design-system",
@@ -30,6 +31,11 @@
   "author": "Stysys",
   "license": "MIT",
   "devDependencies": {
-    "typescript": "^5.0.0"
+    "typescript": "^5.0.0",
+    "semantic-release": "^23.0.0"
+  },
+  "release": {
+    "branches": ["main"],
+    "repositoryUrl": "https://github.com/stysys/styledsystem-ds"
   }
 }

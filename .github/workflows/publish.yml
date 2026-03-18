@@ -1,31 +1,38 @@
-name: Publish to npm
+name: Release and Publish
 
 on:
   push:
-    tags:
-      - "v*"
+    branches:
+      - main
 
 jobs:
-  publish:
+  release:
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
       packages: write
       id-token: write
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - uses: actions/setup-node@v4
         with:
           node-version: "18"
 
-      - run: |
-          echo "@stysys:registry=https://npm.pkg.github.com" >> ~/.npmrc
-          echo "//npm.pkg.github.com/:_authToken=${{ secrets.NPM_PUBLISH_TOKEN }}" >> ~/.npmrc
-
       - run: npm ci
 
       - run: npm run build
 
-      - run: npm publish
+      - name: Configure npm for GitHub Packages
+        run: |
+          echo "@stysys:registry=https://npm.pkg.github.com" >> ~/.npmrc
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.NPM_PUBLISH_TOKEN }}" >> ~/.npmrc
+
+      - name: Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
+        run: npx semantic-release
