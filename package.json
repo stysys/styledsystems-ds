@@ -32,10 +32,12 @@
   "license": "MIT",
   "devDependencies": {
     "typescript": "^5.0.0",
-    "semantic-release": "^23.0.0"
+    "semantic-release": "^22.0.0"
   },
   "release": {
-    "branches": ["main"],
+    "branches": [
+      "main"
+    ],
     "repositoryUrl": "https://github.com/stysys/styledsystem-ds"
   }
 }
