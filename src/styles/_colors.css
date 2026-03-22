@@ -50,4 +50,6 @@
 
   /* Teal - tools, utilities, productivity */
   --base-utility: #0d9488;
+
+  --base-test-trigger: #123456;
 }
