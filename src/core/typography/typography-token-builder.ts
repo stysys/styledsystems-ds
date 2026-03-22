@@ -40,15 +40,23 @@ export interface TokenBuilderConfig {
   >;
 }
 
-export interface TypographyToken {
-  [key: string]: any;
+export interface PlatformTokens {
+  semantic: Record<string, any>;
+  sizeTokens: Record<string, any>;
+  displayFlavor: Record<string, any>;
   baseSize: number;
+  baseLineHeight: number;
   scaleRatio: number;
   headingFont: string;
   bodyFont: string;
-  platform: string;
   updatedAt: string;
   updatedBy: string;
+}
+
+export interface TypographyToken {
+  platform: string;
+  source: string;
+  [platformKey: string]: any; // Allows "web", "print", "indesign", etc. with PlatformTokens
 }
 
 /**
@@ -73,7 +81,10 @@ export function buildTypographyTokens(
   } = config;
 
   const platformKey = platform.toLowerCase();
-  const typography: TypographyToken = {};
+  const typography: TypographyToken = {
+    platform: platformKey,
+    source: `${platform}-plugin`,
+  };
 
   // Create platform-specific token group
   const platformTokens: Record<string, any> = {};
@@ -136,10 +147,6 @@ export function buildTypographyTokens(
 
   // Organize by platform - this is the key structure
   typography[platformKey] = platformTokens;
-
-  // Root level metadata
-  typography.platform = platformKey;
-  typography.source = `${platform}-plugin`;
 
   return typography;
 }

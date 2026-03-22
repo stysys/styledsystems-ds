@@ -40,19 +40,21 @@ export interface ColorConfig {
  */
 export function setupColorPickersForColors(
   colors: ColorConfig[],
-  containerId: string = "modals-container"
+  containerId: string = "modals-container",
 ): void {
   // Always append modals directly to body to ensure they're visible
   // Even if container has display: none, fixed position modals should work
   const container = document.getElementById(containerId) || document.body;
 
   if (!document.getElementById(containerId)) {
-    console.warn(`[Color Picker] Container "${containerId}" not found, using body`);
+    console.warn(
+      `[Color Picker] Container "${containerId}" not found, using body`,
+    );
   }
 
   console.log(
     `[Color Picker] Setting up ${colors.length} color pickers:`,
-    colors.map((c) => c.id)
+    colors.map((c) => c.id),
   );
 
   colors.forEach((colorConfig, idx) => {
@@ -87,7 +89,7 @@ export function setupColorPickersForColors(
 
     console.log(
       `[Color Picker] Created modal ${modalId}, now in DOM:`,
-      document.getElementById(modalId) ? "YES" : "NO"
+      document.getElementById(modalId) ? "YES" : "NO",
     );
 
     // Close modal on outside click
@@ -102,18 +104,20 @@ export function setupColorPickersForColors(
       colorConfig.id,
       colorConfig.hex,
       colorConfig.onColorChange,
-      colorConfig.onColorChanging
+      colorConfig.onColorChanging,
     );
   });
 
   // Verify all modals exist in DOM
   console.log(
     `[Color Picker] Setup complete. Total modals in DOM:`,
-    document.querySelectorAll("[id*='picker-modal']").length
+    document.querySelectorAll("[id*='picker-modal']").length,
   );
   console.log(
     `[Color Picker] Modal IDs:`,
-    Array.from(document.querySelectorAll("[id*='picker-modal']")).map((el) => el.id)
+    Array.from(document.querySelectorAll("[id*='picker-modal']")).map(
+      (el) => el.id,
+    ),
   );
 }
 
@@ -125,7 +129,7 @@ function initializeIroPickerForColor(
   colorId: string,
   initialHex: string,
   onColorChange?: (newHex: string) => void,
-  onColorChanging?: (newHex: string) => void
+  onColorChanging?: (newHex: string) => void,
 ): void {
   const pickerId = `${colorId}-picker`;
   const colorInputId = `${colorId}-color-input`;
@@ -133,7 +137,7 @@ function initializeIroPickerForColor(
 
   if (typeof iro === "undefined") {
     console.warn(
-      '[Color Picker] iro.js not loaded. Add to HTML: <script src="https://cdn.jsdelivr.net/npm/@jaames/iro/dist/iro.min.js"></script>'
+      '[Color Picker] iro.js not loaded. Add to HTML: <script src="https://cdn.jsdelivr.net/npm/@jaames/iro/dist/iro.min.js"></script>',
     );
     return;
   }
@@ -149,9 +153,11 @@ function initializeIroPickerForColor(
     });
 
     const modalContent = document.querySelector(
-      `#${modalId} .picker-modal__content`
+      `#${modalId} .picker-modal__content`,
     ) as HTMLElement;
-    const colorInput = document.getElementById(colorInputId) as HTMLInputElement;
+    const colorInput = document.getElementById(
+      colorInputId,
+    ) as HTMLInputElement;
 
     // Initialize modal appearance
     if (modalContent && colorInput) {
@@ -214,7 +220,9 @@ function initializeIroPickerForColor(
       });
 
       // Confirm button
-      const confirmBtn = document.getElementById(`${colorId}-color-confirm`) as HTMLButtonElement;
+      const confirmBtn = document.getElementById(
+        `${colorId}-color-confirm`,
+      ) as HTMLButtonElement;
       if (confirmBtn) {
         confirmBtn.addEventListener("click", () => {
           const finalHex = colorInput.value;
@@ -229,7 +237,9 @@ function initializeIroPickerForColor(
       }
 
       // Cancel button
-      const cancelBtn = document.getElementById(`${colorId}-color-cancel`) as HTMLButtonElement;
+      const cancelBtn = document.getElementById(
+        `${colorId}-color-cancel`,
+      ) as HTMLButtonElement;
       if (cancelBtn) {
         cancelBtn.addEventListener("click", () => {
           const modal = document.getElementById(modalId) as HTMLElement;
@@ -240,7 +250,10 @@ function initializeIroPickerForColor(
       }
     }
   } catch (e) {
-    console.error(`[Color Picker] Failed to initialize iro.js for ${colorId}:`, e);
+    console.error(
+      `[Color Picker] Failed to initialize iro.js for ${colorId}:`,
+      e,
+    );
   }
 }
 
@@ -269,7 +282,9 @@ export function showColorPickerById(colorId: string): void {
     console.error(`[Color Picker] ✗ Modal NOT found: ${modalId}`);
     console.log(
       `Available modals:`,
-      Array.from(document.querySelectorAll("[id*='picker-modal']")).map((el) => el.id)
+      Array.from(document.querySelectorAll("[id*='picker-modal']")).map(
+        (el) => el.id,
+      ),
     );
   }
 }
@@ -278,7 +293,9 @@ export function showColorPickerById(colorId: string): void {
  * Hide a color picker modal by ID
  */
 export function hideColorPickerById(colorId: string): void {
-  const modal = document.getElementById(`${colorId}-picker-modal`) as HTMLElement;
+  const modal = document.getElementById(
+    `${colorId}-picker-modal`,
+  ) as HTMLElement;
   if (modal) {
     modal.style.display = "none";
   }
@@ -307,7 +324,7 @@ export function showColorPickerModal(options: ColorPickerOptions = {}): void {
         onColorChanging,
       },
     ],
-    "temp-modals-container"
+    "temp-modals-container",
   );
 
   // Ensure container exists
@@ -350,7 +367,7 @@ function defaultColorHandler(color: string): void {
 export function createColorSwatchButton(
   containerSelector: string,
   color: string,
-  onColorChange: (color: string) => void
+  onColorChange: (color: string) => void,
 ): HTMLElement {
   const container = document.querySelector(containerSelector);
   if (!container) return document.createElement("div");
