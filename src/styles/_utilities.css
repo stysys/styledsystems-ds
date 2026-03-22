@@ -1,7 +1,5 @@
 @import "./_theme.css";
-
 @import "tailwindcss";
-
 @layer components {
   /* Dimmed/disabled state for text style group */
   .text-style-group--disabled {
