@@ -332,12 +332,6 @@
   /* Primary theme */
   --color-theme-primary: var(--color-neutral-50);
   --color-theme-hover: var(--color-primary-600);
-  --color-theme-pro-bg: var(--color-primary-500);
-  --color-theme-pro-fg: var(--color-primary-950);
-  --color-theme-pro-bg-hover: var(--color-primary-600);
-  --color-uppsell-bg: var(--color-primary-500);
-  --color-uppsell-fg: var(--color-primary-950);
-  --accent-theme-primary: var(--color-accent-500);
 
   /* Semantic color mappings - UI layers */
   --color-canvas: var(--color-neutral-950);

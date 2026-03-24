@@ -56,11 +56,11 @@
   }
 
   .tab--active {
-    @apply text-theme-primary border-theme-primary hover:text-theme-hover hover:border-theme-hover border-b-2;
+    @apply text-primary-500 border-primary-500 hover:text-primary-600 hover:border-primary-600 border-b-2;
   }
 
   .tab--active {
-    @apply text-theme-primary border-theme-primary hover:text-theme-hover hover:border-theme-hover border-b-2;
+    @apply text-primary-500 border-primary-500 hover:text-primary-600 hover:border-primary-600 border-b-2;
   }
 
   .tab--disabled {
