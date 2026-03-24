@@ -38,7 +38,7 @@
   }
 
   p a {
-    @apply text-theme-primary font-bold;
+    @apply text-primary-500 font-bold;
   }
 }
 @layer components {

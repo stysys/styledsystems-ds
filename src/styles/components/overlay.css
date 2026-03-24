@@ -31,14 +31,14 @@
     @apply bg-surface flex justify-between;
   }
   .overlay__action {
-    @apply hover:text-theme-primary cursor-pointer p-4 underline transition-colors;
+    @apply hover:text-primary-500 cursor-pointer p-4 underline transition-colors;
   }
   .overlay__action--skip,
   .onboarding__action--skip {
     @apply text-muted hover:text-muted;
   }
   .overlay__action--next {
-    @apply hover:text-theme-primary;
+    @apply hover:text-primary-500;
   }
   .overlay__input {
     @apply bg-canvas focus:ring-primary-500 w-full rounded-md border border-neutral-700 px-4 py-2 text-sm text-neutral-50 focus:border-transparent focus:ring-2 focus:outline-none;
@@ -56,7 +56,7 @@
     @apply mx-auto flex;
   }
   .overlay__btn--verify {
-    @apply bg-theme-primary;
+    @apply bg-primary-500;
   }
   .overlay__link {
     @apply text-warning-400 text-sm;

@@ -6,7 +6,7 @@
   @apply flex items-center justify-between;
 }
 .css-output__code {
-  @apply bg-surface text-theme-pro-fg overflow-auto rounded-md border border-neutral-800 p-4 pb-10 font-mono text-xs;
+  @apply bg-surface text-primary-950 overflow-auto rounded-md border border-neutral-800 p-4 pb-10 font-mono text-xs;
   min-height: 300px;
   white-space: pre;
   line-height: 1.6;
