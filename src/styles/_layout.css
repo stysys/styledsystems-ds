@@ -8,7 +8,7 @@
     @apply m-0 p-0;
   }
   body {
-    @apply bg-canvas text-foreground m-0 h-full w-full p-4 font-sans text-sm;
+    @apply bg-canvas text-foreground m-0 h-full w-full font-sans text-sm;
   }
   .header {
     @apply bg-canvas border-surface fixed inset-x-0 top-0 z-[9999] items-center border-b shadow-xl shadow-neutral-950;
