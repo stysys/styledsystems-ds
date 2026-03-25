@@ -102,7 +102,7 @@
 
   /* --- Footer --- */
   .footer {
-    @apply text-muted bg-surface fixed inset-x-0 bottom-0 left-0 mt-4 flex flex-col items-center justify-between pt-2 pb-2;
+    @apply text-muted bg-surface inset-x-0 bottom-0 left-0 mt-4 flex flex-col items-center justify-between pt-2 pb-2;
   }
   .footer__inner {
     @apply w-full px-4;
