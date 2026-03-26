@@ -169,7 +169,7 @@ function designmapXml(dsName: string): string {
     `  <idPkg:Styles src="Resources/Styles.xml"/>`,
     `  <idPkg:Preferences src="Resources/Preferences.xml"/>`,
     `  <idPkg:Graphic src="Resources/Graphic.xml"/>`,
-    `  <idPkg:MasterSpread src="MasterSpreads/MasterSpread_uNaN.xml"/>`,
+    `  <idPkg:MasterSpread src="MasterSpreads/MasterSpread_u27b.xml"/>`,
     `  <idPkg:Spread src="Spreads/Spread_u11b.xml"/>`,
     `  <idPkg:Story src="Stories/Story_u1b8.xml"/>`,
     `</Document>`,
@@ -272,7 +272,7 @@ export function buildIdmlFiles(options: IdmlOptions): Map<string, string> {
     ["Resources/Preferences.xml", PREFERENCES_XML],
     ["Resources/Graphic.xml", graphicXml(colorGroups)],
     ["Resources/Styles.xml", stylesXml(dsName, typographyStyles)],
-    ["MasterSpreads/MasterSpread_uNaN.xml", MASTER_SPREAD_XML],
+    ["MasterSpreads/MasterSpread_u27b.xml", MASTER_SPREAD_XML],
     ["Spreads/Spread_u11b.xml", SPREAD_XML],
     ["Stories/Story_u1b8.xml", STORY_XML],
   ]);
