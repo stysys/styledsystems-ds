@@ -138,6 +138,12 @@ function stylesXml(dsName: string, styles: ResolvedScaleEntry[]): string {
     `        FontStyle="${toIdmlFontStyle(s.weight)}" />`,
   ].join("\n")).join("\n");
 
+  const semanticGroup = styles.map((s) => [
+    `      <ParagraphStyle Self="ParagraphStyleGroup/Semantic/${xmlAttr(s.name)}"`,
+    `        Name="${xmlAttr(s.label)}"`,
+    `        BasedOn="ParagraphStyleGroup/Scale/${xmlAttr(s.name)}" />`,
+  ].join("\n")).join("\n");
+
   return [
     `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>`,
     `<idPkg:Styles xmlns:idPkg="http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging" DOMVersion="${DOM}">`,
@@ -146,6 +152,9 @@ function stylesXml(dsName: string, styles: ResolvedScaleEntry[]): string {
     `    <ParagraphStyle Self="ParagraphStyle/$ID/NormalParagraphStyle" Name="$ID/NormalParagraphStyle"/>`,
     `    <ParagraphStyleGroup Self="ParagraphStyleGroup/Scale" Name="Scale">`,
     scaleGroup,
+    `    </ParagraphStyleGroup>`,
+    `    <ParagraphStyleGroup Self="ParagraphStyleGroup/Semantic" Name="Semantic">`,
+    semanticGroup,
     `    </ParagraphStyleGroup>`,
     `  </RootParagraphStyleGroup>`,
     `  <RootCharacterStyleGroup Self="RootCharacterStyleGroup">`,
