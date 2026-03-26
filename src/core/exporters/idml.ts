@@ -106,7 +106,7 @@ function graphicXml(colorGroups: IdmlColorGroup[]): string {
 
   return [
     `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>`,
-    `<idPkg:Graphic xmlns:idPkg="http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging" DOMVersion="18.0">`,
+    `<idPkg:Graphic xmlns:idPkg="http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging" DOMVersion="8.0">`,
     ...colors,
     `</idPkg:Graphic>`,
   ].join("\n");
@@ -132,7 +132,7 @@ function stylesXml(dsName: string, styles: ResolvedScaleEntry[]): string {
 
   return [
     `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>`,
-    `<idPkg:Styles xmlns:idPkg="http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging" DOMVersion="18.0">`,
+    `<idPkg:Styles xmlns:idPkg="http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging" DOMVersion="8.0">`,
     `  <RootParagraphStyleGroup Self="RootParagraphStyleGroup">`,
     `    <ParagraphStyle Self="ParagraphStyle/$ID/[No paragraph style]" Name="$ID/[No paragraph style]" />`,
     `    <ParagraphStyle Self="ParagraphStyle/$ID/NormalParagraphStyle" Name="$ID/NormalParagraphStyle" />`,
@@ -161,7 +161,7 @@ function stylesXml(dsName: string, styles: ResolvedScaleEntry[]): string {
 function designmapXml(dsName: string): string {
   return [
     `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>`,
-    `<Document DOMVersion="18.0" StoryList="u1b8" ActiveLayer="ub6"`,
+    `<Document DOMVersion="8.0" StoryList="u1b8" ActiveLayer="ub6"`,
     `  xmlns:idPkg="http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging"`,
     `  Self="d" Name="${xmlAttr(dsName)}">`,
     `  <Layer Self="ub6" Name="Layer 1" />`,
@@ -184,12 +184,12 @@ const CONTAINER_XML = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 </container>`;
 
 const FONTS_XML = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<idPkg:Fonts xmlns:idPkg="http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging" DOMVersion="18.0">
+<idPkg:Fonts xmlns:idPkg="http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging" DOMVersion="8.0">
 </idPkg:Fonts>`;
 
 // DocumentPreference is required — InDesign won't open without page dimensions.
 const PREFERENCES_XML = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<idPkg:Preferences xmlns:idPkg="http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging" DOMVersion="18.0">
+<idPkg:Preferences xmlns:idPkg="http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging" DOMVersion="8.0">
   <DocumentPreference
     PageHeight="792" PageWidth="612" PagesPerDocument="1"
     FacingPages="false" AllowPageShuffle="true"
@@ -203,7 +203,7 @@ const PREFERENCES_XML = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 // MasterSpread — pages must not self-reference as their own master.
 // Use $ID/[None] for master-less pages on the A-Master.
 const MASTER_SPREAD_XML = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<idPkg:MasterSpread xmlns:idPkg="http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging" DOMVersion="18.0">
+<idPkg:MasterSpread xmlns:idPkg="http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging" DOMVersion="8.0">
   <MasterSpread Self="u27b" Name="A-Master" NamePrefix="A" BaseName="A-Master"
     PageCount="1" ShowMasterItems="true" AllowPageShuffle="true" BindingLocation="0">
     <FlattenerPreference LineArtAndTextResolution="300" GradientAndMeshResolution="150"
@@ -221,7 +221,7 @@ const MASTER_SPREAD_XML = `<?xml version="1.0" encoding="UTF-8" standalone="yes"
 </idPkg:MasterSpread>`;
 
 const SPREAD_XML = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<idPkg:Spread xmlns:idPkg="http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging" DOMVersion="18.0">
+<idPkg:Spread xmlns:idPkg="http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging" DOMVersion="8.0">
   <Spread Self="u11b" PageCount="1" BindingLocation="0"
     AllowPageShuffle="true" ShowMasterItems="true" FlattenerOverride="Default">
     <FlattenerPreference LineArtAndTextResolution="300" GradientAndMeshResolution="150"
@@ -239,7 +239,7 @@ const SPREAD_XML = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 </idPkg:Spread>`;
 
 const STORY_XML = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<idPkg:Story xmlns:idPkg="http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging" DOMVersion="18.0">
+<idPkg:Story xmlns:idPkg="http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging" DOMVersion="8.0">
   <Story Self="u1b8" AppliedTOCStyle="n" TrackChanges="false" StoryTitle="$ID/">
     <StoryPreference OpticalMarginAlignment="false" OpticalMarginSize="12" />
     <InCopyExportOption IncludeGraphicProxies="true" IncludeAllResources="false" />
