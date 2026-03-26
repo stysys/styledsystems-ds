@@ -34,8 +34,24 @@ npm run release  # semantic-release → bumps version + publishes
 ## Publishing
 - Published to GitHub Packages, NOT npm.org
 - Consumers need `.npmrc` with `@stysys:registry=https://npm.pkg.github.com`
-- Version is bumped automatically via `semantic-release` on main branch
-- Current version in `package.json` — check before assuming what's available downstream
+- Version is bumped automatically via `semantic-release` on every push to `main` — **do not manually bump `package.json` version**
+- Commit message prefix controls the version bump:
+  - `fix:` → patch (e.g. 1.5.0 → 1.5.1)
+  - `feat:` → minor (e.g. 1.5.0 → 1.6.0)
+  - `BREAKING CHANGE:` in footer → major
+
+## After every push to main — update consumers
+After CI publishes a new version, run `npm install @stysys/design-system` in each consuming repo:
+
+```bash
+# styledsystems
+cd /Users/kristofferwindolf/Sites/styledsystems && npm install @stysys/design-system
+
+# indesign-plugins
+cd /Users/kristofferwindolf/Sites/indesign-plugins && npm install @stysys/design-system
+```
+
+`figma-plugins` uses a local `core/` alias — not on npm, no install needed there.
 
 ## Key constraints
 - Pure TypeScript, no framework dependencies

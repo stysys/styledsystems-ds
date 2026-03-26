@@ -368,3 +368,26 @@
   --color-interactive-active: var(--color-neutral-600);
   --color-interactive-disabled: var(--color-neutral-800);
 }
+@theme {
+  /* @link https://utopia.fyi/space/calculator?c=360,18,1.2,1240,20,1.25,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
+
+  --spacing-3xs: clamp(0.3125rem, 0.3125rem + 0vw, 0.3125rem);
+  --spacing-2xs: clamp(0.5625rem, 0.538rem + 0.1087vw, 0.625rem);
+  --spacing-xs: clamp(0.875rem, 0.8505rem + 0.1087vw, 0.9375rem);
+  --spacing-s: clamp(1.125rem, 1.0761rem + 0.2174vw, 1.25rem);
+  --spacing-m: clamp(1.6875rem, 1.6141rem + 0.3261vw, 1.875rem);
+  --spacing-l: clamp(2.25rem, 2.1522rem + 0.4348vw, 2.5rem);
+  --spacing-xl: clamp(3.375rem, 3.2283rem + 0.6522vw, 3.75rem);
+  --spacing-2xl: clamp(4.5rem, 4.3043rem + 0.8696vw, 5rem);
+  --spacing-3xl: clamp(6.75rem, 6.4565rem + 1.3043vw, 7.5rem);
+
+  /* One-up pairs */
+  --spacing-3xs-2xs: clamp(0.3125rem, 0.1902rem + 0.5435vw, 0.625rem);
+  --spacing-2xs-xs: clamp(0.5625rem, 0.4158rem + 0.6522vw, 0.9375rem);
+  --spacing-xs-s: clamp(0.875rem, 0.7283rem + 0.6522vw, 1.25rem);
+  --spacing-s-m: clamp(1.125rem, 0.8315rem + 1.3043vw, 1.875rem);
+  --spacing-m-l: clamp(1.6875rem, 1.3696rem + 1.413vw, 2.5rem);
+  --spacing-l-xl: clamp(2.25rem, 1.663rem + 2.6087vw, 3.75rem);
+  --spacing-xl-2xl: clamp(3.375rem, 2.7391rem + 2.8261vw, 5rem);
+  --spacing-2xl-3xl: clamp(4.5rem, 3.3261rem + 5.2174vw, 7.5rem);
+}
