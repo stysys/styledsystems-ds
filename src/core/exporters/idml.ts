@@ -85,11 +85,11 @@ function graphicXml(colorGroups: IdmlColorGroup[]): string {
     `  <Ink Self="Ink/$ID/Process Magenta" Name="$ID/Process Magenta" PrintOrder="2" IsProcess="true" IsOpaque="true" NeutralDensity="0.61" TrapOrder="2" />`,
     `  <Ink Self="Ink/$ID/Process Yellow"  Name="$ID/Process Yellow"  PrintOrder="3" IsProcess="true" IsOpaque="true" NeutralDensity="0.61" TrapOrder="3" />`,
     `  <Ink Self="Ink/$ID/Process Black"   Name="$ID/Process Black"   PrintOrder="4" IsProcess="true" IsOpaque="true" NeutralDensity="1"    TrapOrder="4" />`,
-    // Required system swatches (Paper must be first)
-    `  <Color Self="Color/Paper"        Model="Process"      Space="CMYK" ColorValue="0 0 0 0"       Name="Paper" />`,
-    `  <Color Self="Color/Black"        Model="Process"      Space="CMYK" ColorValue="0 0 0 100"     Name="Black" />`,
-    `  <Color Self="Color/Registration" Model="Registration" Space="CMYK" ColorValue="100 100 100 100" Name="Registration" />`,
-    `  <Color Self="Color/White"        Model="Process"      Space="CMYK" ColorValue="0 0 0 0"       Name="White" />`,
+    // Required system swatches — must use $ID/ prefix (InDesign built-in resources)
+    `  <Color Self="Color/$ID/Paper"        Model="Process"      Space="CMYK" ColorValue="0 0 0 0"         Name="$ID/Paper" />`,
+    `  <Color Self="Color/$ID/Black"        Model="Process"      Space="CMYK" ColorValue="0 0 0 100"       Name="$ID/Black" />`,
+    `  <Color Self="Color/$ID/Registration" Model="Registration" Space="CMYK" ColorValue="100 100 100 100" Name="$ID/Registration" />`,
+    `  <Color Self="Color/$ID/White"        Model="Process"      Space="CMYK" ColorValue="0 0 0 0"         Name="$ID/White" />`,
   ];
 
   for (const group of colorGroups) {
@@ -161,9 +161,10 @@ function stylesXml(dsName: string, styles: ResolvedScaleEntry[]): string {
 function designmapXml(dsName: string): string {
   return [
     `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>`,
-    `<Document DOMVersion="18.0" StoryList="u1b8"`,
+    `<Document DOMVersion="18.0" StoryList="u1b8" ActiveLayer="ub6"`,
     `  xmlns:idPkg="http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging"`,
     `  Self="d" Name="${xmlAttr(dsName)}">`,
+    `  <Layer Self="ub6" Name="Layer 1" />`,
     `  <idPkg:Fonts src="Resources/Fonts.xml"/>`,
     `  <idPkg:Styles src="Resources/Styles.xml"/>`,
     `  <idPkg:Preferences src="Resources/Preferences.xml"/>`,
@@ -227,7 +228,7 @@ const SPREAD_XML = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
       ClipComplexRegions="false" ConvertAllStrokesToOutlines="false"
       ConvertAllTextToOutlines="false" RasterVectorBalance="75" />
     <Page Self="u11c" MasterPageTransform="1 0 0 1 -306 -396" Name="1"
-      AppliedMaster="MasterSpread/u27b" PageColor="Nothing"
+      AppliedMaster="u27b" PageColor="Nothing"
       GridStartingPoint="TopOutside" UseMasterGrid="true" OverrideList="" TabOrder="">
       <Properties>
         <Descriptor type="list"><ListItem type="string">1</ListItem></Descriptor>
