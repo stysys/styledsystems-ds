@@ -1,6 +1,6 @@
 {
   "name": "@stysys/design-system",
-  "version": "1.1.6",
+  "version": "1.2.0",
   "description": "Comprehensive design system utilities: colors, typography, UI components, brand system, and design tokens",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -30,9 +30,13 @@
   ],
   "author": "Stysys",
   "license": "MIT",
+  "dependencies": {
+    "culori": "^3.3.0"
+  },
   "devDependencies": {
-    "typescript": "^5.0.0",
-    "semantic-release": "^22.0.0"
+    "@types/culori": "^4.0.1",
+    "semantic-release": "^22.0.0",
+    "typescript": "^5.0.0"
   },
   "release": {
     "branches": [

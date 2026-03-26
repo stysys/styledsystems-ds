@@ -1,0 +1,285 @@
+/**
+ * idml.ts — InDesign Markup Language (.idml) exporter
+ *
+ * Generates the XML file tree for an IDML package containing:
+ *   - All color swatches from the design system ramps + semantic roles
+ *   - All paragraph styles from the semantic type scale
+ *
+ * Returns a Map<filepath, content> — the caller is responsible for
+ * zipping these into an .idml file (which is just a ZIP with a specific
+ * internal structure).
+ *
+ * Example (using fflate in browser/Next.js):
+ *   import { strToU8, zip } from "fflate";
+ *   const files = buildIdmlFiles({ ... });
+ *   const fflateInput = Object.fromEntries(
+ *     [...files].map(([k, v]) => [k, strToU8(v)])
+ *   );
+ *   zip(fflateInput, (err, data) => downloadBlob(data, "tokens.idml"));
+ *
+ * Spec reference: https://wwwimages.adobe.com/content/dam/acom/en/devnet/indesign/sdk/cs6/idml/idml-specification.pdf
+ */
+
+import { RAMP_STEPS, type ColorRamp } from "../tokens/colorRamps.js";
+import { type ResolvedScaleEntry } from "../tokens/scaleDefinition.js";
+
+// ---------------------------------------------------------------------------
+// Public input types
+// ---------------------------------------------------------------------------
+
+export interface IdmlColorGroup {
+  /** Group name shown in InDesign Swatches panel, e.g. "Primary" */
+  name: string;
+  swatches: Array<{
+    /** Swatch name, e.g. "Primary 500" */
+    name: string;
+    /** Hex color, e.g. "#0c8ce9" */
+    hex: string;
+  }>;
+}
+
+export interface IdmlOptions {
+  /** Design system name — used as style group label and document title */
+  dsName: string;
+  /** Resolved type scale entries (use resolveSemanticScale() from scaleDefinition) */
+  typographyStyles: ResolvedScaleEntry[];
+  /** Color groups to write as swatches */
+  colorGroups: IdmlColorGroup[];
+}
+
+// ---------------------------------------------------------------------------
+// Helpers
+// ---------------------------------------------------------------------------
+
+function hexToRgb255(hex: string): [number, number, number] {
+  const h = hex.replace("#", "");
+  return [
+    parseInt(h.slice(0, 2), 16),
+    parseInt(h.slice(2, 4), 16),
+    parseInt(h.slice(4, 6), 16),
+  ];
+}
+
+function xmlAttr(value: string | number): string {
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/"/g, "&quot;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
+/** Make a safe Self ID from a name string (no spaces or special chars). */
+function selfId(prefix: string, name: string): string {
+  return `${prefix}/${name.replace(/[^a-zA-Z0-9_-]/g, "_")}`;
+}
+
+// ---------------------------------------------------------------------------
+// XML generators
+// ---------------------------------------------------------------------------
+
+function graphicXml(colorGroups: IdmlColorGroup[]): string {
+  const colors: string[] = [
+    `  <Color Self="Color/Black" Model="Process" Space="CMYK" ColorValue="0 0 0 100" Name="Black" />`,
+    `  <Color Self="Color/Paper" Model="Process" Space="CMYK" ColorValue="0 0 0 0" Name="Paper" />`,
+    `  <Color Self="Color/White" Model="Process" Space="CMYK" ColorValue="0 0 0 0" Name="White" />`,
+  ];
+
+  for (const group of colorGroups) {
+    for (const swatch of group.swatches) {
+      const [r, g, b] = hexToRgb255(swatch.hex);
+      colors.push(
+        `  <Color Self="${xmlAttr(selfId("Color", swatch.name))}" ` +
+        `Model="Process" Space="RGB" ` +
+        `ColorValue="${r} ${g} ${b}" ` +
+        `Name="${xmlAttr(swatch.name)}" />`
+      );
+    }
+  }
+
+  return [
+    `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>`,
+    `<idPkg:Graphic xmlns:idPkg="http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging" DOMVersion="18.0">`,
+    ...colors,
+    `</idPkg:Graphic>`,
+  ].join("\n");
+}
+
+function stylesXml(dsName: string, styles: ResolvedScaleEntry[]): string {
+  const groupSelf = selfId("ParagraphStyleGroup", dsName);
+
+  const paraStyles = styles.map((s) => {
+    const self = `ParagraphStyleGroup/${xmlAttr(dsName)}/${xmlAttr(s.name)}`;
+    return [
+      `      <ParagraphStyle`,
+      `        Self="${xmlAttr(self)}"`,
+      `        Name="${xmlAttr(s.label)}"`,
+      `        PointSize="${s.pointSize}"`,
+      `        Leading="${s.leadingPt}"`,
+      `        Tracking="${s.tracking}"`,
+      `        AppliedFont="${xmlAttr(s.fontFamily)}"`,
+      `        FontStyle="${xmlAttr(s.weight)}"`,
+      `      />`,
+    ].join("\n");
+  });
+
+  return [
+    `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>`,
+    `<idPkg:Styles xmlns:idPkg="http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging" DOMVersion="18.0">`,
+    `  <RootParagraphStyleGroup Self="RootParagraphStyleGroup">`,
+    `    <ParagraphStyle Self="ParagraphStyle/$ID/[No paragraph style]" Name="$ID/[No paragraph style]" />`,
+    `    <ParagraphStyle Self="ParagraphStyle/$ID/NormalParagraphStyle" Name="$ID/NormalParagraphStyle" />`,
+    `    <ParagraphStyleGroup Self="${xmlAttr(groupSelf)}" Name="${xmlAttr(dsName)}">`,
+    ...paraStyles,
+    `    </ParagraphStyleGroup>`,
+    `  </RootParagraphStyleGroup>`,
+    `  <RootCharacterStyleGroup Self="RootCharacterStyleGroup">`,
+    `    <CharacterStyle Self="CharacterStyle/$ID/[No character style]" Name="[No character style]" />`,
+    `  </RootCharacterStyleGroup>`,
+    `  <RootObjectStyleGroup Self="RootObjectStyleGroup">`,
+    `    <ObjectStyle Self="ObjectStyle/$ID/[None]" Name="$ID/[None]" />`,
+    `    <ObjectStyle Self="ObjectStyle/$ID/[Normal Graphics Frame]" Name="$ID/[Normal Graphics Frame]" />`,
+    `    <ObjectStyle Self="ObjectStyle/$ID/[Normal Text Frame]" Name="$ID/[Normal Text Frame]" />`,
+    `  </RootObjectStyleGroup>`,
+    `  <RootTableStyleGroup Self="RootTableStyleGroup">`,
+    `    <TableStyle Self="TableStyle/$ID/[Basic Table]" Name="$ID/[Basic Table]" />`,
+    `  </RootTableStyleGroup>`,
+    `  <RootCellStyleGroup Self="RootCellStyleGroup">`,
+    `    <CellStyle Self="CellStyle/$ID/[None]" Name="$ID/[None]" />`,
+    `  </RootCellStyleGroup>`,
+    `</idPkg:Styles>`,
+  ].join("\n");
+}
+
+function designmapXml(dsName: string): string {
+  return [
+    `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>`,
+    `<Document DOMVersion="18.0" StoryList="u1b8"`,
+    `  xmlns:idPkg="http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging"`,
+    `  Self="d" Name="${xmlAttr(dsName)}">`,
+    `  <idPkg:Fonts src="Resources/Fonts.xml"/>`,
+    `  <idPkg:Styles src="Resources/Styles.xml"/>`,
+    `  <idPkg:Preferences src="Resources/Preferences.xml"/>`,
+    `  <idPkg:Graphic src="Resources/Graphic.xml"/>`,
+    `  <idPkg:MasterSpread src="MasterSpreads/MasterSpread_uNaN.xml"/>`,
+    `  <idPkg:Spread src="Spreads/Spread_u11b.xml"/>`,
+    `  <idPkg:BackingStory src="BackingStory/BackingStory_u2c2.xml"/>`,
+    `  <idPkg:Story src="Stories/Story_u1b8.xml"/>`,
+    `</Document>`,
+  ].join("\n");
+}
+
+const CONTAINER_XML = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<container version="1.0" xmlns="urn:oasis:names:tc:opendocument:xmlns:container">
+  <rootfiles>
+    <rootfile full-path="designmap.xml" />
+  </rootfiles>
+</container>`;
+
+const FONTS_XML = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<idPkg:Fonts xmlns:idPkg="http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging" DOMVersion="18.0">
+</idPkg:Fonts>`;
+
+const PREFERENCES_XML = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<idPkg:Preferences xmlns:idPkg="http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging" DOMVersion="18.0">
+</idPkg:Preferences>`;
+
+const MASTER_SPREAD_XML = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<idPkg:MasterSpread xmlns:idPkg="http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging" DOMVersion="18.0">
+  <MasterSpread Self="u27b" Name="A-Master" NamePrefix="A" BaseName="A-Master" PageCount="1">
+    <Page Self="ubb" MasterPageTransform="1 0 0 1 -306 -396" Name="1" AppliedMaster="MasterSpread/u27b" />
+  </MasterSpread>
+</idPkg:MasterSpread>`;
+
+const SPREAD_XML = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<idPkg:Spread xmlns:idPkg="http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging" DOMVersion="18.0">
+  <Spread Self="u11b" PageCount="1" BindingLocation="0" AllowPageShuffle="true">
+    <Page Self="u11c" MasterPageTransform="1 0 0 1 -306 -396" Name="1" AppliedMaster="MasterSpread/u27b" />
+  </Spread>
+</idPkg:Spread>`;
+
+const STORY_XML = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<idPkg:Story xmlns:idPkg="http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging" DOMVersion="18.0">
+  <Story Self="u1b8" AppliedTOCStyle="n" TrackChanges="false" StoryTitle="">
+    <StoryPreference OpticalMarginAlignment="false" OpticalMarginSize="12" />
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/$ID/[No paragraph style]">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+        <Content></Content>
+      </CharacterStyleRange>
+    </ParagraphStyleRange>
+  </Story>
+</idPkg:Story>`;
+
+const BACKING_STORY_XML = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<idPkg:BackingStory xmlns:idPkg="http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging" DOMVersion="18.0">
+  <XmlStory Self="u2c2" TrackChanges="false" StoryTitle="">
+    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/$ID/[No paragraph style]">
+      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
+        <Content></Content>
+      </CharacterStyleRange>
+    </ParagraphStyleRange>
+  </XmlStory>
+</idPkg:BackingStory>`;
+
+// ---------------------------------------------------------------------------
+// Public API
+// ---------------------------------------------------------------------------
+
+/**
+ * Build the full IDML file tree as a Map<filepath, content string>.
+ *
+ * The caller zips this into an .idml file. The `mimetype` entry must be
+ * stored uncompressed and first in the ZIP (required by the IDML spec).
+ */
+export function buildIdmlFiles(options: IdmlOptions): Map<string, string> {
+  const { dsName, typographyStyles, colorGroups } = options;
+
+  return new Map([
+    ["mimetype", "application/vnd.adobe.indesign-idml-package"],
+    ["META-INF/container.xml", CONTAINER_XML],
+    ["designmap.xml", designmapXml(dsName)],
+    ["Resources/Fonts.xml", FONTS_XML],
+    ["Resources/Preferences.xml", PREFERENCES_XML],
+    ["Resources/Graphic.xml", graphicXml(colorGroups)],
+    ["Resources/Styles.xml", stylesXml(dsName, typographyStyles)],
+    ["MasterSpreads/MasterSpread_uNaN.xml", MASTER_SPREAD_XML],
+    ["Spreads/Spread_u11b.xml", SPREAD_XML],
+    ["Stories/Story_u1b8.xml", STORY_XML],
+    ["BackingStory/BackingStory_u2c2.xml", BACKING_STORY_XML],
+  ]);
+}
+
+/**
+ * Convert color ramps (step → hex maps) to IdmlColorGroups.
+ * Each ramp key becomes a named group with one swatch per step.
+ */
+export function colorRampsToIdmlGroups(
+  ramps: Record<string, ColorRamp>
+): IdmlColorGroup[] {
+  return Object.entries(ramps).map(([name, ramp]) => {
+    const label = name.charAt(0).toUpperCase() + name.slice(1);
+    return {
+      name: label,
+      swatches: RAMP_STEPS.map((step) => ({
+        name: `${label} ${step}`,
+        hex: ramp[step] ?? "#000000",
+      })),
+    };
+  });
+}
+
+/**
+ * Add a flat list of semantic role swatches as their own group.
+ * e.g. { background: "#0f0f0f", primary: "#0c8ce9", ... }
+ */
+export function semanticColorsToIdmlGroup(
+  roles: Record<string, string>,
+  groupName = "Semantic"
+): IdmlColorGroup {
+  return {
+    name: groupName,
+    swatches: Object.entries(roles).map(([role, hex]) => ({
+      name: role.charAt(0).toUpperCase() + role.slice(1).replace(/-/g, " "),
+      hex,
+    })),
+  };
+}

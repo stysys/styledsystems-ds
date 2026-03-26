@@ -21,5 +21,11 @@ export * from "./core/colors/index.js";
 // Typography System
 export * from "./core/typography/index.js";
 
+// Design tokens — semantic type scale + OKLCH color ramps
+export * from "./core/tokens/index.js";
+
+// Exporters — ASE (Adobe Swatch Exchange) + IDML (InDesign Markup Language)
+export * from "./core/exporters/index.js";
+
 // Namespaced activation for backward compatibility
 export * as activation from "./core/activation.js";
