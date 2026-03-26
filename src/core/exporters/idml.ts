@@ -131,17 +131,26 @@ function fontsXml(fontFamilies: string[]): string {
 }
 
 function stylesXml(dsName: string, styles: ResolvedScaleEntry[]): string {
-  const scaleGroup = styles.map((s) => [
-    `      <ParagraphStyle Self="ParagraphStyleGroup/Scale/${xmlAttr(s.name)}"`,
-    `        Name="${xmlAttr(s.label)}" PointSize="${s.pointSize}" Leading="${s.leadingPt}"`,
-    `        Tracking="${s.tracking}" AppliedFont="${xmlAttr(s.fontFamily)}"`,
-    `        FontStyle="${toIdmlFontStyle(s.weight)}" />`,
-  ].join("\n")).join("\n");
+  // Scale group: one entry per unique sizeToken (e.g. "base", "lg", "5xl")
+  const seenTokens = new Set<string>();
+  const scaleGroup = styles
+    .filter((s) => {
+      if (seenTokens.has(s.sizeToken)) return false;
+      seenTokens.add(s.sizeToken);
+      return true;
+    })
+    .map((s) => [
+      `      <ParagraphStyle Self="ParagraphStyleGroup/Scale/${xmlAttr(s.sizeToken)}"`,
+      `        Name="${xmlAttr(s.sizeToken)}" PointSize="${s.pointSize}" Leading="${s.leadingPt}"`,
+      `        Tracking="${s.tracking}" AppliedFont="${xmlAttr(s.fontFamily)}"`,
+      `        FontStyle="${toIdmlFontStyle(s.weight)}" />`,
+    ].join("\n")).join("\n");
 
+  // Semantic group: one per semantic token, BasedOn its sizeToken in Scale
   const semanticGroup = styles.map((s) => [
     `      <ParagraphStyle Self="ParagraphStyleGroup/Semantic/${xmlAttr(s.name)}"`,
     `        Name="${xmlAttr(s.label)}"`,
-    `        BasedOn="ParagraphStyleGroup/Scale/${xmlAttr(s.name)}" />`,
+    `        BasedOn="ParagraphStyleGroup/Scale/${xmlAttr(s.sizeToken)}" />`,
   ].join("\n")).join("\n");
 
   return [
