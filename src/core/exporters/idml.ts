@@ -78,10 +78,18 @@ function selfId(prefix: string, name: string): string {
 // ---------------------------------------------------------------------------
 
 function graphicXml(colorGroups: IdmlColorGroup[]): string {
+  // InDesign requires process inks and these specific system colors to be present.
   const colors: string[] = [
-    `  <Color Self="Color/Black" Model="Process" Space="CMYK" ColorValue="0 0 0 100" Name="Black" />`,
-    `  <Color Self="Color/Paper" Model="Process" Space="CMYK" ColorValue="0 0 0 0" Name="Paper" />`,
-    `  <Color Self="Color/White" Model="Process" Space="CMYK" ColorValue="0 0 0 0" Name="White" />`,
+    // Process inks (required)
+    `  <Ink Self="Ink/$ID/Process Cyan"    Name="$ID/Process Cyan"    PrintOrder="1" IsProcess="true" IsOpaque="true" NeutralDensity="0.61" TrapOrder="1" />`,
+    `  <Ink Self="Ink/$ID/Process Magenta" Name="$ID/Process Magenta" PrintOrder="2" IsProcess="true" IsOpaque="true" NeutralDensity="0.61" TrapOrder="2" />`,
+    `  <Ink Self="Ink/$ID/Process Yellow"  Name="$ID/Process Yellow"  PrintOrder="3" IsProcess="true" IsOpaque="true" NeutralDensity="0.61" TrapOrder="3" />`,
+    `  <Ink Self="Ink/$ID/Process Black"   Name="$ID/Process Black"   PrintOrder="4" IsProcess="true" IsOpaque="true" NeutralDensity="1"    TrapOrder="4" />`,
+    // Required system swatches (Paper must be first)
+    `  <Color Self="Color/Paper"        Model="Process"      Space="CMYK" ColorValue="0 0 0 0"       Name="Paper" />`,
+    `  <Color Self="Color/Black"        Model="Process"      Space="CMYK" ColorValue="0 0 0 100"     Name="Black" />`,
+    `  <Color Self="Color/Registration" Model="Registration" Space="CMYK" ColorValue="100 100 100 100" Name="Registration" />`,
+    `  <Color Self="Color/White"        Model="Process"      Space="CMYK" ColorValue="0 0 0 0"       Name="White" />`,
   ];
 
   for (const group of colorGroups) {
@@ -162,7 +170,6 @@ function designmapXml(dsName: string): string {
     `  <idPkg:Graphic src="Resources/Graphic.xml"/>`,
     `  <idPkg:MasterSpread src="MasterSpreads/MasterSpread_uNaN.xml"/>`,
     `  <idPkg:Spread src="Spreads/Spread_u11b.xml"/>`,
-    `  <idPkg:BackingStory src="BackingStory/BackingStory_u2c2.xml"/>`,
     `  <idPkg:Story src="Stories/Story_u1b8.xml"/>`,
     `</Document>`,
   ].join("\n");
@@ -179,46 +186,69 @@ const FONTS_XML = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <idPkg:Fonts xmlns:idPkg="http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging" DOMVersion="18.0">
 </idPkg:Fonts>`;
 
+// DocumentPreference is required — InDesign won't open without page dimensions.
 const PREFERENCES_XML = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <idPkg:Preferences xmlns:idPkg="http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging" DOMVersion="18.0">
+  <DocumentPreference
+    PageHeight="792" PageWidth="612" PagesPerDocument="1"
+    FacingPages="false" AllowPageShuffle="true"
+    DocumentBleedTopOffset="0" DocumentBleedBottomOffset="0"
+    DocumentBleedInsideOrLeftOffset="0" DocumentBleedOutsideOrRightOffset="0"
+    SlugTopOffset="0" SlugBottomOffset="0"
+    SlugInsideOrLeftOffset="0" SlugRightOrOutsideOffset="0"
+  />
 </idPkg:Preferences>`;
 
+// MasterSpread — pages must not self-reference as their own master.
+// Use $ID/[None] for master-less pages on the A-Master.
 const MASTER_SPREAD_XML = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <idPkg:MasterSpread xmlns:idPkg="http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging" DOMVersion="18.0">
-  <MasterSpread Self="u27b" Name="A-Master" NamePrefix="A" BaseName="A-Master" PageCount="1">
-    <Page Self="ubb" MasterPageTransform="1 0 0 1 -306 -396" Name="1" AppliedMaster="MasterSpread/u27b" />
+  <MasterSpread Self="u27b" Name="A-Master" NamePrefix="A" BaseName="A-Master"
+    PageCount="1" ShowMasterItems="true" AllowPageShuffle="true" BindingLocation="0">
+    <FlattenerPreference LineArtAndTextResolution="300" GradientAndMeshResolution="150"
+      ClipComplexRegions="false" ConvertAllStrokesToOutlines="false"
+      ConvertAllTextToOutlines="false" RasterVectorBalance="75" />
+    <Page Self="ubb" MasterPageTransform="1 0 0 1 -306 -396" Name="1"
+      AppliedMaster="$ID/[None]" PageColor="Nothing"
+      GridStartingPoint="TopOutside" UseMasterGrid="true" OverrideList="" TabOrder="">
+      <Properties>
+        <Descriptor type="list"><ListItem type="string">1</ListItem></Descriptor>
+      </Properties>
+      <PagePreference ColumnsPositions="0 576" />
+    </Page>
   </MasterSpread>
 </idPkg:MasterSpread>`;
 
 const SPREAD_XML = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <idPkg:Spread xmlns:idPkg="http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging" DOMVersion="18.0">
-  <Spread Self="u11b" PageCount="1" BindingLocation="0" AllowPageShuffle="true">
-    <Page Self="u11c" MasterPageTransform="1 0 0 1 -306 -396" Name="1" AppliedMaster="MasterSpread/u27b" />
+  <Spread Self="u11b" PageCount="1" BindingLocation="0"
+    AllowPageShuffle="true" ShowMasterItems="true" FlattenerOverride="Default">
+    <FlattenerPreference LineArtAndTextResolution="300" GradientAndMeshResolution="150"
+      ClipComplexRegions="false" ConvertAllStrokesToOutlines="false"
+      ConvertAllTextToOutlines="false" RasterVectorBalance="75" />
+    <Page Self="u11c" MasterPageTransform="1 0 0 1 -306 -396" Name="1"
+      AppliedMaster="MasterSpread/u27b" PageColor="Nothing"
+      GridStartingPoint="TopOutside" UseMasterGrid="true" OverrideList="" TabOrder="">
+      <Properties>
+        <Descriptor type="list"><ListItem type="string">1</ListItem></Descriptor>
+      </Properties>
+      <PagePreference ColumnsPositions="0 576" />
+    </Page>
   </Spread>
 </idPkg:Spread>`;
 
 const STORY_XML = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <idPkg:Story xmlns:idPkg="http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging" DOMVersion="18.0">
-  <Story Self="u1b8" AppliedTOCStyle="n" TrackChanges="false" StoryTitle="">
+  <Story Self="u1b8" AppliedTOCStyle="n" TrackChanges="false" StoryTitle="$ID/">
     <StoryPreference OpticalMarginAlignment="false" OpticalMarginSize="12" />
+    <InCopyExportOption IncludeGraphicProxies="true" IncludeAllResources="false" />
     <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/$ID/[No paragraph style]">
       <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
-        <Content></Content>
+        <Content> </Content>
       </CharacterStyleRange>
     </ParagraphStyleRange>
   </Story>
 </idPkg:Story>`;
-
-const BACKING_STORY_XML = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<idPkg:BackingStory xmlns:idPkg="http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging" DOMVersion="18.0">
-  <XmlStory Self="u2c2" TrackChanges="false" StoryTitle="">
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/$ID/[No paragraph style]">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
-        <Content></Content>
-      </CharacterStyleRange>
-    </ParagraphStyleRange>
-  </XmlStory>
-</idPkg:BackingStory>`;
 
 // ---------------------------------------------------------------------------
 // Public API
@@ -244,7 +274,6 @@ export function buildIdmlFiles(options: IdmlOptions): Map<string, string> {
     ["MasterSpreads/MasterSpread_uNaN.xml", MASTER_SPREAD_XML],
     ["Spreads/Spread_u11b.xml", SPREAD_XML],
     ["Stories/Story_u1b8.xml", STORY_XML],
-    ["BackingStory/BackingStory_u2c2.xml", BACKING_STORY_XML],
   ]);
 }
 
