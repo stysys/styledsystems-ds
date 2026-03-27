@@ -99,6 +99,27 @@ export interface UIState {
   [key: string]: any;
 }
 
+// ---------------------------------------------------------------------------
+// Font families
+// ---------------------------------------------------------------------------
+
+export type FontFamilyType = "sans" | "serif" | "monospace";
+
+export const FONT_FAMILY_TYPES: FontFamilyType[] = ["sans", "serif", "monospace"];
+
+export const FONT_FAMILY_TYPE_LABELS: Record<FontFamilyType, string> = {
+  sans: "Sans",
+  serif: "Serif",
+  monospace: "Monospace",
+};
+
+/** A single font family defined in a design system. */
+export interface FontFamily {
+  type: FontFamilyType;
+  /** The CSS font-family name, e.g. "Inter" or "Georgia". */
+  name: string;
+}
+
 // Design System related types
 export interface BrandLogoVariant {
   id: string;
@@ -125,6 +146,7 @@ export interface DesignSystemTokens {
     variants: BrandLogoVariant[];
     [key: string]: any;
   };
+  fontFamilies?: FontFamily[];
 }
 
 export interface DesignSystem {
