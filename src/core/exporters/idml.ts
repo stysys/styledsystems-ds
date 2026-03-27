@@ -152,11 +152,16 @@ function stylesXml(dsName: string, styles: ResolvedScaleEntry[]): string {
       `        BasedOn="ParagraphStyle/$ID/NormalParagraphStyle" />`,
     ].join("\n")).join("\n");
 
-  // Semantic styles sit at root level (not in a group) so their BasedOn
-  // references to the Scale group resolve without cross-group lookup issues.
+  // Semantic styles at root level with all type properties specified directly.
+  // BasedOn is included for InDesign's style panel organisation, but each
+  // style is self-contained so it works correctly even if BasedOn doesn't
+  // resolve (which can happen depending on InDesign version / import order).
   const semanticStyles = styles.map((s) => [
     `    <ParagraphStyle Self="ParagraphStyle/Semantic_${xmlAttr(s.name)}"`,
     `      Name="${xmlAttr(s.label)}"`,
+    `      PointSize="${s.pointSize}" Leading="${s.leadingPt}"`,
+    `      Tracking="${s.tracking}" AppliedFont="${xmlAttr(s.fontFamily)}"`,
+    `      FontStyle="${toIdmlFontStyle(s.weight)}"`,
     `      BasedOn="ParagraphStyle/Scale_${xmlAttr(s.sizeToken)}" />`,
   ].join("\n")).join("\n");
 
