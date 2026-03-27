@@ -29,6 +29,10 @@ export interface SemanticScaleEntry {
   leading: number;
   /** Tracking in InDesign thousandths-of-em */
   tracking: number;
+  /** Rhythm multiplier for space before (× rhythmBase). Default 1. */
+  rhythmBefore?: number;
+  /** Rhythm multiplier for space after (× rhythmBase). Default 0.5. */
+  rhythmAfter?: number;
 }
 
 export const SEMANTIC_SCALE: SemanticScaleEntry[] = [
@@ -41,6 +45,8 @@ export const SEMANTIC_SCALE: SemanticScaleEntry[] = [
     weight: "Bold",
     leading: 1.1,
     tracking: -20,
+    rhythmBefore: 8,
+    rhythmAfter: 3,
   },
   {
     token: "h1",
@@ -51,6 +57,8 @@ export const SEMANTIC_SCALE: SemanticScaleEntry[] = [
     weight: "Bold",
     leading: 1.15,
     tracking: -10,
+    rhythmBefore: 6,
+    rhythmAfter: 2,
   },
   {
     token: "h2",
@@ -61,6 +69,8 @@ export const SEMANTIC_SCALE: SemanticScaleEntry[] = [
     weight: "Bold",
     leading: 1.2,
     tracking: -5,
+    rhythmBefore: 5,
+    rhythmAfter: 2,
   },
   {
     token: "h3",
@@ -71,6 +81,8 @@ export const SEMANTIC_SCALE: SemanticScaleEntry[] = [
     weight: "SemiBold",
     leading: 1.25,
     tracking: 0,
+    rhythmBefore: 4,
+    rhythmAfter: 1.5,
   },
   {
     token: "h4",
@@ -81,6 +93,8 @@ export const SEMANTIC_SCALE: SemanticScaleEntry[] = [
     weight: "SemiBold",
     leading: 1.3,
     tracking: 0,
+    rhythmBefore: 3,
+    rhythmAfter: 1.5,
   },
   {
     token: "h5",
@@ -91,6 +105,8 @@ export const SEMANTIC_SCALE: SemanticScaleEntry[] = [
     weight: "SemiBold",
     leading: 1.4,
     tracking: 0,
+    rhythmBefore: 3,
+    rhythmAfter: 1,
   },
   {
     token: "h6",
@@ -101,6 +117,8 @@ export const SEMANTIC_SCALE: SemanticScaleEntry[] = [
     weight: "SemiBold",
     leading: 1.45,
     tracking: 0,
+    rhythmBefore: 2,
+    rhythmAfter: 1,
   },
   {
     token: "body-large",
@@ -111,6 +129,8 @@ export const SEMANTIC_SCALE: SemanticScaleEntry[] = [
     weight: "Regular",
     leading: 1.5,
     tracking: 0,
+    rhythmBefore: 2,
+    rhythmAfter: 1,
   },
   {
     token: "body",
@@ -121,6 +141,8 @@ export const SEMANTIC_SCALE: SemanticScaleEntry[] = [
     weight: "Regular",
     leading: 1.5,
     tracking: 0,
+    rhythmBefore: 1,
+    rhythmAfter: 1,
   },
   {
     token: "body-small",
@@ -131,6 +153,8 @@ export const SEMANTIC_SCALE: SemanticScaleEntry[] = [
     weight: "Regular",
     leading: 1.5,
     tracking: 5,
+    rhythmBefore: 1,
+    rhythmAfter: 0.5,
   },
   {
     token: "caption",
@@ -141,6 +165,8 @@ export const SEMANTIC_SCALE: SemanticScaleEntry[] = [
     weight: "Regular",
     leading: 1.4,
     tracking: 10,
+    rhythmBefore: 1,
+    rhythmAfter: 0.5,
   },
   {
     token: "small-text",
@@ -151,6 +177,8 @@ export const SEMANTIC_SCALE: SemanticScaleEntry[] = [
     weight: "Regular",
     leading: 1.35,
     tracking: 20,
+    rhythmBefore: 0.5,
+    rhythmAfter: 0.5,
   },
   {
     token: "overline",
@@ -161,6 +189,8 @@ export const SEMANTIC_SCALE: SemanticScaleEntry[] = [
     weight: "Medium",
     leading: 1.3,
     tracking: 80,
+    rhythmBefore: 3,
+    rhythmAfter: 0.5,
   },
 ];
 
@@ -177,6 +207,16 @@ export function resolvePointSize(
 }
 
 /**
+ * Derive the vertical rhythm base unit from the body font size.
+ * Default: baseFontSize × 0.5  (e.g. 16px → 8pt grid)
+ * Can be overridden with an explicit value from token storage.
+ */
+export function resolveRhythmBase(baseFontSize: number, override?: number): number {
+  if (override != null && override > 0) return override;
+  return Math.round(baseFontSize * 0.5 * 100) / 100;
+}
+
+/**
  * Resolve all scale entries to concrete point sizes + leading values.
  * Returns objects ready to pass to InDesign, Figma, or IDML exporters.
  */
@@ -184,8 +224,10 @@ export function resolveSemanticScale(
   baseFontSize: number,
   typeScale: number,
   fontFamily = "Arial",
-  entries: SemanticScaleEntry[] = SEMANTIC_SCALE
+  entries: SemanticScaleEntry[] = SEMANTIC_SCALE,
+  rhythmBase?: number
 ): ResolvedScaleEntry[] {
+  const rb = resolveRhythmBase(baseFontSize, rhythmBase);
   return entries.map((entry) => {
     const pointSize = resolvePointSize(entry, baseFontSize, typeScale);
     return {
@@ -193,6 +235,8 @@ export function resolveSemanticScale(
       pointSize,
       leadingPt: Math.round(pointSize * entry.leading * 100) / 100,
       fontFamily,
+      spaceBefore: Math.round(rb * (entry.rhythmBefore ?? 1) * 100) / 100,
+      spaceAfter:  Math.round(rb * (entry.rhythmAfter  ?? 0.5) * 100) / 100,
     };
   });
 }
@@ -204,4 +248,8 @@ export interface ResolvedScaleEntry extends SemanticScaleEntry {
   leadingPt: number;
   /** Font family name */
   fontFamily: string;
+  /** Space before paragraph in points (rhythmBase × rhythmBefore) */
+  spaceBefore: number;
+  /** Space after paragraph in points (rhythmBase × rhythmAfter) */
+  spaceAfter: number;
 }

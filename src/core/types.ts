@@ -138,9 +138,14 @@ export interface BrandLogoVariant {
   updatedAt: string;
 }
 
+export interface TypographyRhythm {
+  /** Base rhythm grid unit in px/pt. Auto-derived from baseSize × 0.5 if omitted. */
+  base?: number;
+}
+
 export interface DesignSystemTokens {
   spacing?: Record<string, number>;
-  typography?: Record<string, any>;
+  typography?: Record<string, any> & { rhythm?: TypographyRhythm };
   colors?: Record<string, string>;
   brand?: {
     variants: BrandLogoVariant[];

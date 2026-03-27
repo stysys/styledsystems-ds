@@ -156,6 +156,7 @@ function stylesXml(dsName: string, styles: ResolvedScaleEntry[]): string {
       `      <ParagraphStyle Self="ParagraphStyle/Scale%3a${xmlAttr(s.sizeToken)}"`,
       `        Name="Scale:${xmlAttr(s.sizeToken)}" PointSize="${s.pointSize}"`,
       `        Leading="${s.leadingPt}" Tracking="${s.tracking}"`,
+      `        SpaceBefore="${s.spaceBefore}" SpaceAfter="${s.spaceAfter}"`,
       `        FontStyle="${toIdmlFontStyle(s.weight)}">`,
       `        <Properties>`,
       `          <BasedOn type="string">$ID/[No paragraph style]</BasedOn>`,
