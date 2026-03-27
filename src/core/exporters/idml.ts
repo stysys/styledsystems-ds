@@ -134,10 +134,9 @@ function fontsXml(fontFamilies: string[]): string {
 }
 
 function stylesXml(dsName: string, styles: ResolvedScaleEntry[]): string {
-  // Scale styles: one per unique sizeToken (e.g. "base", "lg", "5xl").
-  // Flat in RootParagraphStyleGroup — cross-group BasedOn resolution is
-  // unreliable in InDesign import; flat styles always resolve correctly.
-  // Each Scale style inherits from NormalParagraphStyle for a valid chain.
+  // Scale group: one style per unique sizeToken inside a named group so they
+  // appear organised in InDesign's paragraph-styles panel.
+  // Each Scale style is based on NormalParagraphStyle for a valid chain.
   const seenTokens = new Set<string>();
   const scaleStyles = styles
     .filter((s) => {
@@ -146,14 +145,15 @@ function stylesXml(dsName: string, styles: ResolvedScaleEntry[]): string {
       return true;
     })
     .map((s) => [
-      `    <ParagraphStyle Self="ParagraphStyle/Scale_${xmlAttr(s.sizeToken)}"`,
-      `      Name="Scale/${xmlAttr(s.sizeToken)}" PointSize="${s.pointSize}" Leading="${s.leadingPt}"`,
-      `      Tracking="${s.tracking}" AppliedFont="${xmlAttr(s.fontFamily)}"`,
-      `      FontStyle="${toIdmlFontStyle(s.weight)}"`,
-      `      BasedOn="ParagraphStyle/$ID/NormalParagraphStyle" />`,
+      `      <ParagraphStyle Self="ParagraphStyle/Scale_${xmlAttr(s.sizeToken)}"`,
+      `        Name="${xmlAttr(s.sizeToken)}" PointSize="${s.pointSize}" Leading="${s.leadingPt}"`,
+      `        Tracking="${s.tracking}" AppliedFont="${xmlAttr(s.fontFamily)}"`,
+      `        FontStyle="${toIdmlFontStyle(s.weight)}"`,
+      `        BasedOn="ParagraphStyle/$ID/NormalParagraphStyle" />`,
     ].join("\n")).join("\n");
 
-  // Semantic styles: BasedOn references the Scale style's Self exactly.
+  // Semantic styles sit at root level (not in a group) so their BasedOn
+  // references to the Scale group resolve without cross-group lookup issues.
   const semanticStyles = styles.map((s) => [
     `    <ParagraphStyle Self="ParagraphStyle/Semantic_${xmlAttr(s.name)}"`,
     `      Name="${xmlAttr(s.label)}"`,
@@ -166,7 +166,9 @@ function stylesXml(dsName: string, styles: ResolvedScaleEntry[]): string {
     `  <RootParagraphStyleGroup Self="RootParagraphStyleGroup">`,
     `    <ParagraphStyle Self="ParagraphStyle/$ID/[No paragraph style]" Name="$ID/[No paragraph style]"/>`,
     `    <ParagraphStyle Self="ParagraphStyle/$ID/NormalParagraphStyle" Name="$ID/NormalParagraphStyle"/>`,
+    `    <ParagraphStyleGroup Self="ParagraphStyleGroup/Scale" Name="Scale">`,
     scaleStyles,
+    `    </ParagraphStyleGroup>`,
     semanticStyles,
     `  </RootParagraphStyleGroup>`,
     `  <RootCharacterStyleGroup Self="RootCharacterStyleGroup">`,
