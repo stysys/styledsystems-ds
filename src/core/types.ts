@@ -138,9 +138,20 @@ export interface BrandLogoVariant {
   updatedAt: string;
 }
 
+export interface TypographyRhythm {
+  /** Base rhythm grid unit in px/pt. Auto-derived from baseSize × 0.5 if omitted. */
+  base?: number;
+  /**
+   * Independent ratio for paragraph spacing. Falls back to the type scale ratio
+   * if omitted. A higher value (e.g. 1.5) creates more dramatic spatial hierarchy
+   * than the type scale alone — common when type uses a tight ratio like 1.125.
+   */
+  spaceScale?: number;
+}
+
 export interface DesignSystemTokens {
   spacing?: Record<string, number>;
-  typography?: Record<string, any>;
+  typography?: Record<string, any> & { rhythm?: TypographyRhythm };
   colors?: Record<string, string>;
   brand?: {
     variants: BrandLogoVariant[];
