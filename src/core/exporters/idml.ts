@@ -116,12 +116,13 @@ function designmapXml(dsName: string): string {
 
 function fontsXml(fontFamilies: string[]): string {
   const unique = [...new Set(fontFamilies)];
+  // Declare only a single entry per family using the family name as the
+  // PostScript name. This is correct for variable fonts (one file, axis-based
+  // weight) and avoids InDesign reporting "GDOctioVF Bold" as missing when
+  // the font has no separate Bold PostScript name.
   const families = unique.map((name) => [
     `  <FontFamily Self="${xmlAttr(name)}Family" Name="${xmlAttr(name)}">`,
     `    <Font Self="${xmlAttr(name)}Regular" Name="Regular" FontStyle="Regular" PostScriptName="${xmlAttr(name.replace(/\s/g, ""))}" />`,
-    `    <Font Self="${xmlAttr(name)}Bold" Name="Bold" FontStyle="Bold" PostScriptName="${xmlAttr(name.replace(/\s/g, ""))}-Bold" />`,
-    `    <Font Self="${xmlAttr(name)}Italic" Name="Italic" FontStyle="Italic" PostScriptName="${xmlAttr(name.replace(/\s/g, ""))}-Italic" />`,
-    `    <Font Self="${xmlAttr(name)}BoldItalic" Name="BoldItalic" FontStyle="BoldItalic" PostScriptName="${xmlAttr(name.replace(/\s/g, ""))}-BoldItalic" />`,
     `  </FontFamily>`,
   ].join("\n")).join("\n");
 
