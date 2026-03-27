@@ -31,6 +31,8 @@ export interface IdmlOptions {
   exportedAt?: string;
   /** Short identifier for the token version, e.g. first 8 chars of the Firestore doc ID */
   tokenVersionId?: string;
+  /** @stysys/design-system npm package version, e.g. "1.8.2" */
+  dsVersion?: string;
 }
 
 // ---------------------------------------------------------------------------
@@ -325,15 +327,16 @@ function para(text: string): string {
  */
 function storyXml(
   dsName: string,
-  options: Pick<IdmlOptions, "publishedAt" | "exportedAt" | "tokenVersionId">,
+  options: Pick<IdmlOptions, "publishedAt" | "exportedAt" | "tokenVersionId" | "dsVersion">,
   styles: ResolvedScaleEntry[]
 ): string {
   const sampleText = "The quick brown fox jumps over the lazy dog";
 
   const headerLines: string[] = [dsName];
-  if (options.publishedAt) headerLines.push(`Published  ${options.publishedAt}`);
-  if (options.tokenVersionId) headerLines.push(`Version    ${options.tokenVersionId}`);
-  if (options.exportedAt)   headerLines.push(`Exported   ${options.exportedAt}`);
+  if (options.dsVersion)     headerLines.push(`v${options.dsVersion}`);
+  if (options.publishedAt)   headerLines.push(`Published  ${options.publishedAt}`);
+  if (options.tokenVersionId) headerLines.push(`Token      ${options.tokenVersionId}`);
+  if (options.exportedAt)    headerLines.push(`Exported   ${options.exportedAt}`);
 
   const headerParagraphs = headerLines.map(para).join("\n");
 
