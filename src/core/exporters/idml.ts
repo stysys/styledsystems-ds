@@ -133,6 +133,10 @@ function fontsXml(fontFamilies: string[]): string {
 function stylesXml(dsName: string, styles: ResolvedScaleEntry[]): string {
   // Scale group: one entry per unique sizeToken (e.g. "base", "lg", "5xl")
   const seenTokens = new Set<string>();
+  // ParagraphStyle Self values must use the "ParagraphStyle/" namespace even
+  // when the element is nested inside a ParagraphStyleGroup. Using
+  // "ParagraphStyleGroup/..." as a Self causes InDesign to silently drop the
+  // BasedOn reference and show "[No Paragraph Style]" in the UI.
   const scaleGroup = styles
     .filter((s) => {
       if (seenTokens.has(s.sizeToken)) return false;
@@ -140,17 +144,17 @@ function stylesXml(dsName: string, styles: ResolvedScaleEntry[]): string {
       return true;
     })
     .map((s) => [
-      `      <ParagraphStyle Self="ParagraphStyleGroup/Scale/${xmlAttr(s.sizeToken)}"`,
+      `      <ParagraphStyle Self="ParagraphStyle/Scale_${xmlAttr(s.sizeToken)}"`,
       `        Name="${xmlAttr(s.sizeToken)}" PointSize="${s.pointSize}" Leading="${s.leadingPt}"`,
       `        Tracking="${s.tracking}" AppliedFont="${xmlAttr(s.fontFamily)}"`,
       `        FontStyle="${toIdmlFontStyle(s.weight)}" />`,
     ].join("\n")).join("\n");
 
-  // Semantic group: one per semantic token, BasedOn its sizeToken in Scale
+  // Semantic group: BasedOn references the Scale style's Self exactly.
   const semanticGroup = styles.map((s) => [
-    `      <ParagraphStyle Self="ParagraphStyleGroup/Semantic/${xmlAttr(s.name)}"`,
+    `      <ParagraphStyle Self="ParagraphStyle/Semantic_${xmlAttr(s.name)}"`,
     `        Name="${xmlAttr(s.label)}"`,
-    `        BasedOn="ParagraphStyleGroup/Scale/${xmlAttr(s.sizeToken)}" />`,
+    `        BasedOn="ParagraphStyle/Scale_${xmlAttr(s.sizeToken)}" />`,
   ].join("\n")).join("\n");
 
   return [
