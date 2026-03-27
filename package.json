@@ -10,7 +10,9 @@
       "import": "./dist/index.js",
       "types": "./dist/index.d.ts"
     },
-    "./styles/*": "./dist/styles/*"
+    "./dist/styles/*": "./dist/styles/*",
+    "./dist/fonts/*": "./dist/fonts/*",
+    "./dist/types/*": "./dist/types/*"
   },
   "repository": {
     "type": "git",
