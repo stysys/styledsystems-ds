@@ -10,6 +10,12 @@
  * `power` drives the modular scale: size = baseFontSize × typeScale^power
  * `leading` is a multiplier applied to the computed size (1.1 = tight, 1.6 = loose)
  * `tracking` is in InDesign thousandths-of-em (e.g. -20 = -0.02em, 80 = 0.08em)
+ *
+ * Vertical rhythm uses the SAME typeScale ratio for spacing:
+ *   spaceBefore = rhythmBase × typeScale^spacePowerBefore
+ *   spaceAfter  = rhythmBase × typeScale^spacePowerAfter
+ * This means changing the type scale ratio adjusts spacing proportionally too —
+ * one ratio governs the whole system.
  */
 
 export interface SemanticScaleEntry {
@@ -29,10 +35,18 @@ export interface SemanticScaleEntry {
   leading: number;
   /** Tracking in InDesign thousandths-of-em */
   tracking: number;
-  /** Rhythm multiplier for space before (× rhythmBase). Default 1. */
-  rhythmBefore?: number;
-  /** Rhythm multiplier for space after (× rhythmBase). Default 0.5. */
-  rhythmAfter?: number;
+  /**
+   * Modular scale power for space BEFORE the paragraph.
+   * spaceBefore = rhythmBase × typeScale^spacePowerBefore
+   * Default: 1
+   */
+  spacePowerBefore?: number;
+  /**
+   * Modular scale power for space AFTER the paragraph.
+   * spaceAfter = rhythmBase × typeScale^spacePowerAfter
+   * Default: 0
+   */
+  spacePowerAfter?: number;
 }
 
 export const SEMANTIC_SCALE: SemanticScaleEntry[] = [
@@ -45,8 +59,8 @@ export const SEMANTIC_SCALE: SemanticScaleEntry[] = [
     weight: "Bold",
     leading: 1.1,
     tracking: -20,
-    rhythmBefore: 8,
-    rhythmAfter: 3,
+    spacePowerBefore: 8,
+    spacePowerAfter: 4,
   },
   {
     token: "h1",
@@ -57,8 +71,8 @@ export const SEMANTIC_SCALE: SemanticScaleEntry[] = [
     weight: "Bold",
     leading: 1.15,
     tracking: -10,
-    rhythmBefore: 6,
-    rhythmAfter: 2,
+    spacePowerBefore: 7,
+    spacePowerAfter: 3,
   },
   {
     token: "h2",
@@ -69,8 +83,8 @@ export const SEMANTIC_SCALE: SemanticScaleEntry[] = [
     weight: "Bold",
     leading: 1.2,
     tracking: -5,
-    rhythmBefore: 5,
-    rhythmAfter: 2,
+    spacePowerBefore: 6,
+    spacePowerAfter: 3,
   },
   {
     token: "h3",
@@ -81,8 +95,8 @@ export const SEMANTIC_SCALE: SemanticScaleEntry[] = [
     weight: "SemiBold",
     leading: 1.25,
     tracking: 0,
-    rhythmBefore: 4,
-    rhythmAfter: 1.5,
+    spacePowerBefore: 5,
+    spacePowerAfter: 2,
   },
   {
     token: "h4",
@@ -93,8 +107,8 @@ export const SEMANTIC_SCALE: SemanticScaleEntry[] = [
     weight: "SemiBold",
     leading: 1.3,
     tracking: 0,
-    rhythmBefore: 3,
-    rhythmAfter: 1.5,
+    spacePowerBefore: 4,
+    spacePowerAfter: 2,
   },
   {
     token: "h5",
@@ -105,8 +119,8 @@ export const SEMANTIC_SCALE: SemanticScaleEntry[] = [
     weight: "SemiBold",
     leading: 1.4,
     tracking: 0,
-    rhythmBefore: 3,
-    rhythmAfter: 1,
+    spacePowerBefore: 4,
+    spacePowerAfter: 1,
   },
   {
     token: "h6",
@@ -117,8 +131,8 @@ export const SEMANTIC_SCALE: SemanticScaleEntry[] = [
     weight: "SemiBold",
     leading: 1.45,
     tracking: 0,
-    rhythmBefore: 2,
-    rhythmAfter: 1,
+    spacePowerBefore: 3,
+    spacePowerAfter: 1,
   },
   {
     token: "body-large",
@@ -129,8 +143,8 @@ export const SEMANTIC_SCALE: SemanticScaleEntry[] = [
     weight: "Regular",
     leading: 1.5,
     tracking: 0,
-    rhythmBefore: 2,
-    rhythmAfter: 1,
+    spacePowerBefore: 3,
+    spacePowerAfter: 1,
   },
   {
     token: "body",
@@ -141,8 +155,8 @@ export const SEMANTIC_SCALE: SemanticScaleEntry[] = [
     weight: "Regular",
     leading: 1.5,
     tracking: 0,
-    rhythmBefore: 1,
-    rhythmAfter: 1,
+    spacePowerBefore: 2,
+    spacePowerAfter: 1,
   },
   {
     token: "body-small",
@@ -153,8 +167,8 @@ export const SEMANTIC_SCALE: SemanticScaleEntry[] = [
     weight: "Regular",
     leading: 1.5,
     tracking: 5,
-    rhythmBefore: 1,
-    rhythmAfter: 0.5,
+    spacePowerBefore: 1,
+    spacePowerAfter: 0,
   },
   {
     token: "caption",
@@ -165,8 +179,8 @@ export const SEMANTIC_SCALE: SemanticScaleEntry[] = [
     weight: "Regular",
     leading: 1.4,
     tracking: 10,
-    rhythmBefore: 1,
-    rhythmAfter: 0.5,
+    spacePowerBefore: 1,
+    spacePowerAfter: 0,
   },
   {
     token: "small-text",
@@ -177,8 +191,8 @@ export const SEMANTIC_SCALE: SemanticScaleEntry[] = [
     weight: "Regular",
     leading: 1.35,
     tracking: 20,
-    rhythmBefore: 0.5,
-    rhythmAfter: 0.5,
+    spacePowerBefore: 0,
+    spacePowerAfter: 0,
   },
   {
     token: "overline",
@@ -189,8 +203,8 @@ export const SEMANTIC_SCALE: SemanticScaleEntry[] = [
     weight: "Medium",
     leading: 1.3,
     tracking: 80,
-    rhythmBefore: 3,
-    rhythmAfter: 0.5,
+    spacePowerBefore: 3,
+    spacePowerAfter: -1,
   },
 ];
 
@@ -217,8 +231,12 @@ export function resolveRhythmBase(baseFontSize: number, override?: number): numb
 }
 
 /**
- * Resolve all scale entries to concrete point sizes + leading values.
+ * Resolve all scale entries to concrete point sizes, leading, and spacing values.
  * Returns objects ready to pass to InDesign, Figma, or IDML exporters.
+ *
+ * Vertical rhythm uses the same typeScale ratio as type sizes:
+ *   spaceBefore = rhythmBase × typeScale^spacePowerBefore
+ * So adjusting the type scale ratio automatically scales spacing proportionally.
  */
 export function resolveSemanticScale(
   baseFontSize: number,
@@ -235,8 +253,8 @@ export function resolveSemanticScale(
       pointSize,
       leadingPt: Math.round(pointSize * entry.leading * 100) / 100,
       fontFamily,
-      spaceBefore: Math.round(rb * (entry.rhythmBefore ?? 1) * 100) / 100,
-      spaceAfter:  Math.round(rb * (entry.rhythmAfter  ?? 0.5) * 100) / 100,
+      spaceBefore: Math.round(rb * Math.pow(typeScale, entry.spacePowerBefore ?? 1) * 100) / 100,
+      spaceAfter:  Math.round(rb * Math.pow(typeScale, entry.spacePowerAfter  ?? 0) * 100) / 100,
     };
   });
 }
@@ -248,8 +266,8 @@ export interface ResolvedScaleEntry extends SemanticScaleEntry {
   leadingPt: number;
   /** Font family name */
   fontFamily: string;
-  /** Space before paragraph in points (rhythmBase × rhythmBefore) */
+  /** Space before paragraph in points — rhythmBase × typeScale^spacePowerBefore */
   spaceBefore: number;
-  /** Space after paragraph in points (rhythmBase × rhythmAfter) */
+  /** Space after paragraph in points — rhythmBase × typeScale^spacePowerAfter */
   spaceAfter: number;
 }
