@@ -1,7 +1,6 @@
-/* 
- * Auto-generated theme file (Tailwind v4 compliant)
- * DO NOT EDIT MANUALLY - Edit colors.css instead
- * Generated from: primary: #e7ff0f, secondary: #3b82f6, accent: #f50b97, neutral: #1b1b16, success: #10b981, warning: #f59e0b, error: #ef4444, info: #06d44b, premium: #8b5cf6, data: #6366f1, growth: #059669, creative: #ea580c, social: #ec4899, utility: #0d9488
+/*
+ * Theme file — Tailwind v4 compliant
+ * Color palette scales + semantic tokens
  */
 
 @font-face {
@@ -55,94 +54,7 @@
   --text-sm: clamp(0.8331rem, 0.8285714285714286rem + 0.0202vw, 0.8438rem);
   --text-xs: clamp(0.6944rem, 0.720625rem + -0.1167vw, 0.6331rem);
 
-  /* Primary color scale - with literal values */
-  --color-primary-50: oklch(97% 0.096 109);
-  --color-primary-100: oklch(94% 0.193 109);
-  --color-primary-200: oklch(86% 0.386 109);
-  --color-primary-300: oklch(77% 0.579 109);
-  --color-primary-400: oklch(66% 0.772 109);
-  --color-primary-500: #e7ff0f;
-  --color-primary-600: oklch(48% 0.965 109);
-  --color-primary-700: oklch(38% 0.965 109);
-  --color-primary-800: oklch(28% 0.868 109);
-  --color-primary-900: oklch(18% 0.772 109);
-  --color-primary-950: oklch(8% 0.675 109);
-
-  /* Secondary color scale */
-  --color-secondary-50: oklch(97% 0.067 285);
-  --color-secondary-100: oklch(94% 0.134 285);
-  --color-secondary-200: oklch(86% 0.267 285);
-  --color-secondary-300: oklch(77% 0.401 285);
-  --color-secondary-400: oklch(66% 0.534 285);
-  --color-secondary-500: #3b82f6;
-  --color-secondary-600: oklch(48% 0.668 285);
-  --color-secondary-700: oklch(38% 0.668 285);
-  --color-secondary-800: oklch(28% 0.601 285);
-  --color-secondary-900: oklch(18% 0.534 285);
-  --color-secondary-950: oklch(8% 0.467 285);
-
-  /* Accent color scale */
-  --color-accent-50: oklch(97% 0.084 352);
-  --color-accent-100: oklch(94% 0.169 352);
-  --color-accent-200: oklch(86% 0.337 352);
-  --color-accent-300: oklch(77% 0.506 352);
-  --color-accent-400: oklch(66% 0.675 352);
-  --color-accent-500: #f50b97;
-  --color-accent-600: oklch(48% 0.843 352);
-  --color-accent-700: oklch(38% 0.843 352);
-  --color-accent-800: oklch(28% 0.759 352);
-  --color-accent-900: oklch(18% 0.675 352);
-  --color-accent-950: oklch(8% 0.59 352);
-
-  /* Neutral color scale */
-  --color-neutral-50: hsl(60, 1.1%, 97%);
-  --color-neutral-100: hsl(60, 1.6%, 94%);
-  --color-neutral-200: hsl(60, 2.1%, 87%);
-  --color-neutral-300: hsl(60, 2.7%, 78%);
-  --color-neutral-400: hsl(60, 3.2%, 68%);
-  --color-neutral-500: hsl(60, 4.3%, 58%);
-  --color-neutral-600: hsl(60, 5.4%, 45%);
-  --color-neutral-700: hsl(60, 6.4%, 35%);
-  --color-neutral-800: hsl(60, 7.5%, 14.4%);
-  --color-neutral-850: hsl(60, 8.6%, 12.4%);
-  --color-neutral-900: hsl(60, 9.6%, 11.4%);
-  --color-neutral-950: hsl(60, 10.7%, 10.4%);
-
-  /* Success color scale */
-  --color-success-50: oklch(97% 0.055 161);
-  --color-success-100: oklch(94% 0.11 161);
-  --color-success-200: oklch(86% 0.22 161);
-  --color-success-300: oklch(77% 0.331 161);
-  --color-success-400: oklch(66% 0.441 161);
-  --color-success-500: #10b981;
-  --color-success-600: oklch(48% 0.551 161);
-  --color-success-700: oklch(38% 0.551 161);
-  --color-success-800: oklch(28% 0.496 161);
-  --color-success-900: oklch(18% 0.441 161);
-  --color-success-950: oklch(8% 0.386 161);
-
-  /* Warning color scale */
-  --color-warning-50: oklch(97% 0.079 73);
-  --color-warning-100: oklch(94% 0.158 73);
-  --color-warning-200: oklch(86% 0.315 73);
-  --color-warning-300: oklch(77% 0.473 73);
-  --color-warning-400: oklch(66% 0.63 73);
-  --color-warning-500: #f59e0b;
-  --color-warning-600: oklch(48% 0.788 73);
-  --color-warning-700: oklch(38% 0.788 73);
-  --color-warning-800: oklch(28% 0.709 73);
-  --color-warning-900: oklch(18% 0.63 73);
-  --color-warning-950: oklch(8% 0.552 73);
-
-  /* Error color scale */
-  --color-error-50: oklch(97% 0.076 31);
-  --color-error-100: oklch(94% 0.151 31);
-  --color-error-200: oklch(86% 0.302 31);
-  --color-error-300: oklch(77% 0.454 31);
-  --color-error-400: oklch(66% 0.605 31);
-  --color-error-500: #ef4444;
-  --color-error-600: oklch(48% 0.756 31);
-  /* Custom color scales */
+  /* Color scales */
   /* Primary colors */
   --color-primary-50: oklch(97% 0.096 109);
   --color-primary-100: oklch(94% 0.193 109);
@@ -327,46 +239,44 @@
   --color-utility-950: oklch(8% 0.247 185);
 }
 
-/* Semantic tokens and theme-specific mappings with var() references */
+/* Semantic tokens — consume these in component CSS, not raw palette values */
 @theme inline {
-  /* Primary theme */
-  --color-theme-primary: var(--color-neutral-50);
-  --color-theme-hover: var(--color-primary-600);
+  /* Surfaces */
+  --color-canvas:          var(--color-neutral-950);
+  --color-surface:         var(--color-neutral-900);
+  --color-surface-raised:  var(--color-neutral-800);
 
-  /* Semantic color mappings - UI layers */
-  --color-canvas: var(--color-neutral-950);
-  --color-surface: var(--color-neutral-900);
-  --color-surface-elevated: var(--color-neutral-850);
-  --color-foreground: var(--color-neutral-100);
-  --color-primary: var(--color-primary-500);
+  /* Borders */
+  --color-border-subtle:   var(--color-neutral-800);
+  --color-border:          var(--color-neutral-700);
 
-  /* Legacy accent colors for compatibility */
-  --color-accent-primary: var(--color-primary-500);
-  --color-accent-secondary: var(--color-secondary-600);
-  --color-accent-text: var(--color-accent-900);
+  /* Foreground / text */
+  --color-fg:              var(--color-neutral-50);
+  --color-fg-muted:        var(--color-neutral-400);
 
-  /* Status colors - using dedicated scales */
-  --color-success: var(--color-success-500);
-  --color-success-bg: var(--color-success-900);
-  --color-warning: var(--color-warning-500);
-  --color-warning-bg: var(--color-warning-900);
-  --color-error: var(--color-error-500);
-  --color-error-bg: var(--color-error-900);
+  /* Primary */
+  --color-primary:         var(--color-primary-500);
+  --color-primary-subtle:  var(--color-primary-900);
+  --color-on-primary:      var(--color-neutral-950);
 
-  /* Border colors */
-  --color-border-primary: var(--color-neutral-600);
-  --color-border-secondary: var(--color-neutral-700);
-  --color-border-focus: var(--color-primary-400);
+  /* Secondary */
+  --color-secondary:       var(--color-secondary-500);
+  --color-secondary-subtle: var(--color-secondary-900);
+  --color-on-secondary:    var(--color-neutral-50);
 
-  /* Semantic border colors for design clarity */
-  --color-subtle: var(--color-neutral-500);
-  --color-muted: var(--color-neutral-700);
-  --color-interactive: var(--color-neutral-600);
+  /* Destructive */
+  --color-destructive:     var(--color-error-500);
+  --color-on-destructive:  var(--color-neutral-50);
 
-  /* Interactive states */
-  --color-interactive-hover: var(--color-neutral-700);
-  --color-interactive-active: var(--color-neutral-600);
-  --color-interactive-disabled: var(--color-neutral-800);
+  /* Status */
+  --color-success:         var(--color-success-500);
+  --color-success-subtle:  var(--color-success-900);
+  --color-warning:         var(--color-warning-500);
+  --color-warning-subtle:  var(--color-warning-900);
+
+  /* Plugin UI theme tokens */
+  --color-theme-primary:   var(--color-neutral-50);
+  --color-theme-hover:     var(--color-primary-600);
 }
 @theme {
   /* @link https://utopia.fyi/space/calculator?c=360,18,1.2,1240,20,1.25,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
