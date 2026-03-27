@@ -7,7 +7,7 @@
 }
 [data-tooltip]:hover::after {
   content: attr(data-tooltip);
-  @apply bg-surface-elevated pointer-events-none absolute top-full left-0 z-50 mt-2 rounded-md border border-neutral-800 px-3 py-2 text-xs font-medium text-neutral-100 shadow-lg;
+  @apply bg-surface-raised pointer-events-none absolute top-full left-0 z-50 mt-2 rounded-md border border-neutral-800 px-3 py-2 text-xs font-medium text-neutral-100 shadow-lg;
   width: 10rem;
   max-width: 15rem;
   white-space: normal;

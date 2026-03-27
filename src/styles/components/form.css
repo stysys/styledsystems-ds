@@ -92,7 +92,7 @@
     @apply opacity-100;
   }
   .variable-dropdown {
-    @apply bg-surface-elevated absolute z-50 mt-1 w-full rounded-md border-neutral-800 shadow-lg;
+    @apply bg-surface-raised absolute z-50 mt-1 w-full rounded-md border-neutral-800 shadow-lg;
   }
   .dropdown-item {
     @apply flex cursor-pointer items-center px-2 py-2 text-neutral-100 hover:bg-neutral-700;
