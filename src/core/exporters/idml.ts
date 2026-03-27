@@ -25,6 +25,8 @@ export interface IdmlOptions {
   dsName: string;
   typographyStyles: ResolvedScaleEntry[];
   colorGroups: IdmlColorGroup[];
+  /** Optional version string shown in the canvas header frame, e.g. "Mar 27 2026" */
+  version?: string;
 }
 
 // ---------------------------------------------------------------------------
@@ -99,6 +101,7 @@ function designmapXml(dsName: string): string {
     `  </Layer>`,
     `  <idPkg:MasterSpread src="MasterSpreads/MasterSpread_ud8.xml" />`,
     `  <idPkg:Spread src="Spreads/Spread_ud1.xml" />`,
+    `  <idPkg:Story src="Stories/Story_ub1.xml" />`,
     `  <Section Self="ud7" Length="1" Name="" ContinueNumbering="true"`,
     `    IncludeSectionPrefix="false" Marker="" PageStart="ud6" SectionPrefix=""`,
     `    AlternateLayoutLength="1" AlternateLayout="A4 V">`,
@@ -131,30 +134,30 @@ function fontsXml(fontFamilies: string[]): string {
 }
 
 function stylesXml(dsName: string, styles: ResolvedScaleEntry[]): string {
-  // Scale group: one entry per unique sizeToken (e.g. "base", "lg", "5xl")
+  // Scale styles: one per unique sizeToken (e.g. "base", "lg", "5xl").
+  // Flat in RootParagraphStyleGroup — cross-group BasedOn resolution is
+  // unreliable in InDesign import; flat styles always resolve correctly.
+  // Each Scale style inherits from NormalParagraphStyle for a valid chain.
   const seenTokens = new Set<string>();
-  // ParagraphStyle Self values must use the "ParagraphStyle/" namespace even
-  // when the element is nested inside a ParagraphStyleGroup. Using
-  // "ParagraphStyleGroup/..." as a Self causes InDesign to silently drop the
-  // BasedOn reference and show "[No Paragraph Style]" in the UI.
-  const scaleGroup = styles
+  const scaleStyles = styles
     .filter((s) => {
       if (seenTokens.has(s.sizeToken)) return false;
       seenTokens.add(s.sizeToken);
       return true;
     })
     .map((s) => [
-      `      <ParagraphStyle Self="ParagraphStyle/Scale_${xmlAttr(s.sizeToken)}"`,
-      `        Name="${xmlAttr(s.sizeToken)}" PointSize="${s.pointSize}" Leading="${s.leadingPt}"`,
-      `        Tracking="${s.tracking}" AppliedFont="${xmlAttr(s.fontFamily)}"`,
-      `        FontStyle="${toIdmlFontStyle(s.weight)}" />`,
+      `    <ParagraphStyle Self="ParagraphStyle/Scale_${xmlAttr(s.sizeToken)}"`,
+      `      Name="Scale/${xmlAttr(s.sizeToken)}" PointSize="${s.pointSize}" Leading="${s.leadingPt}"`,
+      `      Tracking="${s.tracking}" AppliedFont="${xmlAttr(s.fontFamily)}"`,
+      `      FontStyle="${toIdmlFontStyle(s.weight)}"`,
+      `      BasedOn="ParagraphStyle/$ID/NormalParagraphStyle" />`,
     ].join("\n")).join("\n");
 
-  // Semantic group: BasedOn references the Scale style's Self exactly.
-  const semanticGroup = styles.map((s) => [
-    `      <ParagraphStyle Self="ParagraphStyle/Semantic_${xmlAttr(s.name)}"`,
-    `        Name="${xmlAttr(s.label)}"`,
-    `        BasedOn="ParagraphStyle/Scale_${xmlAttr(s.sizeToken)}" />`,
+  // Semantic styles: BasedOn references the Scale style's Self exactly.
+  const semanticStyles = styles.map((s) => [
+    `    <ParagraphStyle Self="ParagraphStyle/Semantic_${xmlAttr(s.name)}"`,
+    `      Name="${xmlAttr(s.label)}"`,
+    `      BasedOn="ParagraphStyle/Scale_${xmlAttr(s.sizeToken)}" />`,
   ].join("\n")).join("\n");
 
   return [
@@ -163,12 +166,8 @@ function stylesXml(dsName: string, styles: ResolvedScaleEntry[]): string {
     `  <RootParagraphStyleGroup Self="RootParagraphStyleGroup">`,
     `    <ParagraphStyle Self="ParagraphStyle/$ID/[No paragraph style]" Name="$ID/[No paragraph style]"/>`,
     `    <ParagraphStyle Self="ParagraphStyle/$ID/NormalParagraphStyle" Name="$ID/NormalParagraphStyle"/>`,
-    `    <ParagraphStyleGroup Self="ParagraphStyleGroup/Scale" Name="Scale">`,
-    scaleGroup,
-    `    </ParagraphStyleGroup>`,
-    `    <ParagraphStyleGroup Self="ParagraphStyleGroup/Semantic" Name="Semantic">`,
-    semanticGroup,
-    `    </ParagraphStyleGroup>`,
+    scaleStyles,
+    semanticStyles,
     `  </RootParagraphStyleGroup>`,
     `  <RootCharacterStyleGroup Self="RootCharacterStyleGroup">`,
     `    <CharacterStyle Self="CharacterStyle/$ID/[No character style]" Name="[No character style]"/>`,
@@ -230,6 +229,10 @@ function preferencesXml(): string {
   ].join("\n");
 }
 
+const PAGE_H = 841.889763778;
+const PAGE_W = 595.2755905509999;
+const MARGIN = 36;
+
 const MASTER_SPREAD_XML = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <idPkg:MasterSpread xmlns:idPkg="http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging" DOMVersion="${DOM}">
   <MasterSpread Self="ud8" Name="A-Master" NamePrefix="A" BaseName="A-Master"
@@ -245,34 +248,86 @@ const MASTER_SPREAD_XML = `<?xml version="1.0" encoding="UTF-8" standalone="yes"
   </MasterSpread>
 </idPkg:MasterSpread>`.replace("${DOM}", DOM);
 
-const SPREAD_XML = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<idPkg:Spread xmlns:idPkg="http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging" DOMVersion="${DOM}">
-  <Spread Self="ud1" PageCount="1" BindingLocation="0"
-    AllowPageShuffle="true" ShowMasterItems="true" FlattenerOverride="Default">
-    <Page Self="ud6" AppliedMaster="ud8" MasterPageTransform="1 0 0 1 0 0"
-      Name="1" GeometricBounds="0 0 841.889763778 595.2755905509999"
-      ItemTransform="1 0 0 1 0 0" PageColor="Nothing"
-      GridStartingPoint="TopOutside" UseMasterGrid="true" OverrideList="" TabOrder="">
-      <Properties>
-        <Descriptor type="list"><ListItem type="string"></ListItem></Descriptor>
-      </Properties>
-      <MarginPreference ColumnCount="1" ColumnGutter="12" Top="36" Bottom="36" Left="36" Right="36" />
-    </Page>
-  </Spread>
-</idPkg:Spread>`.replace("${DOM}", DOM);
+/** Spread with a single text frame covering the page content area. */
+function spreadXml(): string {
+  const top = MARGIN;
+  const left = MARGIN;
+  const bottom = PAGE_H - MARGIN;
+  const right = PAGE_W - MARGIN;
+  return [
+    `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>`,
+    `<idPkg:Spread xmlns:idPkg="http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging" DOMVersion="${DOM}">`,
+    `  <Spread Self="ud1" PageCount="1" BindingLocation="0"`,
+    `    AllowPageShuffle="true" ShowMasterItems="true" FlattenerOverride="Default">`,
+    `    <Page Self="ud6" AppliedMaster="ud8" MasterPageTransform="1 0 0 1 0 0"`,
+    `      Name="1" GeometricBounds="0 0 ${PAGE_H} ${PAGE_W}"`,
+    `      ItemTransform="1 0 0 1 0 0" PageColor="Nothing"`,
+    `      GridStartingPoint="TopOutside" UseMasterGrid="true" OverrideList="" TabOrder="">`,
+    `      <Properties>`,
+    `        <Descriptor type="list"><ListItem type="string"></ListItem></Descriptor>`,
+    `      </Properties>`,
+    `      <MarginPreference ColumnCount="1" ColumnGutter="12" Top="${MARGIN}" Bottom="${MARGIN}" Left="${MARGIN}" Right="${MARGIN}" />`,
+    `    </Page>`,
+    `    <TextFrame Self="tf1" ParentStory="ub1"`,
+    `      ContentType="TextType"`,
+    `      GeometricBounds="${top} ${left} ${bottom} ${right}"`,
+    `      ItemTransform="1 0 0 1 0 0">`,
+    `      <Properties>`,
+    `        <PathGeometry>`,
+    `          <GeometryPathType PathOpen="false">`,
+    `            <PathPointArray>`,
+    `              <PathPointType Anchor="${left} ${top}" LeftDirection="${left} ${top}" RightDirection="${left} ${top}"/>`,
+    `              <PathPointType Anchor="${right} ${top}" LeftDirection="${right} ${top}" RightDirection="${right} ${top}"/>`,
+    `              <PathPointType Anchor="${right} ${bottom}" LeftDirection="${right} ${bottom}" RightDirection="${right} ${bottom}"/>`,
+    `              <PathPointType Anchor="${left} ${bottom}" LeftDirection="${left} ${bottom}" RightDirection="${left} ${bottom}"/>`,
+    `            </PathPointArray>`,
+    `          </GeometryPathType>`,
+    `        </PathGeometry>`,
+    `      </Properties>`,
+    `    </TextFrame>`,
+    `  </Spread>`,
+    `</idPkg:Spread>`,
+  ].join("\n");
+}
 
-const STORY_XML = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<idPkg:Story xmlns:idPkg="http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging" DOMVersion="${DOM}">
-  <Story Self="ub1" AppliedTOCStyle="n" TrackChanges="false" StoryTitle="$ID/">
-    <StoryPreference OpticalMarginAlignment="false" OpticalMarginSize="12" />
-    <InCopyExportOption IncludeGraphicProxies="true" IncludeAllResources="false" />
-    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/$ID/[No paragraph style]">
-      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">
-        <Content> </Content>
-      </CharacterStyleRange>
-    </ParagraphStyleRange>
-  </Story>
-</idPkg:Story>`.replace("${DOM}", DOM);
+/**
+ * Story containing a header (DS name + version) and one paragraph per
+ * semantic style, each with the matching AppliedParagraphStyle.
+ */
+function storyXml(
+  dsName: string,
+  version: string | undefined,
+  styles: ResolvedScaleEntry[]
+): string {
+  const versionSuffix = version ? ` · ${version}` : "";
+  const sampleText = "The quick brown fox jumps over the lazy dog";
+
+  const styleParagraphs = styles.map((s) => [
+    `    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Semantic_${xmlAttr(s.name)}">`,
+    `      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">`,
+    `        <Content>${xmlAttr(s.label)} \u2014 ${xmlAttr(sampleText)}</Content>`,
+    `        <Br />`,
+    `      </CharacterStyleRange>`,
+    `    </ParagraphStyleRange>`,
+  ].join("\n")).join("\n");
+
+  return [
+    `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>`,
+    `<idPkg:Story xmlns:idPkg="http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging" DOMVersion="${DOM}">`,
+    `  <Story Self="ub1" AppliedTOCStyle="n" TrackChanges="false" StoryTitle="$ID/">`,
+    `    <StoryPreference OpticalMarginAlignment="false" OpticalMarginSize="12" />`,
+    `    <InCopyExportOption IncludeGraphicProxies="true" IncludeAllResources="false" />`,
+    `    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/$ID/NormalParagraphStyle">`,
+    `      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">`,
+    `        <Content>${xmlAttr(dsName + versionSuffix)}</Content>`,
+    `        <Br />`,
+    `      </CharacterStyleRange>`,
+    `    </ParagraphStyleRange>`,
+    styleParagraphs,
+    `  </Story>`,
+    `</idPkg:Story>`,
+  ].join("\n");
+}
 
 const BACKING_STORY_XML = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <idPkg:BackingStory xmlns:idPkg="http://ns.adobe.com/AdobeInDesign/idml/1.0/packaging" DOMVersion="${DOM}">
@@ -288,7 +343,7 @@ const TAGS_XML = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 // ---------------------------------------------------------------------------
 
 export function buildIdmlFiles(options: IdmlOptions): Map<string, string> {
-  const { dsName, typographyStyles, colorGroups } = options;
+  const { dsName, typographyStyles, colorGroups, version } = options;
   const fontFamilies = typographyStyles.map((s) => s.fontFamily);
 
   return new Map([
@@ -301,8 +356,8 @@ export function buildIdmlFiles(options: IdmlOptions): Map<string, string> {
     ["Resources/Preferences.xml",            preferencesXml()],
     ["Resources/Graphic.xml",               graphicXml(colorGroups)],
     ["MasterSpreads/MasterSpread_ud8.xml",   MASTER_SPREAD_XML],
-    ["Spreads/Spread_ud1.xml",               SPREAD_XML],
-    ["Stories/Story_ub1.xml",                STORY_XML],
+    ["Spreads/Spread_ud1.xml",               spreadXml()],
+    ["Stories/Story_ub1.xml",               storyXml(dsName, version, typographyStyles)],
     ["XML/BackingStory.xml",                 BACKING_STORY_XML],
     ["XML/Tags.xml",                         TAGS_XML],
   ]);
