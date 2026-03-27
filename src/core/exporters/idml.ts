@@ -25,8 +25,12 @@ export interface IdmlOptions {
   dsName: string;
   typographyStyles: ResolvedScaleEntry[];
   colorGroups: IdmlColorGroup[];
-  /** Optional version string shown in the canvas header frame, e.g. "Mar 27 2026" */
-  version?: string;
+  /** Date the token set was published, e.g. "Mar 27, 2026, 14:32" */
+  publishedAt?: string;
+  /** Date + time the IDML was exported, e.g. "Mar 27, 2026, 15:04" */
+  exportedAt?: string;
+  /** Short identifier for the token version, e.g. first 8 chars of the Firestore doc ID */
+  tokenVersionId?: string;
 }
 
 // ---------------------------------------------------------------------------
@@ -304,17 +308,34 @@ function spreadXml(): string {
   ].join("\n");
 }
 
+function para(text: string): string {
+  return [
+    `    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/$ID/NormalParagraphStyle">`,
+    `      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">`,
+    `        <Content>${xmlAttr(text)}</Content>`,
+    `        <Br />`,
+    `      </CharacterStyleRange>`,
+    `    </ParagraphStyleRange>`,
+  ].join("\n");
+}
+
 /**
- * Story containing a header (DS name + version) and one paragraph per
- * semantic style, each with the matching AppliedParagraphStyle.
+ * Story containing a header block (DS name, published timestamp, version ID,
+ * export timestamp) and one paragraph per semantic style as a specimen.
  */
 function storyXml(
   dsName: string,
-  version: string | undefined,
+  options: Pick<IdmlOptions, "publishedAt" | "exportedAt" | "tokenVersionId">,
   styles: ResolvedScaleEntry[]
 ): string {
-  const versionSuffix = version ? ` · ${version}` : "";
   const sampleText = "The quick brown fox jumps over the lazy dog";
+
+  const headerLines: string[] = [dsName];
+  if (options.publishedAt) headerLines.push(`Published  ${options.publishedAt}`);
+  if (options.tokenVersionId) headerLines.push(`Version    ${options.tokenVersionId}`);
+  if (options.exportedAt)   headerLines.push(`Exported   ${options.exportedAt}`);
+
+  const headerParagraphs = headerLines.map(para).join("\n");
 
   const styleParagraphs = styles.map((s) => [
     `    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/${xmlAttr(s.name)}">`,
@@ -331,12 +352,8 @@ function storyXml(
     `  <Story Self="ub1" AppliedTOCStyle="n" TrackChanges="false" StoryTitle="$ID/">`,
     `    <StoryPreference OpticalMarginAlignment="false" OpticalMarginSize="12" />`,
     `    <InCopyExportOption IncludeGraphicProxies="true" IncludeAllResources="false" />`,
-    `    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/$ID/NormalParagraphStyle">`,
-    `      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">`,
-    `        <Content>${xmlAttr(dsName + versionSuffix)}</Content>`,
-    `        <Br />`,
-    `      </CharacterStyleRange>`,
-    `    </ParagraphStyleRange>`,
+    headerParagraphs,
+    para(""),
     styleParagraphs,
     `  </Story>`,
     `</idPkg:Story>`,
@@ -357,7 +374,7 @@ const TAGS_XML = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 // ---------------------------------------------------------------------------
 
 export function buildIdmlFiles(options: IdmlOptions): Map<string, string> {
-  const { dsName, typographyStyles, colorGroups, version } = options;
+  const { dsName, typographyStyles, colorGroups } = options;
   const fontFamilies = typographyStyles.map((s) => s.fontFamily);
 
   return new Map([
@@ -371,7 +388,7 @@ export function buildIdmlFiles(options: IdmlOptions): Map<string, string> {
     ["Resources/Graphic.xml",               graphicXml(colorGroups)],
     ["MasterSpreads/MasterSpread_ud8.xml",   MASTER_SPREAD_XML],
     ["Spreads/Spread_ud1.xml",               spreadXml()],
-    ["Stories/Story_ub1.xml",               storyXml(dsName, version, typographyStyles)],
+    ["Stories/Story_ub1.xml",               storyXml(dsName, options, typographyStyles)],
     ["XML/BackingStory.xml",                 BACKING_STORY_XML],
     ["XML/Tags.xml",                         TAGS_XML],
   ]);
