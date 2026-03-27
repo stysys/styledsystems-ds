@@ -1,0 +1,24 @@
+@layer components {
+  .tabs__list {
+    @apply inline-flex h-20 items-center justify-center rounded-md bg-neutral-950 p-1 text-fg-muted;
+  }
+
+  .tabs__trigger {
+    @apply inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium transition-all;
+    &:focus-visible {
+      @apply border-primary outline-none;
+    }
+    &:disabled {
+      @apply pointer-events-none opacity-50;
+    }
+    &[data-state="active"] {
+      @apply bg-surface text-fg shadow-sm;
+    }
+  }
+
+  .tabs__content {
+    &:focus-visible {
+      @apply outline-none;
+    }
+  }
+}

@@ -13,6 +13,10 @@
 @import "./components/color-ramps.css";
 @import "./components/color-ramp.css";
 
+@import "./components/badge.css";
+@import "./components/tabs.css";
+@import "./components/primitives.css";
+
 @import "./components/account-info.css";
 
 @import "./components/info-icon-tooltip.css";

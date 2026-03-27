@@ -1,0 +1,27 @@
+@layer components {
+  .badge {
+    @apply inline-flex items-center rounded-full border border-transparent px-2.5 py-0.5 font-mono text-xs font-semibold uppercase transition-colors;
+    @apply bg-primary text-on-primary;
+    &:hover {
+      @apply bg-primary/80;
+    }
+  }
+
+  .badge--secondary {
+    @apply border-transparent bg-neutral-700 text-fg;
+    &:hover {
+      @apply bg-neutral-700/80;
+    }
+  }
+
+  .badge--destructive {
+    @apply bg-destructive border-transparent text-on-destructive;
+    &:hover {
+      @apply bg-destructive/80;
+    }
+  }
+
+  .badge--outline {
+    @apply border-outline bg-transparent text-fg;
+  }
+}
