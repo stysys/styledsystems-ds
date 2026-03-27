@@ -234,18 +234,23 @@ export function resolveRhythmBase(baseFontSize: number, override?: number): numb
  * Resolve all scale entries to concrete point sizes, leading, and spacing values.
  * Returns objects ready to pass to InDesign, Figma, or IDML exporters.
  *
- * Vertical rhythm uses the same typeScale ratio as type sizes:
- *   spaceBefore = rhythmBase × typeScale^spacePowerBefore
- * So adjusting the type scale ratio automatically scales spacing proportionally.
+ * Type sizes use typeScale; paragraph spacing uses spaceScale (falls back to
+ * typeScale if not set). Decoupling them lets spacing breathe more dramatically
+ * than the type scale alone — e.g. typeScale 1.125, spaceScale 1.25.
+ *
+ *   pointSize   = baseFontSize × typeScale^power
+ *   spaceBefore = rhythmBase   × spaceScale^spacePowerBefore
  */
 export function resolveSemanticScale(
   baseFontSize: number,
   typeScale: number,
   fontFamily = "Arial",
   entries: SemanticScaleEntry[] = SEMANTIC_SCALE,
-  rhythmBase?: number
+  rhythmBase?: number,
+  spaceScale?: number
 ): ResolvedScaleEntry[] {
   const rb = resolveRhythmBase(baseFontSize, rhythmBase);
+  const sr = spaceScale ?? typeScale;
   return entries.map((entry) => {
     const pointSize = resolvePointSize(entry, baseFontSize, typeScale);
     return {
@@ -253,8 +258,8 @@ export function resolveSemanticScale(
       pointSize,
       leadingPt: Math.round(pointSize * entry.leading * 100) / 100,
       fontFamily,
-      spaceBefore: Math.round(rb * Math.pow(typeScale, entry.spacePowerBefore ?? 1) * 100) / 100,
-      spaceAfter:  Math.round(rb * Math.pow(typeScale, entry.spacePowerAfter  ?? 0) * 100) / 100,
+      spaceBefore: Math.round(rb * Math.pow(sr, entry.spacePowerBefore ?? 1) * 100) / 100,
+      spaceAfter:  Math.round(rb * Math.pow(sr, entry.spacePowerAfter  ?? 0) * 100) / 100,
     };
   });
 }
