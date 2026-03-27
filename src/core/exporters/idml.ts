@@ -134,9 +134,10 @@ function fontsXml(fontFamilies: string[]): string {
 }
 
 function stylesXml(dsName: string, styles: ResolvedScaleEntry[]): string {
-  // Scale group: one style per unique sizeToken inside a named group so they
-  // appear organised in InDesign's paragraph-styles panel.
-  // Each Scale style is based on NormalParagraphStyle for a valid chain.
+  // Scale group: one style per unique sizeToken.
+  // Self uses URL-encoded colon (%3a) so InDesign resolves it correctly.
+  // BasedOn and AppliedFont must be child <Properties> elements with a type
+  // attribute — using them as XML attributes silently fails in InDesign import.
   const seenTokens = new Set<string>();
   const scaleStyles = styles
     .filter((s) => {
@@ -145,24 +146,27 @@ function stylesXml(dsName: string, styles: ResolvedScaleEntry[]): string {
       return true;
     })
     .map((s) => [
-      `      <ParagraphStyle Self="ParagraphStyle/Scale_${xmlAttr(s.sizeToken)}"`,
-      `        Name="${xmlAttr(s.sizeToken)}" PointSize="${s.pointSize}" Leading="${s.leadingPt}"`,
-      `        Tracking="${s.tracking}" AppliedFont="${xmlAttr(s.fontFamily)}"`,
-      `        FontStyle="${toIdmlFontStyle(s.weight)}"`,
-      `        BasedOn="ParagraphStyle/$ID/NormalParagraphStyle" />`,
+      `      <ParagraphStyle Self="ParagraphStyle/Scale%3a${xmlAttr(s.sizeToken)}"`,
+      `        Name="Scale:${xmlAttr(s.sizeToken)}" PointSize="${s.pointSize}"`,
+      `        Leading="${s.leadingPt}" Tracking="${s.tracking}"`,
+      `        FontStyle="${toIdmlFontStyle(s.weight)}">`,
+      `        <Properties>`,
+      `          <BasedOn type="string">$ID/[No paragraph style]</BasedOn>`,
+      `          <AppliedFont type="string">${xmlAttr(s.fontFamily)}</AppliedFont>`,
+      `        </Properties>`,
+      `      </ParagraphStyle>`,
     ].join("\n")).join("\n");
 
-  // Semantic styles at root level with all type properties specified directly.
-  // BasedOn is included for InDesign's style panel organisation, but each
-  // style is self-contained so it works correctly even if BasedOn doesn't
-  // resolve (which can happen depending on InDesign version / import order).
+  // Semantic group: BasedOn references Scale via type="object" — this is the
+  // correct IDML format for cross-style inheritance of custom styles.
+  // No type properties here; everything is inherited from the Scale parent.
   const semanticStyles = styles.map((s) => [
-    `    <ParagraphStyle Self="ParagraphStyle/Semantic_${xmlAttr(s.name)}"`,
-    `      Name="${xmlAttr(s.label)}"`,
-    `      PointSize="${s.pointSize}" Leading="${s.leadingPt}"`,
-    `      Tracking="${s.tracking}" AppliedFont="${xmlAttr(s.fontFamily)}"`,
-    `      FontStyle="${toIdmlFontStyle(s.weight)}"`,
-    `      BasedOn="ParagraphStyle/Scale_${xmlAttr(s.sizeToken)}" />`,
+    `      <ParagraphStyle Self="ParagraphStyle/${xmlAttr(s.name)}"`,
+    `        Name="${xmlAttr(s.label)}">`,
+    `        <Properties>`,
+    `          <BasedOn type="object">ParagraphStyle/Scale%3a${xmlAttr(s.sizeToken)}</BasedOn>`,
+    `        </Properties>`,
+    `      </ParagraphStyle>`,
   ].join("\n")).join("\n");
 
   return [
@@ -174,7 +178,9 @@ function stylesXml(dsName: string, styles: ResolvedScaleEntry[]): string {
     `    <ParagraphStyleGroup Self="ParagraphStyleGroup/Scale" Name="Scale">`,
     scaleStyles,
     `    </ParagraphStyleGroup>`,
+    `    <ParagraphStyleGroup Self="ParagraphStyleGroup/Semantic" Name="Semantic">`,
     semanticStyles,
+    `    </ParagraphStyleGroup>`,
     `  </RootParagraphStyleGroup>`,
     `  <RootCharacterStyleGroup Self="RootCharacterStyleGroup">`,
     `    <CharacterStyle Self="CharacterStyle/$ID/[No character style]" Name="[No character style]"/>`,
@@ -310,7 +316,7 @@ function storyXml(
   const sampleText = "The quick brown fox jumps over the lazy dog";
 
   const styleParagraphs = styles.map((s) => [
-    `    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/Semantic_${xmlAttr(s.name)}">`,
+    `    <ParagraphStyleRange AppliedParagraphStyle="ParagraphStyle/${xmlAttr(s.name)}">`,
     `      <CharacterStyleRange AppliedCharacterStyle="CharacterStyle/$ID/[No character style]">`,
     `        <Content>${xmlAttr(s.label)} \u2014 ${xmlAttr(sampleText)}</Content>`,
     `        <Br />`,
