@@ -58,7 +58,7 @@
   }
 
   .input {
-    @apply flex h-10 w-full rounded-md border border-outline bg-transparent px-3 text-sm text-fg;
+    @apply flex h-10 w-full rounded-md border border-outline bg-transparent px-3 text-sm text-fg transition-base;
     &::placeholder {
       @apply text-fg-muted;
     }
@@ -84,7 +84,7 @@
   }
 
   select {
-    @apply flex h-10 w-full rounded-md border border-outline bg-transparent px-3 text-sm text-fg shadow-sm;
+    @apply flex h-10 w-full rounded-md border border-outline bg-transparent px-3 text-sm text-fg shadow-sm transition-base;
     &:focus {
       @apply border-primary outline-none;
     }

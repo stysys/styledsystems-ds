@@ -1,6 +1,6 @@
 @layer components {
   .btn {
-    @apply inline-flex h-10 w-fit cursor-pointer items-center whitespace-nowrap rounded-md border px-6 text-sm font-semibold tracking-wider transition-all duration-200;
+    @apply inline-flex h-10 w-fit cursor-pointer items-center whitespace-nowrap rounded-md border px-6 text-sm font-semibold tracking-wider transition-base;
     &:hover {
       @apply scale-[1.02] shadow-lg;
     }
