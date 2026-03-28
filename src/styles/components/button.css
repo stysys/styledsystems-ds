@@ -1,6 +1,6 @@
 @layer components {
   .btn {
-    @apply inline-flex w-fit cursor-pointer items-center whitespace-nowrap rounded-md border px-6 py-2 text-sm font-semibold tracking-wider transition-all duration-200;
+    @apply inline-flex h-10 w-fit cursor-pointer items-center whitespace-nowrap rounded-md border px-6 text-sm font-semibold tracking-wider transition-all duration-200;
     &:hover {
       @apply scale-[1.02] shadow-lg;
     }
@@ -20,7 +20,7 @@
   }
 
   .btn--outline {
-    @apply border-outline text-fg bg-transparent;
+    @apply border-outline bg-transparent text-fg;
     &:hover {
       @apply bg-surface-raised;
     }
@@ -61,16 +61,16 @@
     }
   }
 
-  /* Size variants */
+  /* Size variants — explicit heights, keep px padding */
   .btn--sm {
-    @apply px-3 py-1 text-xs;
+    @apply h-8 px-3 text-xs;
   }
 
   .btn--lg {
-    @apply px-8 py-3 text-base;
+    @apply h-12 px-8 text-base;
   }
 
   .btn--icon {
-    @apply w-9 px-0 py-0;
+    @apply h-10 w-10 px-0;
   }
 }
