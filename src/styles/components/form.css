@@ -73,6 +73,11 @@
     }
   }
 
+  /* Size modifier */
+  .input--sm {
+    @apply h-8 px-2 text-xs;
+  }
+
   /* Plugin modifier: icon prefix inside input */
   .input--icon-prefix {
     @apply pl-9;
