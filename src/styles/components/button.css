@@ -60,4 +60,17 @@
       @apply bg-destructive/90;
     }
   }
+
+  /* Size variants */
+  .btn--sm {
+    @apply px-3 py-1 text-xs;
+  }
+
+  .btn--lg {
+    @apply px-8 py-3 text-base;
+  }
+
+  .btn--icon {
+    @apply w-9 px-0 py-0;
+  }
 }
