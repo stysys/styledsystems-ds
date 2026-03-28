@@ -11,11 +11,6 @@
     @apply h-full w-px;
   }
 
-  /* Standard transition — use on buttons, inputs, selects, and interactive elements */
-  .transition-base {
-    @apply transition-colors duration-200 ease-in-out;
-  }
-
   /* Styled scrollbar — apply to any scrollable container */
   .scrollbar-styled {
     scrollbar-width: thin;

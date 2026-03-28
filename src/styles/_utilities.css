@@ -1,5 +1,12 @@
 @import "./_theme.css";
 @import "tailwindcss";
+
+@utility transition-base {
+  transition-property: color, background-color, border-color, opacity;
+  transition-duration: 200ms;
+  transition-timing-function: ease-in-out;
+}
+
 @layer components {
   /* Dimmed/disabled state for text style group */
   .text-style-group--disabled {
