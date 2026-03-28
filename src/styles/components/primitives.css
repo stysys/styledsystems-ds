@@ -1,6 +1,6 @@
 @layer components {
   .skeleton {
-    @apply animate-pulse rounded-md bg-neutral-800;
+    @apply animate-pulse rounded-md bg-surface-raised;
   }
 
   .separator {
@@ -9,5 +9,25 @@
 
   .separator--vertical {
     @apply h-full w-px;
+  }
+
+  /* Styled scrollbar — apply to any scrollable container */
+  .scrollbar-styled {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-outline) transparent;
+
+    &::-webkit-scrollbar {
+      width: 4px;
+    }
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: var(--color-outline);
+      border-radius: 99px;
+    }
+    &::-webkit-scrollbar-thumb:hover {
+      background: var(--color-fg-muted);
+    }
   }
 }
