@@ -33,6 +33,8 @@ export interface IdmlOptions {
   tokenVersionId?: string;
   /** @stysys/design-system npm package version, e.g. "1.8.2" */
   dsVersion?: string;
+  /** Email of the org owner, e.g. "kristoffer@example.com" */
+  orgOwnerEmail?: string;
 }
 
 // ---------------------------------------------------------------------------
@@ -328,12 +330,13 @@ function para(text: string): string {
  */
 function storyXml(
   dsName: string,
-  options: Pick<IdmlOptions, "publishedAt" | "exportedAt" | "tokenVersionId" | "dsVersion">,
+  options: Pick<IdmlOptions, "publishedAt" | "exportedAt" | "tokenVersionId" | "dsVersion" | "orgOwnerEmail">,
   styles: ResolvedScaleEntry[]
 ): string {
   const sampleText = "The quick brown fox jumps over the lazy dog";
 
   const headerLines: string[] = [dsName];
+  if (options.orgOwnerEmail) headerLines.push(`Owner      ${options.orgOwnerEmail}`);
   if (options.dsVersion)     headerLines.push(`v${options.dsVersion}`);
   if (options.publishedAt)   headerLines.push(`Published  ${options.publishedAt}`);
   if (options.tokenVersionId) headerLines.push(`Token      ${options.tokenVersionId}`);
