@@ -44,19 +44,21 @@ export interface ScaleStep {
  * From xs (power -2) to 9xl (power 10)
  */
 export const DEFAULT_SCALE_STEPS: ScaleStep[] = [
-  { name: "9xl", power: 10 },
-  { name: "8xl", power: 9 },
-  { name: "7xl", power: 8 },
-  { name: "6xl", power: 7 },
-  { name: "5xl", power: 6 },
-  { name: "4xl", power: 5 },
-  { name: "3xl", power: 4 },
-  { name: "2xl", power: 3 },
-  { name: "xl", power: 2 },
-  { name: "lg", power: 1 },
-  { name: "base", power: 0 },
-  { name: "sm", power: -1 },
-  { name: "xs", power: -2 },
+  { name: "9xl",  power:  10 },
+  { name: "8xl",  power:   9 },
+  { name: "7xl",  power:   8 },
+  { name: "6xl",  power:   7 },
+  { name: "5xl",  power:   6 },
+  { name: "4xl",  power:   5 },
+  { name: "3xl",  power:   4 },
+  { name: "2xl",  power:   3 },
+  { name: "xl",   power:   2 },
+  { name: "lg",   power:   1 },
+  { name: "base", power:   0 },
+  { name: "sm",   power:  -1 },
+  { name: "xs",   power:  -2 },
+  { name: "2xs",  power:  -3 },
+  { name: "3xs",  power:  -4 },
 ];
 
 /**
