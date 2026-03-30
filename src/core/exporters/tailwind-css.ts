@@ -110,19 +110,20 @@ function colorThemeBlock(colors: TailwindCssTokens["colors"]): string {
   if (!colors) return "";
 
   const ramps = buildRampSet(colors.primary, colors.secondary, colors.neutrals);
-  const rampNames = [
-    ["primary", "Primary"],
-    ["secondary", "Secondary"],
-    ["tertiary", "Tertiary"],
-    ["neutrals", "Neutrals"],
-    ["gray", "Gray"],
-  ] as const;
+  // [cssKey, label, rampKey] — cssKey is the variable prefix, rampKey is the RampSet property
+  const rampNames: [string, string, string][] = [
+    ["primary",   "Primary",   "primary"],
+    ["secondary", "Secondary", "secondary"],
+    ["tertiary",  "Tertiary",  "tertiary"],
+    ["neutral",   "Neutral",   "neutrals"],
+    ["gray",      "Gray",      "gray"],
+  ];
 
   let out = ruler("Colors");
-  for (const [key, label] of rampNames) {
+  for (const [cssKey, label, rampKey] of rampNames) {
     out += `\n  /* ${label} */\n`;
     for (const step of RAMP_STEPS) {
-      out += `  --color-${key}-${step}: ${(ramps as any)[key][step]};\n`;
+      out += `  --color-${cssKey}-${step}: ${(ramps as any)[rampKey][step]};\n`;
     }
   }
   return out;
@@ -196,7 +197,7 @@ function semanticUtilityBlocks(typo: TailwindCssTokens["typography"]): string {
  * @example
  * const css = generateTailwindCSS({
  *   typography: { baseSize: 16, scaleRatio: 1.25, headingFont: "Playfair Display", bodyFont: "Inter" },
- *   colors:     { primary: "#0c8ce9", secondary: "#8a38f5", neutrals: "#6b7280" },
+ *   colors:     { primary: "#0c8ce9", secondary: "#8a38f5", neutrals: "#6b7280" }, // neutrals is the internal key; outputs --color-neutral-*
  * });
  */
 export function generateTailwindCSS(tokens: TailwindCssTokens): string {
