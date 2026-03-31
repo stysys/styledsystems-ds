@@ -35,6 +35,8 @@ export interface IdmlOptions {
   dsVersion?: string;
   /** Email of the org owner, e.g. "kristoffer@example.com" */
   orgOwnerEmail?: string;
+  /** Email of whoever published/approved the token version */
+  publishedByEmail?: string;
 }
 
 // ---------------------------------------------------------------------------
@@ -142,7 +144,7 @@ function fontsXml(fontFamilies: string[]): string {
   ].join("\n");
 }
 
-function stylesXml(dsName: string, styles: ResolvedScaleEntry[]): string {
+function stylesXml(_dsName: string, styles: ResolvedScaleEntry[]): string {
   // Scale group: one style per unique sizeToken.
   // Self uses URL-encoded colon (%3a) so InDesign resolves it correctly.
   // BasedOn and AppliedFont must be child <Properties> elements with a type
@@ -330,17 +332,18 @@ function para(text: string): string {
  */
 function storyXml(
   dsName: string,
-  options: Pick<IdmlOptions, "publishedAt" | "exportedAt" | "tokenVersionId" | "dsVersion" | "orgOwnerEmail">,
+  options: Pick<IdmlOptions, "publishedAt" | "exportedAt" | "tokenVersionId" | "dsVersion" | "orgOwnerEmail" | "publishedByEmail">,
   styles: ResolvedScaleEntry[]
 ): string {
   const sampleText = "The quick brown fox jumps over the lazy dog";
 
   const headerLines: string[] = [dsName];
-  if (options.orgOwnerEmail) headerLines.push(`Owner      ${options.orgOwnerEmail}`);
-  if (options.dsVersion)     headerLines.push(`v${options.dsVersion}`);
-  if (options.publishedAt)   headerLines.push(`Published  ${options.publishedAt}`);
-  if (options.tokenVersionId) headerLines.push(`Token      ${options.tokenVersionId}`);
-  if (options.exportedAt)    headerLines.push(`Exported   ${options.exportedAt}`);
+  if (options.orgOwnerEmail)   headerLines.push(`Owner      ${options.orgOwnerEmail}`);
+  if (options.publishedByEmail) headerLines.push(`Published  ${options.publishedByEmail}`);
+  if (options.dsVersion)       headerLines.push(`v${options.dsVersion}`);
+  if (options.publishedAt)     headerLines.push(`Date       ${options.publishedAt}`);
+  if (options.tokenVersionId)  headerLines.push(`Token      ${options.tokenVersionId}`);
+  if (options.exportedAt)      headerLines.push(`Exported   ${options.exportedAt}`);
 
   const headerParagraphs = headerLines.map(para).join("\n");
 
