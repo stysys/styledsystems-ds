@@ -9,7 +9,7 @@
  * Node/browser context that has access to the token data.
  */
 
-import { buildRampSet, RAMP_STEPS } from "../tokens/colorRamps.js";
+import { calculateRamp, generateTertiaryRamp, generateGrayRamp, RAMP_STEPS } from "../tokens/colorRamps.js";
 import { SEMANTIC_SCALE } from "../tokens/scaleDefinition.js";
 import { generateFluidClamp } from "../utilities/utilities.js";
 import { calculateFontSize } from "../typography/typography.js";
@@ -17,6 +17,15 @@ import { calculateFontSize } from "../typography/typography.js";
 // ---------------------------------------------------------------------------
 // Public input type
 // ---------------------------------------------------------------------------
+
+export interface ColorTokenEntry {
+  /** CSS-safe identifier, e.g. "primary", "brand-blue" */
+  key: string;
+  /** Display label used for comments in the output */
+  label: string;
+  /** Base hex value */
+  hex: string;
+}
 
 export interface TailwindCssTokens {
   typography?: {
@@ -26,14 +35,11 @@ export interface TailwindCssTokens {
     bodyFont: string;
     spaceScale?: number;
   };
-  colors?: {
-    /** Base hex for the primary ramp */
-    primary: string;
-    /** Base hex for the secondary ramp */
-    secondary: string;
-    /** Base hex for the neutrals ramp */
-    neutrals: string;
-  };
+  /**
+   * Dynamic color entries — each produces a full --color-{key}-* ramp.
+   * Tertiary is auto-derived from the first two; gray is always achromatic.
+   */
+  colors?: ColorTokenEntry[];
 }
 
 // ---------------------------------------------------------------------------
@@ -107,23 +113,30 @@ function ruler(title: string): string {
 // ---------------------------------------------------------------------------
 
 function colorThemeBlock(colors: TailwindCssTokens["colors"]): string {
-  if (!colors) return "";
+  if (!colors || colors.length === 0) return "";
 
-  const ramps = buildRampSet(colors.primary, colors.secondary, colors.neutrals);
-  // [cssKey, label, rampKey] — cssKey is the variable prefix, rampKey is the RampSet property
-  const rampNames: [string, string, string][] = [
-    ["primary",   "Primary",   "primary"],
-    ["secondary", "Secondary", "secondary"],
-    ["tertiary",  "Tertiary",  "tertiary"],
-    ["neutral",   "Neutral",   "neutrals"],
-    ["gray",      "Gray",      "gray"],
-  ];
+  // Build each user-defined ramp
+  const userRamps: Array<{ cssKey: string; label: string; ramp: Record<number, string> }> = [];
+  for (const entry of colors) {
+    userRamps.push({ cssKey: entry.key, label: entry.label, ramp: calculateRamp(entry.hex) });
+  }
+
+  // Auto-derived ramps
+  const derived: Array<{ cssKey: string; label: string; ramp: Record<number, string> }> = [];
+  if (userRamps.length >= 2) {
+    derived.push({
+      cssKey: "tertiary",
+      label: "Tertiary",
+      ramp: generateTertiaryRamp(userRamps[0].ramp as any, userRamps[1].ramp as any),
+    });
+  }
+  derived.push({ cssKey: "gray", label: "Gray", ramp: generateGrayRamp() });
 
   let out = ruler("Colors");
-  for (const [cssKey, label, rampKey] of rampNames) {
+  for (const { cssKey, label, ramp } of [...userRamps, ...derived]) {
     out += `\n  /* ${label} */\n`;
     for (const step of RAMP_STEPS) {
-      out += `  --color-${cssKey}-${step}: ${(ramps as any)[rampKey][step]};\n`;
+      out += `  --color-${cssKey}-${step}: ${ramp[step]};\n`;
     }
   }
   return out;
