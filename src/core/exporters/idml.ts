@@ -60,12 +60,36 @@ function hexToRgb255(hex: string): [number, number, number] {
   ];
 }
 
-/** Map any weight string to the 4 valid IDML FontStyle values */
-function toIdmlFontStyle(weight: string): string {
-  const w = weight.toLowerCase();
-  if (w.includes("bolditalic") || (w.includes("bold") && w.includes("italic"))) return "BoldItalic";
-  if (w.includes("italic")) return "Italic";
-  if (w.includes("bold") || w.includes("heavy") || w.includes("black") || w.includes("extra")) return "Bold";
+/**
+ * Map a weight value to an InDesign font style name.
+ * Accepts our semantic weight strings ("Bold", "SemiBold", "Medium", "Regular")
+ * or numeric weights (700, 600, 500, 400, 300 …).
+ * InDesign matches these against the actual font's style list, so the names
+ * must match what the font exposes (e.g. Inter uses "Light", "Regular",
+ * "Medium", "SemiBold", "Bold", "ExtraBold", "Black").
+ */
+function toIdmlFontStyle(weight: string | number): string {
+  const n = typeof weight === "number" ? weight : parseInt(weight, 10);
+  if (!isNaN(n)) {
+    if (n >= 900) return "Black";
+    if (n >= 800) return "ExtraBold";
+    if (n >= 700) return "Bold";
+    if (n >= 600) return "SemiBold";
+    if (n >= 500) return "Medium";
+    if (n >= 300) return "Light";
+    if (n >= 200) return "ExtraLight";
+    return "Thin";
+  }
+  // Named weight strings from SemanticScaleEntry
+  const w = String(weight).toLowerCase();
+  if (w === "black")                                   return "Black";
+  if (w === "extrabold" || w === "heavy")              return "ExtraBold";
+  if (w === "bold")                                    return "Bold";
+  if (w === "semibold" || w === "demibold")            return "SemiBold";
+  if (w === "medium")                                  return "Medium";
+  if (w === "light")                                   return "Light";
+  if (w === "extralight" || w === "ultralight")        return "ExtraLight";
+  if (w === "thin")                                    return "Thin";
   return "Regular";
 }
 
