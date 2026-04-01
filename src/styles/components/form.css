@@ -32,7 +32,7 @@
 
   /* Input & Input Wrappers */
   input {
-    @apply py-2 font-mono;
+    @apply py-2;
   }
   .input-wrapper {
     @apply relative;
