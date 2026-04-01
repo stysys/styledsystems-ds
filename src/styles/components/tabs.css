@@ -4,7 +4,7 @@
   }
 
   .tabs__trigger {
-    @apply inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium transition-all;
+    @apply inline-flex items-center cursor-pointer whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium transition-all;
     &:focus-visible {
       @apply border-primary outline-none;
     }
