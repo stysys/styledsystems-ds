@@ -2,15 +2,12 @@
   .card {
     @apply bg-surface rounded-lg border border-subtle shadow-sm;
   }
-
   .card__header {
     @apply p-2xs-xs flex flex-col gap-1.5;
   }
-
   .card__title {
     @apply flex text-sm font-semibold leading-none tracking-tight;
   }
-
   .card__body {
     @apply p-2xs-xs pt-0;
   }
