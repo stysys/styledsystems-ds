@@ -8,7 +8,7 @@
   }
 
   .card__title {
-    @apply flex text-base font-semibold leading-none tracking-tight;
+    @apply flex text-sm font-semibold leading-none tracking-tight;
   }
 
   .card__body {
