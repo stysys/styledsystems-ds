@@ -13,14 +13,20 @@ export interface PluginDesignSystem {
 }
 
 export interface ColorPayload {
-  ramps: Record<string, Record<number, string>>;
+  ramps: Record<string, Record<string, string>>;
   semantic?: Record<string, string>;
 }
 
 export interface TypoPayload {
-  baseFontSize: number;
-  typeScale: number;
-  fontFamily: string;
+  /** Primary DB field names */
+  baseSize?: number;
+  scaleRatio?: number;
+  headingFont?: string;
+  bodyFont?: string;
+  /** Legacy field names — older Firestore records may use these */
+  baseFontSize?: number;
+  typeScale?: number;
+  fontFamily?: string;
 }
 
 export interface DsTokens {
