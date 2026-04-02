@@ -1,4 +1,4 @@
-@import "./_theme.css";
+/* @import "./_theme.css"; */
 @utility grid-12 {
   @apply grid grid-cols-12;
 }

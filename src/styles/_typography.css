@@ -1,4 +1,4 @@
-@import "./_theme.css";
+/* @import "./_theme.css"; */
 
 @utility headings {
   @apply font-display leading-headings;
