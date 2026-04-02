@@ -27,5 +27,8 @@ export * from "./core/tokens/index.js";
 // Exporters — ASE (Adobe Swatch Exchange) + IDML (InDesign Markup Language)
 export * from "./core/exporters/index.js";
 
+// Plugin REST API type contracts (shared across Figma, InDesign plugins)
+export * from "./core/plugin-api-types.js";
+
 // Namespaced activation for backward compatibility
 export * as activation from "./core/activation.js";
