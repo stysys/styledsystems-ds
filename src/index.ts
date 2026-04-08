@@ -32,3 +32,9 @@ export * from "./core/plugin-api-types.js";
 
 // Namespaced activation for backward compatibility
 export * as activation from "./core/activation.js";
+
+// Version control, permissions & sync types (Phase 0)
+export * from "./core/versions/index.js";
+
+// Sync package builder, generators & utilities (Phase 1)
+export * from "./core/sync/index.js";

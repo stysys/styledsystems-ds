@@ -1,5 +1,5 @@
 /* Load _theme.css per Plugin/Consumer */
-/* @import "./_theme.css"; */
+@import "./_theme.css";
 @import "./_layout.css";
 @import "./typography-ui.css";
 @import "./_action-group-ui.css";

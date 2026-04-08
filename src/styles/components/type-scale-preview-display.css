@@ -1,5 +1,5 @@
 /* Type Scale Preview Display Component */
-@import "./../_theme.css";
+/* @import "./../_theme.css"; */
 @layer component {
   .type-scale-preview {
     @apply flex flex-col gap-2 overflow-hidden;

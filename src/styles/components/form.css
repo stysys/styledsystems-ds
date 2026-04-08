@@ -59,6 +59,7 @@
 
   .input {
     @apply flex h-10 w-full rounded-md border border-outline bg-transparent px-3 text-sm text-fg transition-base;
+    border-style: solid;
     &::placeholder {
       @apply text-fg-muted;
     }

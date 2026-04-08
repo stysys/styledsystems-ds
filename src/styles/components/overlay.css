@@ -35,7 +35,7 @@
   }
   .overlay__action--skip,
   .onboarding__action--skip {
-    @apply text-muted hover:text-muted;
+    @apply text-fg-muted hover:text-fg-muted;
   }
   .overlay__action--next {
     @apply hover:text-primary-500;

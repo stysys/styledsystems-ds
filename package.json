@@ -10,6 +10,14 @@
       "import": "./dist/index.js",
       "types": "./dist/index.d.ts"
     },
+    "./sync": {
+      "import": "./dist/core/sync/index.js",
+      "types": "./dist/core/sync/index.d.ts"
+    },
+    "./versions": {
+      "import": "./dist/core/versions/index.js",
+      "types": "./dist/core/versions/index.d.ts"
+    },
     "./dist/styles/*": "./dist/styles/*",
     "./dist/fonts/*": "./dist/fonts/*",
     "./dist/types/*": "./dist/types/*"
@@ -27,7 +35,7 @@
     "copy:styles": "mkdir -p dist/styles/components && cp src/styles/*.css dist/styles/ 2>/dev/null || true && cp -r src/styles/components/*.css dist/styles/components/ 2>/dev/null || true",
     "copy:assets": "mkdir -p dist/fonts && cp -r src/fonts/* dist/fonts/ 2>/dev/null || true",
     "copy:types": "mkdir -p dist/types && cp -r src/types/* dist/types/ 2>/dev/null || true",
-    "watch": "tsc --watch",
+    "watch": "nodemon --watch src -e ts,tsx,css,woff,woff2 --exec \"npm run build\"",
     "test": "echo \"Error: no test specified\" && exit 1",
     "release": "semantic-release"
   },
@@ -40,11 +48,16 @@
   "author": "Stysys",
   "license": "MIT",
   "dependencies": {
-    "culori": "^3.3.0"
+    "@octokit/rest": "^22.0.1",
+    "culori": "^3.3.0",
+    "fflate": "^0.8.2"
   },
   "devDependencies": {
     "@types/culori": "^4.0.1",
+    "@types/node": "^25.5.2",
+    "nodemon": "^3.1.14",
     "semantic-release": "^22.0.0",
+    "tailwindcss": "^4.2.2",
     "typescript": "^5.0.0"
   },
   "release": {

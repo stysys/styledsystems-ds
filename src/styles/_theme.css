@@ -237,48 +237,7 @@
   --color-utility-800: oklch(28% 0.317 185);
   --color-utility-900: oklch(18% 0.282 185);
   --color-utility-950: oklch(8% 0.247 185);
-}
 
-/* Semantic tokens — consume these in component CSS, not raw palette values */
-@theme inline {
-  /* Surfaces */
-  --color-canvas:          var(--color-neutral-950);
-  --color-surface:         var(--color-neutral-900);
-  --color-surface-raised:  var(--color-neutral-800);
-
-  /* Borders */
-  --color-subtle:          var(--color-neutral-800);
-  --color-outline:         var(--color-neutral-700);
-
-  /* Foreground / text */
-  --color-fg:              var(--color-neutral-50);
-  --color-fg-muted:        var(--color-neutral-400);
-
-  /* Primary */
-  --color-primary:         var(--color-primary-500);
-  --color-primary-subtle:  var(--color-primary-900);
-  --color-on-primary:      var(--color-neutral-950);
-
-  /* Secondary */
-  --color-secondary:       var(--color-secondary-500);
-  --color-secondary-subtle: var(--color-secondary-900);
-  --color-on-secondary:    var(--color-neutral-50);
-
-  /* Destructive */
-  --color-destructive:     var(--color-error-500);
-  --color-on-destructive:  var(--color-neutral-50);
-
-  /* Status */
-  --color-success:         var(--color-success-500);
-  --color-success-subtle:  var(--color-success-900);
-  --color-warning:         var(--color-warning-500);
-  --color-warning-subtle:  var(--color-warning-900);
-
-  /* Plugin UI theme tokens */
-  --color-theme-primary:   var(--color-neutral-50);
-  --color-theme-hover:     var(--color-primary-600);
-}
-@theme {
   /* @link https://utopia.fyi/space/calculator?c=360,18,1.2,1240,20,1.25,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
 
   --spacing-3xs: clamp(0.3125rem, 0.3125rem + 0vw, 0.3125rem);
@@ -300,4 +259,48 @@
   --spacing-l-xl: clamp(2.25rem, 1.663rem + 2.6087vw, 3.75rem);
   --spacing-xl-2xl: clamp(3.375rem, 2.7391rem + 2.8261vw, 5rem);
   --spacing-2xl-3xl: clamp(4.5rem, 3.3261rem + 5.2174vw, 7.5rem);
+}
+
+/* Semantic tokens — consume these in component CSS, not raw palette values */
+
+@theme inline {
+  /* Surfaces */
+  --color-canvas: var(--color-neutral-950);
+  --color-surface: var(--color-neutral-900);
+  --color-surface-raised: var(--color-neutral-800);
+
+  /* Borders */
+  --color-subtle: var(--color-neutral-800);
+  --color-outline: var(--color-neutral-700);
+
+  /* Foreground / text */
+  --color-fg: var(--color-neutral-50);
+  --color-fg-muted: var(--color-neutral-400);
+  --color-fg-inverted: var(--color-neutral-950);
+
+  /* Primary */
+  --color-primary: var(--color-primary-500);
+  --color-primary-subtle: var(--color-primary-900);
+  --color-on-primary: var(--color-neutral-950);
+
+  /* Secondary */
+  --color-secondary: var(--color-secondary-500);
+  --color-secondary-subtle: var(--color-secondary-900);
+  --color-on-secondary: var(--color-neutral-50);
+
+  /* Destructive */
+  --color-destructive: var(--color-error-500);
+  --color-destructive-hover: var(--color-error-600);
+  --color-on-destructive: var(--color-neutral-50);
+
+  /* Status */
+  --color-success: var(--color-success-500);
+  --color-success-subtle: var(--color-success-900);
+  --color-warning: var(--color-warning-500);
+  --color-warning-subtle: var(--color-warning-900);
+
+  /* Plugin UI theme tokens */
+  --color-theme-primary: var(--color-neutral-50);
+  --color-theme-hover: var(--color-primary-600);
+  --testar: var(--color-primary-600);
 }

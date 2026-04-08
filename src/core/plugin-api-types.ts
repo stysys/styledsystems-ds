@@ -21,6 +21,7 @@ export interface TypoPayload {
   /** Primary DB field names */
   baseSize?: number;
   scaleRatio?: number;
+  bodyLeading?: number;
   headingFont?: string;
   bodyFont?: string;
   /** Legacy field names — older Firestore records may use these */

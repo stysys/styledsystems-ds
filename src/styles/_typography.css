@@ -27,7 +27,7 @@
   }
 
   .info-section__title {
-    @apply font-display text-muted mb-3 text-xs font-medium tracking-wider;
+    @apply font-display text-fg-muted mb-3 text-xs font-medium tracking-wider;
   }
 
   .form__label {

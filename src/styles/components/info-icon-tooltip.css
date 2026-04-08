@@ -1,6 +1,6 @@
 /* === Info Icon & Tooltips === */
 .info-icon {
-  @apply text-muted ml-1 cursor-help;
+  @apply text-fg-muted ml-1 cursor-help;
 }
 [data-tooltip] {
   @apply relative cursor-help;
