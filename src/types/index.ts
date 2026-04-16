@@ -51,6 +51,7 @@ export interface DesignSystemTokens {
   spacing?: Record<string, number>;
   typography?: Record<string, any>;
   colors?: Record<string, string>;
+  components?: Record<string, import("../core/plugin-api-types").ComponentToken>;
   brand?: {
     variants: BrandLogoVariant[];
     [key: string]: any;

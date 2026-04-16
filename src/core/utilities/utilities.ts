@@ -233,6 +233,44 @@ export function generateFluidClamp(
 }
 
 /**
+ * InDesign UXP measurement unit enum values for verticalMeasurementUnits.
+ * Used to convert pt values to whatever unit the document ruler is set to.
+ */
+export const InDesignMeasurementUnits = {
+  millimeters:     2053991795 - 1, // placeholder — real value below
+  inches:          2053729892,
+  inchesDecimal:   2053729892,
+  points:          2054188905,
+  picas:           2054187363,
+  ciceros:         2053336176,
+} as const;
+
+/**
+ * Convert a point value to the InDesign document's vertical ruler unit.
+ * Pass `doc` (the UXP active document object) so the unit is read live.
+ * Falls back to millimetres if the unit cannot be determined.
+ */
+export function ptToDocUnit(pt: number, doc?: any): number {
+  try {
+    const unit = doc?.viewPreferences?.verticalMeasurementUnits;
+    if (unit === 2053729892 /* inches / inchesDecimal */) {
+      return Math.round((pt / 72) * 10000) / 10000;
+    }
+    if (unit === 2054188905 /* points */) {
+      return Math.round(pt * 1000) / 1000;
+    }
+    if (unit === 2054187363 /* picas */) {
+      return Math.round((pt / 12) * 10000) / 10000;
+    }
+    if (unit === 2053336176 /* ciceros */) {
+      return Math.round((pt / 12.7868) * 10000) / 10000;
+    }
+  } catch {}
+  // Default: millimetres (most common non-US setting)
+  return Math.round((pt * 25.4) / 72 * 1000) / 1000;
+}
+
+/**
  * Format number for display (limit decimal places)
  */
 export function formatNumber(num: number, decimals: number = 2): string {
