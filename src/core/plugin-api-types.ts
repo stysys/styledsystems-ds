@@ -70,6 +70,19 @@ export interface ComponentToken {
   /** Default paragraph style name applied to new text in this frame */
   paragraphStyle?: string;
 
+  // ── Variations ─────────────────────────────────────────────────────────────
+  /**
+   * Name of the base ComponentToken this one inherits from (InDesign "Based On").
+   * Only overridden properties are stored — merge with base to get full definition.
+   * Stored on the base component's `variations` map, not as a standalone field used at runtime.
+   */
+  basedOn?: string;
+  /**
+   * Derived styles keyed by variation name. Each entry stores only the properties
+   * that differ from this base component. Resolve full style as: { ...base, ...variation }.
+   */
+  variations?: Record<string, Partial<Omit<ComponentToken, "name" | "basedOn" | "variations">>>;
+
   // ── Meta ───────────────────────────────────────────────────────────────────
   /** Optional description shown in UI */
   description?: string;
