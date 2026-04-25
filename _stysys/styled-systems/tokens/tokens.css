@@ -74,21 +74,21 @@
 
   /* Typography scale — fluid clamp ---------------------- */
 
-  --text-3xs: clamp(0.7500rem, 0.7727rem + -0.114vw, 0.6875rem);
-  --text-2xs: clamp(0.7500rem, 0.7500rem + 0.000vw, 0.7500rem);
-  --text-xs: clamp(0.7500rem, 0.7500rem + 0.000vw, 0.7500rem);
-  --text-sm: clamp(0.7500rem, 0.7273rem + 0.114vw, 0.8125rem);
-  --text-base: clamp(0.7500rem, 0.7045rem + 0.227vw, 0.8750rem);
-  --text-lg: clamp(0.7500rem, 0.6818rem + 0.341vw, 0.9375rem);
-  --text-xl: clamp(0.7500rem, 0.6591rem + 0.455vw, 1.0000rem);
-  --text-2xl: clamp(0.7500rem, 0.6364rem + 0.568vw, 1.0625rem);
-  --text-3xl: clamp(0.7500rem, 0.6136rem + 0.682vw, 1.1250rem);
-  --text-4xl: clamp(0.7500rem, 0.5909rem + 0.795vw, 1.1875rem);
-  --text-5xl: clamp(0.7500rem, 0.5455rem + 1.023vw, 1.3125rem);
-  --text-6xl: clamp(0.7500rem, 0.5227rem + 1.136vw, 1.3750rem);
-  --text-7xl: clamp(0.7500rem, 0.4773rem + 1.364vw, 1.5000rem);
-  --text-8xl: clamp(0.7500rem, 0.4545rem + 1.477vw, 1.5625rem);
-  --text-9xl: clamp(0.7500rem, 0.4091rem + 1.705vw, 1.6875rem);
+  --text-3xs: clamp(0.8750rem, 0.9205rem + -0.227vw, 0.7500rem);
+  --text-2xs: clamp(0.8750rem, 0.8977rem + -0.114vw, 0.8125rem);
+  --text-xs: clamp(0.8750rem, 0.8750rem + 0.000vw, 0.8750rem);
+  --text-sm: clamp(0.8750rem, 0.8523rem + 0.114vw, 0.9375rem);
+  --text-base: clamp(0.8750rem, 0.8295rem + 0.227vw, 1.0000rem);
+  --text-lg: clamp(0.8750rem, 0.8068rem + 0.341vw, 1.0625rem);
+  --text-xl: clamp(0.8750rem, 0.7841rem + 0.455vw, 1.1250rem);
+  --text-2xl: clamp(0.8750rem, 0.7614rem + 0.568vw, 1.1875rem);
+  --text-3xl: clamp(0.8750rem, 0.7159rem + 0.795vw, 1.3125rem);
+  --text-4xl: clamp(0.8750rem, 0.6932rem + 0.909vw, 1.3750rem);
+  --text-5xl: clamp(0.8750rem, 0.6477rem + 1.136vw, 1.5000rem);
+  --text-6xl: clamp(0.8750rem, 0.6250rem + 1.250vw, 1.5625rem);
+  --text-7xl: clamp(0.8750rem, 0.5795rem + 1.477vw, 1.6875rem);
+  --text-8xl: clamp(0.8750rem, 0.5341rem + 1.705vw, 1.8125rem);
+  --text-9xl: clamp(0.8750rem, 0.4886rem + 1.932vw, 1.9375rem);
 
   /* Font families --------------------------------------- */
 
