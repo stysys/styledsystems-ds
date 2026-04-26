@@ -84,7 +84,19 @@
   --color-secondary-subtle: var(--color-secondary-subtle);
   --color-on-secondary: var(--color-on-secondary);
   --color-destructive: var(--color-destructive);
+  --color-destructive-subtle: var(--color-destructive-subtle);
   --color-on-destructive: var(--color-on-destructive);
+  --color-success: var(--color-success);
+  --color-success-subtle: var(--color-success-subtle);
+  --color-on-success: var(--color-on-success);
+  --color-warning: var(--color-warning);
+  --color-warning-subtle: var(--color-warning-subtle);
+  --color-on-warning: var(--color-on-warning);
+  --color-info: var(--color-info);
+  --color-info-subtle: var(--color-info-subtle);
+  --color-on-info: var(--color-on-info);
+  --color-focus: var(--color-focus);
+  --color-link: var(--color-link);
 
   /* Typography scale -------------------------------------- */
   --text-3xs: var(--text-3xs);
