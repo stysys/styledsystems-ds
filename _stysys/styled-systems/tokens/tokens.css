@@ -74,20 +74,20 @@
 
   /* Semantic colors ------------------------------------- */
 
-  --color-background: #c4c4c1;
-  --color-surface: #b4b4b1;
-  --color-surface-raised: #c4c4c1;
-  --color-border-subtle: #969692;
-  --color-border: #787874;
-  --color-foreground: #000000;
-  --color-foreground-muted: #2e2e2b;
+  --color-background: #000000;
+  --color-surface: #020201;
+  --color-surface-raised: #0d0d0a;
+  --color-border-subtle: #1d1d1a;
+  --color-border: #2e2e2b;
+  --color-foreground: #c4c4c1;
+  --color-foreground-muted: #5b5b58;
   --color-primary: #4e05ac;
-  --color-primary-subtle: #be9bff;
+  --color-primary-subtle: #16004a;
   --color-on-primary: #c4c4c1;
   --color-secondary: #3aa960;
-  --color-secondary-subtle: #9dffba;
+  --color-secondary-subtle: #003300;
   --color-on-secondary: #c4c4c1;
-  --color-destructive: #676767;
+  --color-destructive: #858585;
   --color-on-destructive: #c4c4c1;
 
   /* Typography scale — fluid clamp ---------------------- */
