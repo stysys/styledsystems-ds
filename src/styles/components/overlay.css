@@ -31,17 +31,17 @@
     @apply bg-surface flex justify-between;
   }
   .overlay__action {
-    @apply hover:text-primary-500 cursor-pointer p-4 underline transition-colors;
+    @apply hover:text-primary cursor-pointer p-4 underline transition-colors;
   }
   .overlay__action--skip,
   .onboarding__action--skip {
-    @apply text-fg-muted hover:text-fg-muted;
+    @apply text-muted hover:text-muted;
   }
   .overlay__action--next {
-    @apply hover:text-primary-500;
+    @apply hover:text-primary;
   }
   .overlay__input {
-    @apply bg-canvas focus:ring-primary-500 w-full rounded-md border border-neutral-700 px-4 py-2 text-sm text-neutral-50 focus:border-transparent focus:ring-2 focus:outline-none;
+    @apply bg-background focus:ring-primary w-full rounded-md border border-neutral-700 px-4 py-2 text-sm text-neutral-50 focus:border-transparent focus:ring-2 focus:outline-none;
   }
   .overlay__input--verification {
     @apply text-center font-mono tracking-wider;
@@ -56,10 +56,10 @@
     @apply mx-auto flex;
   }
   .overlay__btn--verify {
-    @apply bg-primary-500;
+    @apply bg-primary;
   }
   .overlay__link {
-    @apply text-warning-400 text-sm;
+    @apply text-amber-400 text-sm;
   }
   .overlay__message-area {
     @apply mt-4;
@@ -71,6 +71,6 @@
     @apply rounded-md p-3 text-sm;
   }
   .overlay__message-area--error p {
-    @apply text-error-400;
+    @apply text-red-400;
   }
 }

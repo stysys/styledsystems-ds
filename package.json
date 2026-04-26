@@ -5,6 +5,10 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "type": "module",
+  "files": [
+    "dist",
+    "_stysys"
+  ],
   "exports": {
     ".": {
       "import": "./dist/index.js",
@@ -20,7 +24,8 @@
     },
     "./dist/styles/*": "./dist/styles/*",
     "./dist/fonts/*": "./dist/fonts/*",
-    "./dist/types/*": "./dist/types/*"
+    "./dist/types/*": "./dist/types/*",
+    "./_stysys/*": "./_stysys/*"
   },
   "repository": {
     "type": "git",

@@ -27,7 +27,7 @@
       border-radius: 99px;
     }
     &::-webkit-scrollbar-thumb:hover {
-      background: var(--color-fg-muted);
+      background: var(--color-muted);
     }
   }
 }

@@ -8,7 +8,7 @@
   }
 
   .badge--secondary {
-    @apply border-transparent bg-neutral-700 text-fg;
+    @apply border-transparent bg-neutral-700 text-foreground;
     &:hover {
       @apply bg-neutral-700/80;
     }
@@ -22,6 +22,6 @@
   }
 
   .badge--outline {
-    @apply border-outline bg-transparent text-fg;
+    @apply border-outline bg-transparent text-foreground;
   }
 }

@@ -8,10 +8,10 @@
     @apply m-0 p-0;
   }
   body {
-    @apply bg-canvas text-fg m-0 h-full w-full font-sans text-sm;
+    @apply bg-background text-foreground m-0 h-full w-full font-sans text-sm;
   }
   .header {
-    @apply bg-canvas border-surface fixed inset-x-0 top-0 z-[9999] items-center border-b shadow-xl shadow-neutral-950;
+    @apply bg-background border-surface fixed inset-x-0 top-0 z-[9999] items-center border-b shadow-xl shadow-neutral-950;
   }
   .header__inner {
     @apply mx-auto flex justify-between px-4;
@@ -52,15 +52,15 @@
   }
 
   .tab--active {
-    @apply text-primary-500 border-primary-500 border-b-2;
+    @apply text-primary border-primary border-b-2;
   }
 
   .tab--active {
-    @apply text-primary-500 border-primary-500 hover:text-primary-600 hover:border-primary-600 border-b-2;
+    @apply text-primary border-primary hover:text-primary/90 hover:border-primary/90 border-b-2;
   }
 
   .tab--active {
-    @apply text-primary-500 border-primary-500 hover:text-primary-600 hover:border-primary-600 border-b-2;
+    @apply text-primary border-primary hover:text-primary/90 hover:border-primary/90 border-b-2;
   }
 
   .tab--disabled {
@@ -102,7 +102,7 @@
 
   /* --- Footer --- */
   .footer {
-    @apply text-fg-muted bg-surface inset-x-0 bottom-0 left-0 mt-4 flex flex-col items-center justify-between pt-2 pb-2;
+    @apply text-muted bg-surface inset-x-0 bottom-0 left-0 mt-4 flex flex-col items-center justify-between pt-2 pb-2;
   }
   .footer__inner {
     @apply w-full px-4;

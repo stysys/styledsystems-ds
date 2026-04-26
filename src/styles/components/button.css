@@ -20,7 +20,7 @@
   }
 
   .btn--outline {
-    @apply border-outline bg-transparent text-fg;
+    @apply border-outline bg-transparent text-foreground;
     &:hover {
       @apply bg-surface-raised;
     }
@@ -41,7 +41,7 @@
   }
 
   .btn--ghost {
-    @apply border-transparent text-fg;
+    @apply border-transparent text-foreground;
     &:hover {
       @apply bg-surface-raised;
     }
@@ -62,7 +62,7 @@
   }
 
   .btn--ghost-destructive {
-    @apply border-transparent text-fg-muted;
+    @apply border-transparent text-muted;
     &:hover {
       @apply bg-destructive/10 text-destructive;
     }

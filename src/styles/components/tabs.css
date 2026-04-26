@@ -1,6 +1,6 @@
 @layer components {
   .tabs__list {
-    @apply inline-flex h-20 items-center justify-center rounded-md bg-neutral-950 p-1 text-fg-muted;
+    @apply inline-flex h-20 items-center justify-center rounded-md bg-neutral-950 p-1 text-muted;
   }
 
   .tabs__trigger {
@@ -12,7 +12,7 @@
       @apply pointer-events-none opacity-50;
     }
     &[data-state="active"] {
-      @apply bg-surface text-fg shadow-sm;
+      @apply bg-surface text-foreground shadow-sm;
     }
   }
 

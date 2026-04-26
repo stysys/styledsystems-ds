@@ -3,18 +3,18 @@
   @apply relative mb-4 rounded-lg border-none px-4 py-3 text-sm leading-tight;
 }
 .banner--unverified {
-  @apply bg-primary-500 text-info-900;
+  @apply bg-primary text-foreground;
 }
 .banner--verified,
 .banner--pro,
 .banner--upsell {
-  @apply bg-premium-900 text-white;
+  @apply bg-neutral-900 text-white;
 }
 .banner__close {
   @apply absolute top-0 right-3 z-10 cursor-pointer border-none bg-transparent p-0 text-xl font-thin text-white transition-colors duration-200;
 }
 .banner__close:hover {
-  @apply text-primary-400;
+  @apply text-primary/80;
 }
 .banner__link {
   @apply font-bold underline;

@@ -12,7 +12,7 @@
   @apply mt-0.5 flex h-4 w-4 flex-shrink-0 items-center justify-center rounded border-2 border-neutral-600;
 }
 .newsletter-optin__checkbox:checked + .newsletter-optin__checkmark {
-  @apply bg-primary-600 border-primary-600;
+  @apply bg-primary/90 border-primary/90;
 }
 .newsletter-optin__checkbox:checked + .newsletter-optin__checkmark::after {
   content: "✓";

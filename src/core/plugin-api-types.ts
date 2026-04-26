@@ -83,6 +83,13 @@ export interface ComponentToken {
    */
   variations?: Record<string, Partial<Omit<ComponentToken, "name" | "basedOn" | "variations">>>;
 
+  // ── Sample content ─────────────────────────────────────────────────────────
+  /**
+   * First ≤10 words from each paragraph in the component's text frame.
+   * Captured at save time — used as placeholder copy in documentation / preview tools.
+   */
+  textSample?: string[];
+
   // ── Meta ───────────────────────────────────────────────────────────────────
   /** Optional description shown in UI */
   description?: string;
