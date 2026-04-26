@@ -8,17 +8,17 @@
 
 
   /* Primary */
-  --color-primary-50: #afff8b;
-  --color-primary-100: #a3ff7f;
-  --color-primary-200: #8bf366;
-  --color-primary-300: #74db4d;
-  --color-primary-400: #5cc331;
-  --color-primary-500: #44ac05;
-  --color-primary-600: #1e8c00;
-  --color-primary-700: #006e00;
-  --color-primary-800: #005000;
-  --color-primary-900: #003300;
-  --color-primary-950: #002500;
+  --color-primary-50: #94ffe8;
+  --color-primary-100: #88ffdd;
+  --color-primary-200: #6ff1c6;
+  --color-primary-300: #54daaf;
+  --color-primary-400: #37c399;
+  --color-primary-500: #05ac84;
+  --color-primary-600: #008d67;
+  --color-primary-700: #006e4b;
+  --color-primary-800: #005130;
+  --color-primary-900: #003518;
+  --color-primary-950: #00280c;
 
   /* Secondary */
   --color-secondary-50: #a9ffc5;
@@ -34,30 +34,30 @@
   --color-secondary-950: #002500;
 
   /* Neutral */
-  --color-neutral-50: #acaca2;
-  --color-neutral-100: #9c9c92;
-  --color-neutral-200: #7e7e75;
-  --color-neutral-300: #616158;
-  --color-neutral-400: #46463d;
-  --color-neutral-500: #2c2c24;
-  --color-neutral-600: #1f1f17;
-  --color-neutral-700: #13130c;
-  --color-neutral-800: #080803;
-  --color-neutral-900: #020200;
-  --color-neutral-950: #010000;
+  --color-neutral-50: #f8f8f8;
+  --color-neutral-100: #e8e8e8;
+  --color-neutral-200: #c8c8c8;
+  --color-neutral-300: #a8a8a8;
+  --color-neutral-400: #8a8a8a;
+  --color-neutral-500: #6d6d6d;
+  --color-neutral-600: #515151;
+  --color-neutral-700: #363636;
+  --color-neutral-800: #1e1e1e;
+  --color-neutral-900: #080808;
+  --color-neutral-950: #020202;
 
   /* Tertiary */
-  --color-tertiary-50: #addaad;
-  --color-tertiary-100: #a3d6a4;
-  --color-tertiary-200: #90ce92;
-  --color-tertiary-300: #7dc57f;
-  --color-tertiary-400: #69bc6d;
-  --color-tertiary-500: #39ab45;
-  --color-tertiary-600: #349d3f;
-  --color-tertiary-700: #2f9039;
-  --color-tertiary-800: #298233;
-  --color-tertiary-900: #24752d;
-  --color-tertiary-950: #226f2a;
+  --color-tertiary-50: #aadabe;
+  --color-tertiary-100: #a0d6b7;
+  --color-tertiary-200: #8ccda9;
+  --color-tertiary-300: #77c59c;
+  --color-tertiary-400: #60bc8e;
+  --color-tertiary-500: #23ab73;
+  --color-tertiary-600: #1f9d69;
+  --color-tertiary-700: #1c9060;
+  --color-tertiary-800: #188257;
+  --color-tertiary-900: #15754e;
+  --color-tertiary-950: #136f49;
 
   /* Gray */
   --color-gray-50: #f8f8f8;
@@ -74,33 +74,33 @@
 
   /* Semantic colors ------------------------------------- */
 
-  --color-background: #010000;
-  --color-surface: #020200;
-  --color-surface-raised: #080803;
-  --color-border-subtle: #13130c;
-  --color-border: #1f1f17;
-  --color-foreground: #acaca2;
-  --color-foreground-muted: #46463d;
-  --color-primary: #44ac05;
-  --color-primary-subtle: #003300;
-  --color-on-primary: #acaca2;
+  --color-background: #020202;
+  --color-surface: #080808;
+  --color-surface-raised: #1e1e1e;
+  --color-border-subtle: #363636;
+  --color-border: #515151;
+  --color-foreground: #f8f8f8;
+  --color-foreground-muted: #8a8a8a;
+  --color-primary: #05ac84;
+  --color-primary-subtle: #003518;
+  --color-on-primary: #f8f8f8;
   --color-secondary: #3aa960;
   --color-secondary-subtle: #003300;
-  --color-on-secondary: #acaca2;
-  --color-destructive: #cc272e;
-  --color-destructive-subtle: #3f0000;
+  --color-on-secondary: #f8f8f8;
+  --color-destructive: #b24d49;
+  --color-destructive-subtle: #300000;
   --color-on-destructive: #f8f8f8;
-  --color-success: #008d00;
-  --color-success-subtle: #001900;
-  --color-on-success: #a7ff9f;
-  --color-warning: #b25600;
-  --color-warning-subtle: #320000;
-  --color-on-warning: #ffdc9b;
-  --color-info: #0079d8;
-  --color-info-subtle: #000056;
-  --color-on-info: #9effff;
-  --color-focus: #44ac05;
-  --color-link: #5cc331;
+  --color-success: #36853d;
+  --color-success-subtle: #001500;
+  --color-on-success: #bfffc1;
+  --color-warning: #9d6300;
+  --color-warning-subtle: #260000;
+  --color-on-warning: #ffeb9d;
+  --color-info: #0079b6;
+  --color-info-subtle: #00033c;
+  --color-on-info: #a5ffff;
+  --color-focus: #05ac84;
+  --color-link: #37c399;
 
   /* Typography scale — fluid clamp ---------------------- */
 
