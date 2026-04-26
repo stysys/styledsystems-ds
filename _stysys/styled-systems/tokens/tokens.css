@@ -75,16 +75,16 @@
   /* Semantic colors ------------------------------------- */
 
   --color-background: #f8f8f8;
-  --color-surface: #e8e8e8;
+  --color-surface: #e7e7e7;
   --color-surface-raised: #f8f8f8;
-  --color-border-subtle: #c8c8c8;
-  --color-border: #a8a8a8;
-  --color-foreground: #020202;
-  --color-foreground-muted: #515151;
-  --color-primary: #5905ac;
+  --color-border-subtle: #c5c5c5;
+  --color-border: #a5a5a5;
+  --color-foreground: #030303;
+  --color-foreground-muted: #4b4b4b;
+  --color-primary: #7437ce;
   --color-primary-subtle: #cd9bff;
   --color-on-primary: #f8f8f8;
-  --color-secondary: #3aa960;
+  --color-secondary: #54c076;
   --color-secondary-subtle: #9dffba;
   --color-on-secondary: #f8f8f8;
   --color-destructive: #a8000b;
