@@ -74,33 +74,33 @@
 
   /* Semantic colors ------------------------------------- */
 
-  --color-background: #f8f8f8;
-  --color-surface: #e8e8e8;
-  --color-surface-raised: #f8f8f8;
-  --color-border-subtle: #c8c8c8;
-  --color-border: #a8a8a8;
-  --color-foreground: #020202;
-  --color-foreground-muted: #515151;
+  --color-background: #020202;
+  --color-surface: #080808;
+  --color-surface-raised: #1e1e1e;
+  --color-border-subtle: #363636;
+  --color-border: #515151;
+  --color-foreground: #f8f8f8;
+  --color-foreground-muted: #8a8a8a;
   --color-primary: #8bac05;
-  --color-primary-subtle: #daff77;
+  --color-primary-subtle: #203500;
   --color-on-primary: #f8f8f8;
   --color-secondary: #3aa960;
-  --color-secondary-subtle: #9dffba;
+  --color-secondary-subtle: #003300;
   --color-on-secondary: #f8f8f8;
-  --color-destructive: #9d171f;
-  --color-destructive-subtle: #ffb9af;
+  --color-destructive: #c03d3c;
+  --color-destructive-subtle: #380000;
   --color-on-destructive: #f8f8f8;
-  --color-success: #006b00;
-  --color-success-subtle: #9cffa1;
+  --color-success: #0e8927;
+  --color-success-subtle: #001600;
   --color-on-success: #acffb0;
-  --color-warning: #884000;
-  --color-warning-subtle: #ffd48d;
+  --color-warning: #a85d00;
+  --color-warning-subtle: #2c0000;
   --color-on-warning: #ffe49c;
-  --color-info: #005ba7;
-  --color-info-subtle: #92f1ff;
+  --color-info: #0079c8;
+  --color-info-subtle: #00004a;
   --color-on-info: #a2ffff;
   --color-focus: #8bac05;
-  --color-link: #6e8d00;
+  --color-link: #9ec030;
 
   /* Typography scale — fluid clamp ---------------------- */
 
