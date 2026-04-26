@@ -45,18 +45,6 @@
   --color-neutral-900: var(--color-neutral-900);
   --color-neutral-950: var(--color-neutral-950);
 
-  --color-color-4-50: var(--color-color-4-50);
-  --color-color-4-100: var(--color-color-4-100);
-  --color-color-4-200: var(--color-color-4-200);
-  --color-color-4-300: var(--color-color-4-300);
-  --color-color-4-400: var(--color-color-4-400);
-  --color-color-4-500: var(--color-color-4-500);
-  --color-color-4-600: var(--color-color-4-600);
-  --color-color-4-700: var(--color-color-4-700);
-  --color-color-4-800: var(--color-color-4-800);
-  --color-color-4-900: var(--color-color-4-900);
-  --color-color-4-950: var(--color-color-4-950);
-
   --color-tertiary-50: var(--color-tertiary-50);
   --color-tertiary-100: var(--color-tertiary-100);
   --color-tertiary-200: var(--color-tertiary-200);
