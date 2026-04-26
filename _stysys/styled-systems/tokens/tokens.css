@@ -8,17 +8,17 @@
 
 
   /* Primary */
-  --color-primary-50: #e5ff82;
-  --color-primary-100: #daff77;
-  --color-primary-200: #c6ea61;
-  --color-primary-300: #b2d54a;
-  --color-primary-400: #9ec030;
-  --color-primary-500: #8bac05;
-  --color-primary-600: #6e8d00;
-  --color-primary-700: #526e00;
-  --color-primary-800: #385100;
-  --color-primary-900: #203500;
-  --color-primary-950: #152800;
+  --color-primary-50: #beacff;
+  --color-primary-100: #af9bff;
+  --color-primary-200: #927aff;
+  --color-primary-300: #7659f1;
+  --color-primary-400: #5c37ce;
+  --color-primary-500: #4405ac;
+  --color-primary-600: #350093;
+  --color-primary-700: #28007b;
+  --color-primary-800: #1e0064;
+  --color-primary-900: #17004c;
+  --color-primary-950: #130041;
 
   /* Secondary */
   --color-secondary-50: #a9ffc5;
@@ -47,17 +47,17 @@
   --color-neutral-950: #020202;
 
   /* Tertiary */
-  --color-tertiary-50: #badaad;
-  --color-tertiary-100: #b2d6a3;
-  --color-tertiary-200: #a3ce91;
-  --color-tertiary-300: #94c57e;
-  --color-tertiary-400: #84bd6b;
-  --color-tertiary-500: #65ac42;
-  --color-tertiary-600: #5c9e3c;
-  --color-tertiary-700: #549136;
-  --color-tertiary-800: #4c8330;
-  --color-tertiary-900: #44762b;
-  --color-tertiary-950: #406f28;
+  --color-tertiary-50: #9dc3db;
+  --color-tertiary-100: #92bdd7;
+  --color-tertiary-200: #7cafcf;
+  --color-tertiary-300: #65a2c6;
+  --color-tertiary-400: #4d95be;
+  --color-tertiary-500: #007bad;
+  --color-tertiary-600: #00719f;
+  --color-tertiary-700: #006791;
+  --color-tertiary-800: #005d84;
+  --color-tertiary-900: #005377;
+  --color-tertiary-950: #004e70;
 
   /* Gray */
   --color-gray-50: #f8f8f8;
@@ -81,26 +81,26 @@
   --color-border: #515151;
   --color-foreground: #f8f8f8;
   --color-foreground-muted: #8a8a8a;
-  --color-primary: #8bac05;
-  --color-primary-subtle: #203500;
+  --color-primary: #4405ac;
+  --color-primary-subtle: #17004c;
   --color-on-primary: #f8f8f8;
   --color-secondary: #3aa960;
   --color-secondary-subtle: #003300;
   --color-on-secondary: #f8f8f8;
-  --color-destructive: #c03d3c;
-  --color-destructive-subtle: #380000;
+  --color-destructive: #cc272e;
+  --color-destructive-subtle: #3f0000;
   --color-on-destructive: #f8f8f8;
-  --color-success: #0e8927;
-  --color-success-subtle: #001600;
-  --color-on-success: #acffb0;
-  --color-warning: #a85d00;
-  --color-warning-subtle: #2c0000;
-  --color-on-warning: #ffe49c;
-  --color-info: #0079c8;
-  --color-info-subtle: #00004a;
-  --color-on-info: #a2ffff;
-  --color-focus: #8bac05;
-  --color-link: #9ec030;
+  --color-success: #008d00;
+  --color-success-subtle: #001900;
+  --color-on-success: #a7ff9f;
+  --color-warning: #b25600;
+  --color-warning-subtle: #320000;
+  --color-on-warning: #ffdc9b;
+  --color-info: #0079d8;
+  --color-info-subtle: #000056;
+  --color-on-info: #9effff;
+  --color-focus: #4405ac;
+  --color-link: #5c37ce;
 
   /* Typography scale — fluid clamp ---------------------- */
 
