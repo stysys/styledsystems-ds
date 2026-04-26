@@ -75,8 +75,8 @@
   --color-surface-raised: var(--color-surface-raised);
   --color-border-subtle: var(--color-border-subtle);
   --color-border: var(--color-border);
-  --color-text: var(--color-text);
-  --color-text-fg-muted: var(--color-text-fg-muted);
+  --color-foreground: var(--color-foreground);
+  --color-foreground-muted: var(--color-foreground-muted);
   --color-primary: var(--color-primary);
   --color-primary-subtle: var(--color-primary-subtle);
   --color-on-primary: var(--color-on-primary);
