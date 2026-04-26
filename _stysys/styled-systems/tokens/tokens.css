@@ -8,30 +8,30 @@
 
 
   /* Primary */
-  --color-primary-50: #ddabff;
-  --color-primary-100: #cd9bff;
-  --color-primary-200: #ae7aff;
-  --color-primary-300: #9059f1;
-  --color-primary-400: #7437ce;
-  --color-primary-500: #5905ac;
-  --color-primary-600: #450092;
-  --color-primary-700: #340078;
-  --color-primary-800: #24005f;
-  --color-primary-900: #170046;
-  --color-primary-950: #11003a;
+  --color-primary-50: #ccacff;
+  --color-primary-100: #bd9bff;
+  --color-primary-200: #9f7aff;
+  --color-primary-300: #8259f5;
+  --color-primary-400: #6736d2;
+  --color-primary-500: #4e00b0;
+  --color-primary-600: #3d0096;
+  --color-primary-700: #2e007d;
+  --color-primary-800: #210065;
+  --color-primary-900: #17004c;
+  --color-primary-950: #130040;
 
   /* Secondary */
-  --color-secondary-50: #ffe598;
-  --color-secondary-100: #ffd78a;
-  --color-secondary-200: #ffbc6f;
-  --color-secondary-300: #f1a255;
-  --color-secondary-400: #d58839;
-  --color-secondary-500: #ba6f17;
-  --color-secondary-600: #9a5100;
-  --color-secondary-700: #7a3400;
-  --color-secondary-800: #5b1600;
-  --color-secondary-900: #3d0000;
-  --color-secondary-950: #2e0000;
+  --color-secondary-50: #ffc9ff;
+  --color-secondary-100: #ffb9ff;
+  --color-secondary-200: #e598ff;
+  --color-secondary-300: #c479eb;
+  --color-secondary-400: #a459ca;
+  --color-secondary-500: #853aa9;
+  --color-secondary-600: #671789;
+  --color-secondary-700: #4b006a;
+  --color-secondary-800: #2f004c;
+  --color-secondary-900: #16002f;
+  --color-secondary-950: #0a0021;
 
   /* Neutral */
   --color-neutral-50: #f8f8f8;
@@ -47,17 +47,17 @@
   --color-neutral-950: #020202;
 
   /* Tertiary */
-  --color-tertiary-50: #e1a2b5;
-  --color-tertiary-100: #dd98ad;
-  --color-tertiary-200: #d5839e;
-  --color-tertiary-300: #cc6f8e;
-  --color-tertiary-400: #c2597f;
-  --color-tertiary-500: #ad2862;
-  --color-tertiary-600: #9f245a;
-  --color-tertiary-700: #912051;
-  --color-tertiary-800: #841c49;
-  --color-tertiary-900: #771841;
-  --color-tertiary-950: #70163e;
+  --color-tertiary-50: #b8a1de;
+  --color-tertiary-100: #b097da;
+  --color-tertiary-200: #a182d2;
+  --color-tertiary-300: #936dc9;
+  --color-tertiary-400: #8557c0;
+  --color-tertiary-500: #6a25ad;
+  --color-tertiary-600: #61219f;
+  --color-tertiary-700: #581d91;
+  --color-tertiary-800: #501a84;
+  --color-tertiary-900: #471677;
+  --color-tertiary-950: #431470;
 
   /* Gray */
   --color-gray-50: #f8f8f8;
@@ -81,11 +81,11 @@
   --color-border: #515151;
   --color-foreground: #f8f8f8;
   --color-foreground-muted: #8a8a8a;
-  --color-primary: #5905ac;
-  --color-primary-subtle: #170046;
+  --color-primary: #4e00b0;
+  --color-primary-subtle: #17004c;
   --color-on-primary: #f8f8f8;
-  --color-secondary: #ba6f17;
-  --color-secondary-subtle: #3d0000;
+  --color-secondary: #853aa9;
+  --color-secondary-subtle: #16002f;
   --color-on-secondary: #f8f8f8;
   --color-destructive: #cc272e;
   --color-destructive-subtle: #3f0000;
@@ -99,8 +99,8 @@
   --color-info: #0079d8;
   --color-info-subtle: #000056;
   --color-on-info: #9effff;
-  --color-focus: #5905ac;
-  --color-link: #7437ce;
+  --color-focus: #4e00b0;
+  --color-link: #6736d2;
 
   /* Typography scale — fluid clamp ---------------------- */
 
