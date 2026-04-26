@@ -74,21 +74,21 @@
 
   /* Typography scale — fluid clamp ---------------------- */
 
-  --text-3xs: clamp(0.6250rem, 0.6705rem + -0.227vw, 0.5000rem);
-  --text-2xs: clamp(0.6875rem, 0.7330rem + -0.227vw, 0.5625rem);
-  --text-xs: clamp(0.7500rem, 0.7727rem + -0.114vw, 0.6875rem);
-  --text-sm: clamp(0.8125rem, 0.8125rem + 0.000vw, 0.8125rem);
-  --text-base: clamp(0.8750rem, 0.8295rem + 0.227vw, 1.0000rem);
-  --text-lg: clamp(0.9375rem, 0.8466rem + 0.455vw, 1.1875rem);
-  --text-xl: clamp(1.0000rem, 0.8409rem + 0.795vw, 1.4375rem);
-  --text-2xl: clamp(1.0625rem, 0.8125rem + 1.250vw, 1.7500rem);
-  --text-3xl: clamp(1.1875rem, 0.8693rem + 1.591vw, 2.0625rem);
-  --text-4xl: clamp(1.2500rem, 0.7955rem + 2.273vw, 2.5000rem);
-  --text-5xl: clamp(1.3750rem, 0.7841rem + 2.955vw, 3.0000rem);
-  --text-6xl: clamp(1.4375rem, 0.6648rem + 3.864vw, 3.5625rem);
-  --text-7xl: clamp(1.5625rem, 0.5625rem + 5.000vw, 4.3125rem);
-  --text-8xl: clamp(1.6875rem, 0.4148rem + 6.364vw, 5.1875rem);
-  --text-9xl: clamp(1.8125rem, 0.2216rem + 7.955vw, 6.1875rem);
+  --text-3xs: clamp(NaNrem, NaNrem + NaNvw, NaNrem);
+  --text-2xs: clamp(NaNrem, NaNrem + NaNvw, NaNrem);
+  --text-xs: clamp(NaNrem, NaNrem + NaNvw, NaNrem);
+  --text-sm: clamp(NaNrem, NaNrem + NaNvw, NaNrem);
+  --text-base: clamp(NaNrem, NaNrem + NaNvw, NaNrem);
+  --text-lg: clamp(NaNrem, NaNrem + NaNvw, NaNrem);
+  --text-xl: clamp(NaNrem, NaNrem + NaNvw, NaNrem);
+  --text-2xl: clamp(NaNrem, NaNrem + NaNvw, NaNrem);
+  --text-3xl: clamp(NaNrem, NaNrem + NaNvw, NaNrem);
+  --text-4xl: clamp(NaNrem, NaNrem + NaNvw, NaNrem);
+  --text-5xl: clamp(NaNrem, NaNrem + NaNvw, NaNrem);
+  --text-6xl: clamp(NaNrem, NaNrem + NaNvw, NaNrem);
+  --text-7xl: clamp(NaNrem, NaNrem + NaNvw, NaNrem);
+  --text-8xl: clamp(NaNrem, NaNrem + NaNvw, NaNrem);
+  --text-9xl: clamp(NaNrem, NaNrem + NaNvw, NaNrem);
 
   /* Font families --------------------------------------- */
 
