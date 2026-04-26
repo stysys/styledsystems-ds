@@ -21,17 +21,17 @@
   --color-primary-950: #12003e;
 
   /* Secondary */
-  --color-secondary-50: #ffff96;
-  --color-secondary-100: #f8f58c;
-  --color-secondary-200: #e3e078;
-  --color-secondary-300: #d0cc64;
-  --color-secondary-400: #bcb84f;
-  --color-secondary-500: #a9a53a;
-  --color-secondary-600: #8b860b;
-  --color-secondary-700: #6e6800;
-  --color-secondary-800: #524c00;
-  --color-secondary-900: #383000;
-  --color-secondary-950: #2c2300;
+  --color-secondary-50: #a9ffc5;
+  --color-secondary-100: #9dffba;
+  --color-secondary-200: #85f0a3;
+  --color-secondary-300: #6dd88c;
+  --color-secondary-400: #54c076;
+  --color-secondary-500: #3aa960;
+  --color-secondary-600: #048a43;
+  --color-secondary-700: #006c26;
+  --color-secondary-800: #004e04;
+  --color-secondary-900: #003300;
+  --color-secondary-950: #002500;
 
   /* Neutral */
   --color-neutral-50: #c4c4c1;
@@ -47,17 +47,17 @@
   --color-neutral-950: #000000;
 
   /* Tertiary */
-  --color-tertiary-50: #eaa9a9;
-  --color-tertiary-100: #e79fa0;
-  --color-tertiary-200: #e08c8d;
-  --color-tertiary-300: #d9797b;
-  --color-tertiary-400: #d1656a;
-  --color-tertiary-500: #c03847;
-  --color-tertiary-600: #b13341;
-  --color-tertiary-700: #a22e3a;
-  --color-tertiary-800: #932934;
-  --color-tertiary-900: #84242e;
-  --color-tertiary-950: #7d212b;
+  --color-tertiary-50: #9dc3de;
+  --color-tertiary-100: #92bdda;
+  --color-tertiary-200: #7cb0d2;
+  --color-tertiary-300: #65a2ca;
+  --color-tertiary-400: #4d95c2;
+  --color-tertiary-500: #007bb2;
+  --color-tertiary-600: #0071a4;
+  --color-tertiary-700: #006796;
+  --color-tertiary-800: #005d88;
+  --color-tertiary-900: #00537a;
+  --color-tertiary-950: #004e74;
 
   /* Gray */
   --color-gray-50: #f8f8f8;
@@ -84,8 +84,8 @@
   --color-primary: #4e05ac;
   --color-primary-subtle: #be9bff;
   --color-on-primary: #c4c4c1;
-  --color-secondary: #a9a53a;
-  --color-secondary-subtle: #f8f58c;
+  --color-secondary: #3aa960;
+  --color-secondary-subtle: #9dffba;
   --color-on-secondary: #c4c4c1;
   --color-destructive: #676767;
   --color-on-destructive: #c4c4c1;
