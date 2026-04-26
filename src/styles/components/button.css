@@ -15,7 +15,7 @@
   .btn--solid {
     @apply border-neutral-500 bg-neutral-500 text-neutral-950;
     &:hover {
-      @apply bg-primary;
+      @apply bg-primary text-on-primary;
     }
   }
 

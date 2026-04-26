@@ -1,0 +1,15 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Watch Design Tokens from GitHub",
+      "type": "shell",
+      "command": "bash ${workspaceFolder}/.vscode/watch-tokens.sh",
+      "isBackground": true,
+      "runOptions": {
+        "runOn": "folderOpen"
+      },
+      "problemMatcher": []
+    }
+  ]
+}
