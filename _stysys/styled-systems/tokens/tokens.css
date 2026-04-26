@@ -74,17 +74,17 @@
 
   /* Semantic colors ------------------------------------- */
 
-  --color-background: #020202;
-  --color-surface: #080808;
-  --color-surface-raised: #1e1e1e;
-  --color-border-subtle: #363636;
-  --color-border: #515151;
+  --color-background: #000000;
+  --color-surface: #030303;
+  --color-surface-raised: #171717;
+  --color-border-subtle: #171717;
+  --color-border: #303030;
   --color-foreground: #f8f8f8;
-  --color-foreground-muted: #8a8a8a;
-  --color-primary: #5905ac;
+  --color-foreground-muted: #676767;
+  --color-primary: #7437ce;
   --color-primary-subtle: #170046;
   --color-on-primary: #f8f8f8;
-  --color-secondary: #3aa960;
+  --color-secondary: #54c076;
   --color-secondary-subtle: #003300;
   --color-on-secondary: #f8f8f8;
   --color-destructive: #cc272e;
