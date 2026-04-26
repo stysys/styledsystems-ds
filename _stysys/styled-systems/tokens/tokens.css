@@ -34,17 +34,17 @@
   --color-secondary-950: #002500;
 
   /* Neutral */
-  --color-neutral-50: #f9f9f2;
-  --color-neutral-100: #eaeae3;
-  --color-neutral-200: #cdcdc6;
-  --color-neutral-300: #b0b0aa;
-  --color-neutral-400: #95958f;
-  --color-neutral-500: #7a7a74;
-  --color-neutral-600: #5d5d58;
-  --color-neutral-700: #42423d;
-  --color-neutral-800: #292924;
-  --color-neutral-900: #11110d;
-  --color-neutral-950: #070704;
+  --color-neutral-50: #acaca2;
+  --color-neutral-100: #9c9c92;
+  --color-neutral-200: #7e7e75;
+  --color-neutral-300: #616158;
+  --color-neutral-400: #46463d;
+  --color-neutral-500: #2c2c24;
+  --color-neutral-600: #1f1f17;
+  --color-neutral-700: #13130c;
+  --color-neutral-800: #080803;
+  --color-neutral-900: #020200;
+  --color-neutral-950: #010000;
 
   /* Tertiary */
   --color-tertiary-50: #9ec5e5;
@@ -74,19 +74,19 @@
 
   /* Semantic colors ------------------------------------- */
 
-  --color-background: #070704;
-  --color-surface: #11110d;
-  --color-surface-raised: #292924;
-  --color-border-subtle: #42423d;
-  --color-border: #5d5d58;
-  --color-foreground: #f9f9f2;
-  --color-foreground-muted: #95958f;
+  --color-background: #010000;
+  --color-surface: #020200;
+  --color-surface-raised: #080803;
+  --color-border-subtle: #13130c;
+  --color-border: #1f1f17;
+  --color-foreground: #acaca2;
+  --color-foreground-muted: #46463d;
   --color-primary: #6d05ac;
   --color-primary-subtle: #180040;
-  --color-on-primary: #f9f9f2;
+  --color-on-primary: #acaca2;
   --color-secondary: #3aa960;
   --color-secondary-subtle: #003300;
-  --color-on-secondary: #f9f9f2;
+  --color-on-secondary: #acaca2;
   --color-destructive: #cc272e;
   --color-destructive-subtle: #3f0000;
   --color-on-destructive: #f8f8f8;
