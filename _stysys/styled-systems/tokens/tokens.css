@@ -46,6 +46,19 @@
   --color-neutral-900: #020200;
   --color-neutral-950: #010000;
 
+  /* Color 4 */
+  --color-color-4-50: #f8f8f8;
+  --color-color-4-100: #ebebeb;
+  --color-color-4-200: #d2d2d2;
+  --color-color-4-300: #b8b8b8;
+  --color-color-4-400: #a0a0a0;
+  --color-color-4-500: #888888;
+  --color-color-4-600: #6b6b6b;
+  --color-color-4-700: #4f4f4f;
+  --color-color-4-800: #343434;
+  --color-color-4-900: #1c1c1c;
+  --color-color-4-950: #111111;
+
   /* Tertiary */
   --color-tertiary-50: #9ec5e5;
   --color-tertiary-100: #93bfe2;
