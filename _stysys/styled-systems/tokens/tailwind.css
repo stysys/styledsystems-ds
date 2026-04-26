@@ -69,6 +69,23 @@
   --color-gray-900: var(--color-gray-900);
   --color-gray-950: var(--color-gray-950);
 
+  /* Semantic colors --------------------------------------- */
+  --color-background: var(--color-background);
+  --color-surface: var(--color-surface);
+  --color-surface-raised: var(--color-surface-raised);
+  --color-border-subtle: var(--color-border-subtle);
+  --color-border: var(--color-border);
+  --color-text: var(--color-text);
+  --color-text-fg-muted: var(--color-text-fg-muted);
+  --color-primary: var(--color-primary);
+  --color-primary-subtle: var(--color-primary-subtle);
+  --color-on-primary: var(--color-on-primary);
+  --color-secondary: var(--color-secondary);
+  --color-secondary-subtle: var(--color-secondary-subtle);
+  --color-on-secondary: var(--color-on-secondary);
+  --color-destructive: var(--color-destructive);
+  --color-on-destructive: var(--color-on-destructive);
+
   /* Typography scale -------------------------------------- */
   --text-3xs: var(--text-3xs);
   --text-2xs: var(--text-2xs);

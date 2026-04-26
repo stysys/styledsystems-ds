@@ -72,23 +72,41 @@
   --color-gray-900: #030303;
   --color-gray-950: #000000;
 
+  /* Semantic colors ------------------------------------- */
+
+  --color-background: #1e1d16;
+  --color-surface: #2a2921;
+  --color-surface-raised: #43433a;
+  --color-border-subtle: #5e5e55;
+  --color-border: #7b7b71;
+  --color-text: #f9f9ee;
+  --color-text-fg-muted: #aeaea3;
+  --color-primary: #05ac8e;
+  --color-primary-subtle: #003621;
+  --color-on-primary: #f9f9ee;
+  --color-secondary: #6a3aa9;
+  --color-secondary-subtle: #120036;
+  --color-on-secondary: #f9f9ee;
+  --color-destructive: #858585;
+  --color-on-destructive: #f9f9ee;
+
   /* Typography scale — fluid clamp ---------------------- */
 
-  --text-3xs: clamp(NaNrem, NaNrem + NaNvw, NaNrem);
-  --text-2xs: clamp(NaNrem, NaNrem + NaNvw, NaNrem);
-  --text-xs: clamp(NaNrem, NaNrem + NaNvw, NaNrem);
-  --text-sm: clamp(NaNrem, NaNrem + NaNvw, NaNrem);
-  --text-base: clamp(NaNrem, NaNrem + NaNvw, NaNrem);
-  --text-lg: clamp(NaNrem, NaNrem + NaNvw, NaNrem);
-  --text-xl: clamp(NaNrem, NaNrem + NaNvw, NaNrem);
-  --text-2xl: clamp(NaNrem, NaNrem + NaNvw, NaNrem);
-  --text-3xl: clamp(NaNrem, NaNrem + NaNvw, NaNrem);
-  --text-4xl: clamp(NaNrem, NaNrem + NaNvw, NaNrem);
-  --text-5xl: clamp(NaNrem, NaNrem + NaNvw, NaNrem);
-  --text-6xl: clamp(NaNrem, NaNrem + NaNvw, NaNrem);
-  --text-7xl: clamp(NaNrem, NaNrem + NaNvw, NaNrem);
-  --text-8xl: clamp(NaNrem, NaNrem + NaNvw, NaNrem);
-  --text-9xl: clamp(NaNrem, NaNrem + NaNvw, NaNrem);
+  --text-3xs: clamp(0.5625rem, 0.5852rem + -0.114vw, 0.5000rem);
+  --text-2xs: clamp(0.6875rem, 0.7102rem + -0.114vw, 0.6250rem);
+  --text-xs: clamp(0.7500rem, 0.7500rem + 0.000vw, 0.7500rem);
+  --text-sm: clamp(0.8125rem, 0.7898rem + 0.114vw, 0.8750rem);
+  --text-base: clamp(0.9375rem, 0.8920rem + 0.227vw, 1.0625rem);
+  --text-lg: clamp(1.0625rem, 0.9943rem + 0.341vw, 1.2500rem);
+  --text-xl: clamp(1.1875rem, 1.0739rem + 0.568vw, 1.5000rem);
+  --text-2xl: clamp(1.3125rem, 1.1307rem + 0.909vw, 1.8125rem);
+  --text-3xl: clamp(1.5000rem, 1.2500rem + 1.250vw, 2.1875rem);
+  --text-4xl: clamp(1.6875rem, 1.3466rem + 1.705vw, 2.6250rem);
+  --text-5xl: clamp(1.8750rem, 1.3977rem + 2.386vw, 3.1875rem);
+  --text-6xl: clamp(2.1250rem, 1.5114rem + 3.068vw, 3.8125rem);
+  --text-7xl: clamp(2.3750rem, 1.5795rem + 3.977vw, 4.5625rem);
+  --text-8xl: clamp(2.6875rem, 1.6648rem + 5.114vw, 5.5000rem);
+  --text-9xl: clamp(3.0625rem, 1.7898rem + 6.364vw, 6.5625rem);
 
   /* Font families --------------------------------------- */
 
