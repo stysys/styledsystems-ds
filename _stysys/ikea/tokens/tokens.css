@@ -104,21 +104,21 @@
 
   /* Typography scale — fluid clamp ---------------------- */
 
-  --text-3xs: clamp(0.8125rem, 0.9034rem + -0.455vw, 0.5625rem);
-  --text-2xs: clamp(0.8125rem, 0.8580rem + -0.227vw, 0.6875rem);
-  --text-xs: clamp(0.8125rem, 0.8352rem + -0.114vw, 0.7500rem);
-  --text-sm: clamp(0.8125rem, 0.8125rem + 0.000vw, 0.8125rem);
-  --text-base: clamp(0.8125rem, 0.7670rem + 0.227vw, 0.9375rem);
-  --text-lg: clamp(0.8125rem, 0.7216rem + 0.455vw, 1.0625rem);
-  --text-xl: clamp(0.8125rem, 0.6761rem + 0.682vw, 1.1875rem);
-  --text-2xl: clamp(0.8125rem, 0.6307rem + 0.909vw, 1.3125rem);
-  --text-3xl: clamp(0.8125rem, 0.5625rem + 1.250vw, 1.5000rem);
-  --text-4xl: clamp(0.8125rem, 0.4943rem + 1.591vw, 1.6875rem);
-  --text-5xl: clamp(0.8125rem, 0.4261rem + 1.932vw, 1.8750rem);
-  --text-6xl: clamp(0.8125rem, 0.3352rem + 2.386vw, 2.1250rem);
-  --text-7xl: clamp(0.8125rem, 0.2443rem + 2.841vw, 2.3750rem);
-  --text-8xl: clamp(0.8125rem, 0.1307rem + 3.409vw, 2.6875rem);
-  --text-9xl: clamp(0.8125rem, -0.0057rem + 4.091vw, 3.0625rem);
+  --text-3xs: clamp(0.8750rem, 0.9659rem + -0.455vw, 0.6250rem);
+  --text-2xs: clamp(0.8750rem, 0.9432rem + -0.341vw, 0.6875rem);
+  --text-xs: clamp(0.8750rem, 0.8977rem + -0.114vw, 0.8125rem);
+  --text-sm: clamp(0.8750rem, 0.8750rem + 0.000vw, 0.8750rem);
+  --text-base: clamp(0.8750rem, 0.8295rem + 0.227vw, 1.0000rem);
+  --text-lg: clamp(0.8750rem, 0.7841rem + 0.455vw, 1.1250rem);
+  --text-xl: clamp(0.8750rem, 0.7386rem + 0.682vw, 1.2500rem);
+  --text-2xl: clamp(0.8750rem, 0.6705rem + 1.023vw, 1.4375rem);
+  --text-3xl: clamp(0.8750rem, 0.6023rem + 1.364vw, 1.6250rem);
+  --text-4xl: clamp(0.8750rem, 0.5341rem + 1.705vw, 1.8125rem);
+  --text-5xl: clamp(0.8750rem, 0.4659rem + 2.045vw, 2.0000rem);
+  --text-6xl: clamp(0.8750rem, 0.3750rem + 2.500vw, 2.2500rem);
+  --text-7xl: clamp(0.8750rem, 0.2614rem + 3.068vw, 2.5625rem);
+  --text-8xl: clamp(0.8750rem, 0.1477rem + 3.636vw, 2.8750rem);
+  --text-9xl: clamp(0.8750rem, 0.0114rem + 4.318vw, 3.2500rem);
 
   /* Font families --------------------------------------- */
 
