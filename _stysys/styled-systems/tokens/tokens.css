@@ -21,17 +21,17 @@
   --color-primary-950: #11003a;
 
   /* Secondary */
-  --color-secondary-50: #ffc2a6;
-  --color-secondary-100: #ffb196;
-  --color-secondary-200: #ff9077;
-  --color-secondary-300: #ff7058;
-  --color-secondary-400: #dd4f39;
-  --color-secondary-500: #ba2b17;
-  --color-secondary-600: #970000;
-  --color-secondary-700: #750000;
-  --color-secondary-800: #520000;
-  --color-secondary-900: #300000;
-  --color-secondary-950: #1e0000;
+  --color-secondary-50: #9eff88;
+  --color-secondary-100: #93ff7d;
+  --color-secondary-200: #7efa67;
+  --color-secondary-300: #67e550;
+  --color-secondary-400: #51cf37;
+  --color-secondary-500: #38ba17;
+  --color-secondary-600: #009a00;
+  --color-secondary-700: #007a00;
+  --color-secondary-800: #005c00;
+  --color-secondary-900: #003f00;
+  --color-secondary-950: #003000;
 
   /* Neutral */
   --color-neutral-50: #f8f8f8;
@@ -47,17 +47,17 @@
   --color-neutral-950: #020202;
 
   /* Tertiary */
-  --color-tertiary-50: #d99abe;
-  --color-tertiary-100: #d48fb7;
-  --color-tertiary-200: #ca78a9;
-  --color-tertiary-300: #bf629c;
-  --color-tertiary-400: #b44a8e;
-  --color-tertiary-500: #9b0073;
-  --color-tertiary-600: #8e0069;
-  --color-tertiary-700: #820060;
-  --color-tertiary-800: #760057;
-  --color-tertiary-900: #6a004e;
-  --color-tertiary-950: #640049;
+  --color-tertiary-50: #a0c9e6;
+  --color-tertiary-100: #95c3e3;
+  --color-tertiary-200: #7fb7dd;
+  --color-tertiary-300: #69abd7;
+  --color-tertiary-400: #519fd1;
+  --color-tertiary-500: #0087c4;
+  --color-tertiary-600: #007cb4;
+  --color-tertiary-700: #0071a5;
+  --color-tertiary-800: #006696;
+  --color-tertiary-900: #005c87;
+  --color-tertiary-950: #005780;
 
   /* Gray */
   --color-gray-50: #f8f8f8;
@@ -84,8 +84,8 @@
   --color-primary: #5905ac;
   --color-primary-subtle: #170046;
   --color-on-primary: #f8f8f8;
-  --color-secondary: #ba2b17;
-  --color-secondary-subtle: #300000;
+  --color-secondary: #38ba17;
+  --color-secondary-subtle: #003f00;
   --color-on-secondary: #f8f8f8;
   --color-destructive: #cc272e;
   --color-destructive-subtle: #3f0000;
