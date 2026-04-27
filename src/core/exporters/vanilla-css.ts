@@ -19,6 +19,41 @@ import type { TailwindCssTokens } from "./tailwind-css.js";
 const MIN_VP = 320;
 const MAX_VP = 1200;
 
+// Utopia-style fluid space scale — multiples of the base font size
+export const SPACE_SCALE: ReadonlyArray<{ name: string; mul: number }> = [
+  { name: "3xs", mul: 0.25 },
+  { name: "2xs", mul: 0.5  },
+  { name: "xs",  mul: 0.75 },
+  { name: "s",   mul: 1    },
+  { name: "m",   mul: 1.5  },
+  { name: "l",   mul: 2    },
+  { name: "xl",  mul: 3    },
+  { name: "2xl", mul: 4    },
+  { name: "3xl", mul: 6    },
+];
+
+export function generateSpaceLines(
+  minBase: number,
+  maxBase: number,
+  minVp: number,
+  maxVp: number,
+): string[] {
+  const lines: string[] = [];
+  // Individual steps
+  for (const step of SPACE_SCALE) {
+    const clamp = generateFluidClamp(step.mul * minBase, step.mul * maxBase, minVp, maxVp);
+    lines.push(`  --spacing-${step.name}: ${clamp};`);
+  }
+  // One-up pairs
+  for (let i = 0; i < SPACE_SCALE.length - 1; i++) {
+    const small = SPACE_SCALE[i];
+    const large = SPACE_SCALE[i + 1];
+    const clamp = generateFluidClamp(small.mul * minBase, large.mul * maxBase, minVp, maxVp);
+    lines.push(`  --spacing-${small.name}-${large.name}: ${clamp};`);
+  }
+  return lines;
+}
+
 const TEXT_SCALE: ReadonlyArray<{ name: string; power: number }> = [
   { name: "3xs",  power: -4 },
   { name: "2xs",  power: -3 },
@@ -106,6 +141,10 @@ export function generateVanillaCSSVars(tokens: TailwindCssTokens, dsName?: strin
     lines.push(`\n${ruler("Font families")}`);
     lines.push(`  --font-display: "${typo.headingFont}";`);
     lines.push(`  --font-body: "${typo.bodyFont}";`);
+    lines.push("");
+
+    lines.push(ruler("Fluid space scale"));
+    lines.push(...generateSpaceLines(minBase, maxBase, minVp, maxVp));
     lines.push("");
   }
 
