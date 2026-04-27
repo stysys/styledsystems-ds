@@ -74,13 +74,13 @@
 
   /* Semantic colors ------------------------------------- */
 
-  --color-background: #020202;
-  --color-surface: #080808;
-  --color-surface-raised: #1e1e1e;
-  --color-border-subtle: #363636;
-  --color-border: #515151;
+  --color-background: #000000;
+  --color-surface: #030303;
+  --color-surface-raised: #171717;
+  --color-border-subtle: #171717;
+  --color-border: #303030;
   --color-foreground: #f8f8f8;
-  --color-foreground-muted: #8a8a8a;
+  --color-foreground-muted: #858585;
   --color-primary: #5905ac;
   --color-primary-subtle: #170046;
   --color-on-primary: #f8f8f8;
