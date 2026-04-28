@@ -1,3 +1,59 @@
+@utility btn-solid {
+  @apply border-neutral-500 bg-neutral-500 text-neutral-950;
+  &:hover {
+    @apply bg-primary text-on-primary;
+  }
+}
+
+@utility btn-outline {
+  @apply border-outline bg-transparent text-foreground;
+  &:hover {
+    @apply bg-surface-raised;
+  }
+}
+
+@utility btn-primary {
+  @apply border-transparent bg-primary text-on-primary;
+  &:hover {
+    @apply bg-primary/90;
+  }
+}
+
+@utility btn-secondary {
+  @apply border-transparent bg-secondary text-on-secondary;
+  &:hover {
+    @apply bg-secondary/90;
+  }
+}
+
+@utility btn-ghost {
+  @apply border-transparent text-foreground;
+  &:hover {
+    @apply bg-surface-raised;
+  }
+}
+
+@utility btn-link {
+  @apply border-transparent text-primary underline-offset-4;
+  &:hover {
+    @apply underline;
+  }
+}
+
+@utility btn-destructive {
+  @apply border-transparent bg-destructive text-on-destructive;
+  &:hover {
+    @apply bg-destructive/90;
+  }
+}
+
+@utility btn-ghost-destructive {
+  @apply border-transparent text-muted;
+  &:hover {
+    @apply bg-destructive/10 text-destructive;
+  }
+}
+
 @layer components {
   .btn {
     @apply inline-flex w-fit cursor-pointer items-center whitespace-nowrap btn-md border transition-base;
@@ -12,72 +68,18 @@
     }
   }
 
-  .btn--solid {
-    @apply border-neutral-500 bg-neutral-500 text-neutral-950;
-    &:hover {
-      @apply bg-primary text-on-primary;
-    }
-  }
-
-  .btn--outline {
-    @apply border-outline bg-transparent text-foreground;
-    &:hover {
-      @apply bg-surface-raised;
-    }
-  }
-
-  .btn--primary {
-    @apply border-transparent bg-primary text-on-primary;
-    &:hover {
-      @apply bg-primary/90;
-    }
-  }
-
-  .btn--secondary {
-    @apply border-transparent bg-secondary text-on-secondary;
-    &:hover {
-      @apply bg-secondary/90;
-    }
-  }
-
-  .btn--ghost {
-    @apply border-transparent text-foreground;
-    &:hover {
-      @apply bg-surface-raised;
-    }
-  }
-
-  .btn--link {
-    @apply border-transparent text-primary underline-offset-4;
-    &:hover {
-      @apply underline;
-    }
-  }
-
-  .btn--destructive {
-    @apply border-transparent bg-destructive text-on-destructive;
-    &:hover {
-      @apply bg-destructive/90;
-    }
-  }
-
-  .btn--ghost-destructive {
-    @apply border-transparent text-muted;
-    &:hover {
-      @apply bg-destructive/10 text-destructive;
-    }
-  }
+  .btn--solid            { @apply btn-solid; }
+  .btn--outline          { @apply btn-outline; }
+  .btn--primary          { @apply btn-primary; }
+  .btn--secondary        { @apply btn-secondary; }
+  .btn--ghost            { @apply btn-ghost; }
+  .btn--link             { @apply btn-link; }
+  .btn--destructive      { @apply btn-destructive; }
+  .btn--ghost-destructive { @apply btn-ghost-destructive; }
 
   /* Size variants — explicit heights, keep px padding */
-  .btn--sm {
-    @apply btn-sm;
-  }
+  .btn--sm { @apply btn-sm; }
+  .btn--lg { @apply btn-lg; }
 
-  .btn--lg {
-    @apply btn-lg;
-  }
-
-  .btn--icon {
-    @apply h-10 w-10 px-0;
-  }
+  .btn--icon { @apply h-10 w-10 px-0; }
 }
