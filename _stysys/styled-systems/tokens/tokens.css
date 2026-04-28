@@ -104,21 +104,21 @@
 
   /* Typography scale — fluid clamp ---------------------- */
 
-  --text-3xs: clamp(0.6250rem, 0.6477rem + -0.114vw, 0.5625rem);
-  --text-2xs: clamp(0.6875rem, 0.7102rem + -0.114vw, 0.6250rem);
+  --text-3xs: clamp(0.6250rem, 0.6250rem + 0.000vw, 0.6250rem);
+  --text-2xs: clamp(0.6875rem, 0.6875rem + 0.000vw, 0.6875rem);
   --text-xs: clamp(0.8125rem, 0.8125rem + 0.000vw, 0.8125rem);
-  --text-sm: clamp(0.8750rem, 0.8523rem + 0.114vw, 0.9375rem);
-  --text-base: clamp(1.0000rem, 0.9545rem + 0.227vw, 1.1250rem);
-  --text-lg: clamp(1.1250rem, 1.0341rem + 0.455vw, 1.3750rem);
-  --text-xl: clamp(1.2500rem, 1.1136rem + 0.682vw, 1.6250rem);
-  --text-2xl: clamp(1.4375rem, 1.2557rem + 0.909vw, 1.9375rem);
-  --text-3xl: clamp(1.6250rem, 1.3750rem + 1.250vw, 2.3125rem);
-  --text-4xl: clamp(1.8125rem, 1.4489rem + 1.818vw, 2.8125rem);
-  --text-5xl: clamp(2.0000rem, 1.5000rem + 2.500vw, 3.3750rem);
-  --text-6xl: clamp(2.2500rem, 1.6136rem + 3.182vw, 4.0000rem);
-  --text-7xl: clamp(2.5625rem, 1.7443rem + 4.091vw, 4.8125rem);
-  --text-8xl: clamp(2.8750rem, 1.8068rem + 5.341vw, 5.8125rem);
-  --text-9xl: clamp(3.2500rem, 1.9091rem + 6.705vw, 6.9375rem);
+  --text-sm: clamp(0.8750rem, 0.8750rem + 0.000vw, 0.8750rem);
+  --text-base: clamp(1.0000rem, 1.0000rem + 0.000vw, 1.0000rem);
+  --text-lg: clamp(1.1250rem, 1.1250rem + 0.000vw, 1.1250rem);
+  --text-xl: clamp(1.2500rem, 1.2500rem + 0.000vw, 1.2500rem);
+  --text-2xl: clamp(1.4375rem, 1.4375rem + 0.000vw, 1.4375rem);
+  --text-3xl: clamp(1.6250rem, 1.6250rem + 0.000vw, 1.6250rem);
+  --text-4xl: clamp(1.8125rem, 1.8125rem + 0.000vw, 1.8125rem);
+  --text-5xl: clamp(2.0000rem, 2.0000rem + 0.000vw, 2.0000rem);
+  --text-6xl: clamp(2.2500rem, 2.2500rem + 0.000vw, 2.2500rem);
+  --text-7xl: clamp(2.5625rem, 2.5625rem + 0.000vw, 2.5625rem);
+  --text-8xl: clamp(2.8750rem, 2.8750rem + 0.000vw, 2.8750rem);
+  --text-9xl: clamp(3.2500rem, 3.2500rem + 0.000vw, 3.2500rem);
 
   /* Font families --------------------------------------- */
 
@@ -127,23 +127,23 @@
 
   /* Fluid space scale ----------------------------------- */
 
-  --spacing-3xs: clamp(0.2500rem, 0.2386rem + 0.057vw, 0.2813rem);
-  --spacing-2xs: clamp(0.5000rem, 0.4773rem + 0.114vw, 0.5625rem);
-  --spacing-xs: clamp(0.7500rem, 0.7159rem + 0.170vw, 0.8438rem);
-  --spacing-s: clamp(1.0000rem, 0.9545rem + 0.227vw, 1.1250rem);
-  --spacing-m: clamp(1.5000rem, 1.4318rem + 0.341vw, 1.6875rem);
-  --spacing-l: clamp(2.0000rem, 1.9091rem + 0.455vw, 2.2500rem);
-  --spacing-xl: clamp(3.0000rem, 2.8636rem + 0.682vw, 3.3750rem);
-  --spacing-2xl: clamp(4.0000rem, 3.8182rem + 0.909vw, 4.5000rem);
-  --spacing-3xl: clamp(6.0000rem, 5.7273rem + 1.364vw, 6.7500rem);
-  --spacing-3xs-2xs: clamp(0.2500rem, 0.1364rem + 0.568vw, 0.5625rem);
-  --spacing-2xs-xs: clamp(0.5000rem, 0.3750rem + 0.625vw, 0.8438rem);
-  --spacing-xs-s: clamp(0.7500rem, 0.6136rem + 0.682vw, 1.1250rem);
-  --spacing-s-m: clamp(1.0000rem, 0.7500rem + 1.250vw, 1.6875rem);
-  --spacing-m-l: clamp(1.5000rem, 1.2273rem + 1.364vw, 2.2500rem);
-  --spacing-l-xl: clamp(2.0000rem, 1.5000rem + 2.500vw, 3.3750rem);
-  --spacing-xl-2xl: clamp(3.0000rem, 2.4545rem + 2.727vw, 4.5000rem);
-  --spacing-2xl-3xl: clamp(4.0000rem, 3.0000rem + 5.000vw, 6.7500rem);
+  --spacing-3xs: clamp(0.2500rem, 0.2500rem + 0.000vw, 0.2500rem);
+  --spacing-2xs: clamp(0.5000rem, 0.5000rem + 0.000vw, 0.5000rem);
+  --spacing-xs: clamp(0.7500rem, 0.7500rem + 0.000vw, 0.7500rem);
+  --spacing-s: clamp(1.0000rem, 1.0000rem + 0.000vw, 1.0000rem);
+  --spacing-m: clamp(1.5000rem, 1.5000rem + 0.000vw, 1.5000rem);
+  --spacing-l: clamp(2.0000rem, 2.0000rem + 0.000vw, 2.0000rem);
+  --spacing-xl: clamp(3.0000rem, 3.0000rem + 0.000vw, 3.0000rem);
+  --spacing-2xl: clamp(4.0000rem, 4.0000rem + 0.000vw, 4.0000rem);
+  --spacing-3xl: clamp(6.0000rem, 6.0000rem + 0.000vw, 6.0000rem);
+  --spacing-3xs-2xs: clamp(0.2500rem, 0.1591rem + 0.455vw, 0.5000rem);
+  --spacing-2xs-xs: clamp(0.5000rem, 0.4091rem + 0.455vw, 0.7500rem);
+  --spacing-xs-s: clamp(0.7500rem, 0.6591rem + 0.455vw, 1.0000rem);
+  --spacing-s-m: clamp(1.0000rem, 0.8182rem + 0.909vw, 1.5000rem);
+  --spacing-m-l: clamp(1.5000rem, 1.3182rem + 0.909vw, 2.0000rem);
+  --spacing-l-xl: clamp(2.0000rem, 1.6364rem + 1.818vw, 3.0000rem);
+  --spacing-xl-2xl: clamp(3.0000rem, 2.6364rem + 1.818vw, 4.0000rem);
+  --spacing-2xl-3xl: clamp(4.0000rem, 3.2727rem + 3.636vw, 6.0000rem);
 
   /* Button sizes ---------------------------------------- */
 
