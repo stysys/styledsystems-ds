@@ -1,4 +1,39 @@
 /* Form and Input Components */
+
+@utility input {
+  height: var(--button-md-height);
+  border-radius: var(--button-md-radius);
+  @apply flex w-full border border-outline bg-transparent px-3 text-sm text-foreground transition-base;
+  border-style: solid;
+  &::placeholder {
+    @apply text-muted;
+  }
+  &:focus-visible {
+    @apply border-primary outline-none;
+  }
+  &:disabled {
+    @apply cursor-not-allowed opacity-50;
+  }
+}
+
+@utility input-select {
+  @apply input pr-8;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23ffffff' d='M6 8L2 4h8z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.5rem center;
+  background-size: 12px;
+  &:focus {
+    @apply border-primary outline-none;
+  }
+}
+
+@utility input-sm {
+  height: var(--button-sm-height);
+  border-radius: var(--button-sm-radius);
+  @apply px-2 text-xs;
+}
+
 @layer components {
   /* === Form Layouts === */
   .form {
@@ -57,48 +92,20 @@
   }
 
   .input {
-    @apply flex h-10 w-full rounded-md border border-outline bg-transparent px-3 text-sm text-foreground transition-base;
-    border-style: solid;
-    &::placeholder {
-      @apply text-muted;
-    }
-    &:focus-visible {
-      @apply border-primary outline-none;
-    }
-    &:disabled {
-      @apply cursor-not-allowed opacity-50;
-    }
+    @apply input;
     &[type="file"] {
       @apply border-0 bg-transparent text-sm font-medium;
     }
   }
 
   /* Size modifier */
-  .input--sm {
-    @apply h-8 px-2 text-xs;
-  }
+  .input--sm { @apply input-sm; }
 
   /* Plugin modifier: icon prefix inside input */
-  .input--icon-prefix {
-    @apply pl-9;
-  }
+  .input--icon-prefix { @apply pl-9; }
 
-  select {
-    @apply flex h-10 w-full rounded-md border border-outline bg-transparent px-3 text-sm text-foreground shadow-sm transition-base;
-    &:focus {
-      @apply border-primary outline-none;
-    }
-  }
-
-  select.input--select {
-    @apply pr-6;
-    appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23ffffff' d='M6 8L2 4h8z'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 0.5rem center;
-    background-size: 12px;
-    @apply pl-4;
-  }
+  select { @apply input-select; }
+  select.input--select { @apply input-select; }
 
   .input-icon,
   .input-icon-text {

@@ -361,8 +361,37 @@ ${"=".repeat(66)} */`;
 
   const buttonBlock = tokens.buttonSizes ? `\n${buttonUtilityBlocks(tokens.buttonSizes)}` : "";
 
-  return `${header}\n\n@import "./tokens.css";\n${themeBlock}${utilityBlock}${buttonBlock}\n${BUTTON_VARIANT_UTILITIES}`;
+  return `${header}\n\n@import "./tokens.css";\n${themeBlock}${utilityBlock}${buttonBlock}\n${FORM_UTILITIES}\n${BUTTON_VARIANT_UTILITIES}`;
 }
+
+const FORM_UTILITIES = `/* Form utilities ${"─".repeat(42)} */
+
+@utility input {
+  height: var(--button-md-height);
+  border-radius: var(--button-md-radius);
+  @apply flex w-full border border-outline bg-transparent px-3 text-sm text-foreground transition-base;
+  border-style: solid;
+  &::placeholder { @apply text-muted; }
+  &:focus-visible { @apply border-primary outline-none; }
+  &:disabled { @apply cursor-not-allowed opacity-50; }
+}
+
+@utility input-select {
+  @apply input pr-8;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23ffffff' d='M6 8L2 4h8z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.5rem center;
+  background-size: 12px;
+  &:focus { @apply border-primary outline-none; }
+}
+
+@utility input-sm {
+  height: var(--button-sm-height);
+  border-radius: var(--button-sm-radius);
+  @apply px-2 text-xs;
+}
+`;
 
 const BUTTON_VARIANT_UTILITIES = `/* Button variant utilities ${"─".repeat(33)} */
 
