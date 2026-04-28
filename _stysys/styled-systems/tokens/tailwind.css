@@ -237,3 +237,26 @@
   line-height: 1.4;
   letter-spacing: 0.1em;
 }
+
+/* Button size utilities ──────────────────────────────────── */
+
+@utility btn-sm {
+  height: var(--button-sm-height);
+  padding-left: var(--button-sm-padding-x);
+  padding-right: var(--button-sm-padding-x);
+  border-radius: 4px;
+}
+
+@utility btn-md {
+  height: var(--button-md-height);
+  padding-left: var(--button-md-padding-x);
+  padding-right: var(--button-md-padding-x);
+  border-radius: 6px;
+}
+
+@utility btn-lg {
+  height: var(--button-lg-height);
+  padding-left: var(--button-lg-padding-x);
+  padding-right: var(--button-lg-padding-x);
+  border-radius: 8px;
+}
