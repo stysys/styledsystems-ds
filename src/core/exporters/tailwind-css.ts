@@ -47,6 +47,14 @@ export interface TailwindCssTokens {
     // Legacy aliases — accepted for backwards compat, lower priority than min/maxFontSize
     baseSize?: number;
     scaleRatio?: number;
+    semanticRoles?: Record<string, {
+      step?: string;
+      fontSize: number;
+      lineHeight: number;
+      fontFamily: string;
+      fontWeight: number;
+      letterSpacing?: number | string;
+    }>;
   };
   /**
    * Dynamic color entries — each produces a full --color-{key}-* ramp.
@@ -72,13 +80,10 @@ const WEIGHT_MAP: Record<string, number> = {
 };
 
 const HEADING_TOKENS = new Set([
-  "display",
-  "h1",
-  "h2",
-  "h3",
-  "h4",
-  "h5",
-  "h6",
+  "display-lg", "display", "display-sm",
+  "heading-xl", "heading-lg", "heading-md",
+  "title-lg", "title-md", "title-sm",
+  "label-lg", "label-md", "label-sm",
 ]);
 
 /** Min/max viewport mirrors the TypographyTool scale config. */
@@ -198,6 +203,27 @@ function semanticUtilityBlocks(typo: TailwindCssTokens["typography"]): string {
   if (!typo) return "";
 
   let out = `/* Semantic type utilities ${"─".repeat(34)} */\n`;
+
+  if (typo.semanticRoles && Object.keys(typo.semanticRoles).length > 0) {
+    for (const [token, role] of Object.entries(typo.semanticRoles)) {
+      const sizeVar = role.step ? `var(--text-${role.step})` : `${role.fontSize}px`;
+      const ls = role.letterSpacing;
+      const tracking = ls && ls !== 0 && ls !== "0em" && ls !== "0"
+        ? (typeof ls === "number"
+            ? (Math.abs(ls) < 1 ? `${ls}em` : `${(ls / 1000).toFixed(4).replace(/\.?0+$/, "")}em`)
+            : String(ls))
+        : null;
+      out += `\n@utility ${token} {\n`;
+      const fontVar = HEADING_TOKENS.has(token) ? "var(--font-display)" : "var(--font-body)";
+      out += `  font-size: ${sizeVar};\n`;
+      out += `  font-family: ${fontVar};\n`;
+      out += `  font-weight: ${role.fontWeight};\n`;
+      out += `  line-height: ${role.lineHeight};\n`;
+      if (tracking) out += `  letter-spacing: ${tracking};\n`;
+      out += `}\n`;
+    }
+    return out;
+  }
 
   for (const entry of SEMANTIC_SCALE) {
     const fontVar = HEADING_TOKENS.has(entry.token)

@@ -6,8 +6,10 @@ CHECK_INTERVAL=20
 
 cd "$REPO_PATH" || exit
 
-# Seed with current local tree hash so we don't re-sync on startup
-LAST_TREE=$(git ls-tree -d HEAD "$WATCH_PATH" 2>/dev/null | awk '{print $3}')
+# Fetch once on startup so LAST_TREE reflects what's actually on origin,
+# not the potentially stale local HEAD. This avoids a spurious re-sync.
+git fetch origin main --quiet 2>/dev/null
+LAST_TREE=$(git ls-tree -d origin/main "$WATCH_PATH" 2>/dev/null | awk '{print $3}')
 
 echo "Watching $WATCH_PATH for GitHub updates (every ${CHECK_INTERVAL}s)..."
 
