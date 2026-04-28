@@ -71,6 +71,7 @@ export interface TailwindCssTokens {
     height: number;
     paddingX: number;
     radius: number;
+    labelRole?: string;
   }>;
 }
 
@@ -363,15 +364,15 @@ ${"=".repeat(66)} */`;
   return `${header}\n\n@import "./tokens.css";\n${themeBlock}${utilityBlock}${buttonBlock}`;
 }
 
-function buttonUtilityBlocks(sizes: Record<string, { height: number; paddingX: number; radius: number }>): string {
+function buttonUtilityBlocks(sizes: Record<string, { height: number; paddingX: number; radius: number; labelRole?: string }>): string {
   let out = `/* Button size utilities ${"─".repeat(36)} */\n`;
   for (const [size, cfg] of Object.entries(sizes)) {
-    const r = cfg.radius === 9999 ? "9999px" : `${cfg.radius}px`;
     out += `\n@utility btn-${size} {\n`;
     out += `  height: var(--button-${size}-height);\n`;
     out += `  padding-left: var(--button-${size}-padding-x);\n`;
     out += `  padding-right: var(--button-${size}-padding-x);\n`;
-    out += `  border-radius: ${r};\n`;
+    out += `  border-radius: var(--button-${size}-radius);\n`;
+    if (cfg.labelRole) out += `  @apply ${cfg.labelRole};\n`;
     out += `}\n`;
   }
   return out;

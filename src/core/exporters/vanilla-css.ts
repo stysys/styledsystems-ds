@@ -152,10 +152,9 @@ export function generateVanillaCSSVars(tokens: TailwindCssTokens, dsName?: strin
   if (tokens.buttonSizes && Object.keys(tokens.buttonSizes).length > 0) {
     lines.push(ruler("Button sizes"));
     for (const [size, cfg] of Object.entries(tokens.buttonSizes)) {
-      const r = cfg.radius === 9999 ? "9999px" : `${cfg.radius}px`;
       lines.push(`  --button-${size}-height: ${cfg.height}px;`);
       lines.push(`  --button-${size}-padding-x: ${cfg.paddingX}px;`);
-      lines.push(`  --button-${size}-radius: ${r};`);
+      lines.push(`  --button-${size}-radius: ${cfg.radius === 9999 ? "9999px" : `${cfg.radius}px`};`);
     }
     lines.push("");
   }
