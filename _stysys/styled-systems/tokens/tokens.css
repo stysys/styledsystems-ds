@@ -152,8 +152,8 @@
   --button-sm-radius: 4px;
   --button-md-height: 32px;
   --button-md-padding-x: 16px;
-  --button-md-radius: 6px;
+  --button-md-radius: 4px;
   --button-lg-height: 40px;
   --button-lg-padding-x: 20px;
-  --button-lg-radius: 8px;
+  --button-lg-radius: 6px;
 }
