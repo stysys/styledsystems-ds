@@ -245,7 +245,7 @@
   padding-left: var(--button-sm-padding-x);
   padding-right: var(--button-sm-padding-x);
   border-radius: var(--button-sm-radius);
-  @apply label-md;
+  @apply label-sm;
 }
 
 @utility btn-md {

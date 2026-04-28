@@ -147,13 +147,13 @@
 
   /* Button sizes ---------------------------------------- */
 
-  --button-sm-height: 24px;
+  --button-sm-height: 28px;
   --button-sm-padding-x: 12px;
   --button-sm-radius: 4px;
-  --button-md-height: 32px;
+  --button-md-height: 36px;
   --button-md-padding-x: 16px;
   --button-md-radius: 4px;
   --button-lg-height: 40px;
   --button-lg-padding-x: 20px;
-  --button-lg-radius: 6px;
+  --button-lg-radius: 4px;
 }
