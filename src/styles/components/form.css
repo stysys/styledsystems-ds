@@ -50,7 +50,6 @@
     @apply relative flex items-center;
   }
   .label {
-    @apply text-sm font-medium leading-none;
     &:has(+ :disabled),
     &:has(~ :disabled) {
       @apply cursor-not-allowed opacity-70;

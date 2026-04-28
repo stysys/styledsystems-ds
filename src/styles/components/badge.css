@@ -1,6 +1,6 @@
 @layer components {
   .badge {
-    @apply inline-flex items-center rounded-full border border-transparent px-2.5 py-0.5 font-mono text-xs font-semibold uppercase transition-colors;
+    @apply inline-flex items-center rounded-full border border-transparent px-1.5 py-0 label-sm uppercase transition-colors;
     @apply bg-primary text-on-primary;
     &:hover {
       @apply bg-primary/80;

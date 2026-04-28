@@ -1,4 +1,7 @@
 /* Load _theme.css per Plugin/Consumer */
+
+@import "../../_stysys/styled-systems/tokens/tailwind.css";
+
 @import "./_theme.css";
 @import "./_layout.css";
 @import "./typography-ui.css";

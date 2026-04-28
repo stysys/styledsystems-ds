@@ -66,6 +66,12 @@ export interface TailwindCssTokens {
    * e.g. { primary: "#05ac8e", background: "#030303", fg: "#f5f5f5" }
    */
   semanticColors?: Record<string, string>;
+  /** Button size tokens — generates --button-{size}-* vars and @utility btn-{size} blocks. */
+  buttonSizes?: Record<string, {
+    height: number;
+    paddingX: number;
+    radius: number;
+  }>;
 }
 
 // ---------------------------------------------------------------------------
@@ -352,5 +358,21 @@ ${"=".repeat(66)} */`;
 
   const utilityBlock = tokens.typography ? `\n${semanticUtilityBlocks(tokens.typography)}` : "";
 
-  return `${header}\n\n@import "./tokens.css";\n${themeBlock}${utilityBlock}`;
+  const buttonBlock = tokens.buttonSizes ? `\n${buttonUtilityBlocks(tokens.buttonSizes)}` : "";
+
+  return `${header}\n\n@import "./tokens.css";\n${themeBlock}${utilityBlock}${buttonBlock}`;
+}
+
+function buttonUtilityBlocks(sizes: Record<string, { height: number; paddingX: number; radius: number }>): string {
+  let out = `/* Button size utilities ${"─".repeat(36)} */\n`;
+  for (const [size, cfg] of Object.entries(sizes)) {
+    const r = cfg.radius === 9999 ? "9999px" : `${cfg.radius}px`;
+    out += `\n@utility btn-${size} {\n`;
+    out += `  height: var(--button-${size}-height);\n`;
+    out += `  padding-left: var(--button-${size}-padding-x);\n`;
+    out += `  padding-right: var(--button-${size}-padding-x);\n`;
+    out += `  border-radius: ${r};\n`;
+    out += `}\n`;
+  }
+  return out;
 }

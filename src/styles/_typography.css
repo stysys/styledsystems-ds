@@ -6,12 +6,10 @@
 @utility body {
   @apply font-body leading-body;
 }
-@utility label {
-  @apply headings text-xs font-medium;
-}
+
 @layer components {
   label {
-    @apply label;
+    @apply label-md;
   }
 }
 @layer base {
