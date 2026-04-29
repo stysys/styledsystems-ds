@@ -70,14 +70,32 @@ export interface TailwindCssTokens {
   buttonSizes?: Record<string, {
     height: number;
     paddingX: number;
-    radius: number;
+    radius: string;
     labelRole?: string;
   }>;
+  /** Global radius + shadow scale — generates --radius-* and --shadow-* vars. */
+  styles?: {
+    radius?: Record<string, number>;
+    shadows?: Record<string, string>;
+  };
 }
 
 // ---------------------------------------------------------------------------
 // Constants
 // ---------------------------------------------------------------------------
+
+export const DEFAULT_RADIUS: Record<string, number> = {
+  none: 0, sm: 4, md: 8, lg: 12, xl: 16, full: 9999,
+};
+const DEFAULT_RADIUS_KEYS = Object.keys(DEFAULT_RADIUS);
+
+export const DEFAULT_SHADOWS: Record<string, string> = {
+  sm: "0 1px 3px 0 oklch(0% 0 0 / 0.10)",
+  md: "0 4px 6px -1px oklch(0% 0 0 / 0.10), 0 2px 4px -2px oklch(0% 0 0 / 0.10)",
+  lg: "0 10px 15px -3px oklch(0% 0 0 / 0.10), 0 4px 6px -4px oklch(0% 0 0 / 0.10)",
+  xl: "0 20px 25px -5px oklch(0% 0 0 / 0.10), 0 8px 10px -6px oklch(0% 0 0 / 0.10)",
+};
+const DEFAULT_SHADOW_KEYS = Object.keys(DEFAULT_SHADOWS);
 
 const WEIGHT_MAP: Record<string, number> = {
   Bold: 700,
@@ -346,6 +364,18 @@ export function generateTailwindWrapper(tokens: TailwindCssTokens): string {
     lines.push(`  --font-body: var(--font-body);`);
   }
 
+  // --- Styles var references (always include — defaults always output in tokens.css) ---
+  {
+    const radiusKeys = tokens.styles?.radius ? Object.keys(tokens.styles.radius) : DEFAULT_RADIUS_KEYS;
+    const shadowKeys = tokens.styles?.shadows ? Object.keys(tokens.styles.shadows) : DEFAULT_SHADOW_KEYS;
+    lines.push("");
+    lines.push(`  ${ruler("Radius scale").trim()}`);
+    for (const k of radiusKeys) lines.push(`  --radius-${k}: var(--radius-${k});`);
+    lines.push("");
+    lines.push(`  ${ruler("Shadow scale").trim()}`);
+    for (const k of shadowKeys) lines.push(`  --shadow-${k}: var(--shadow-${k});`);
+  }
+
   while (lines[lines.length - 1] === "") lines.pop();
 
   const header = `/* ${"=".repeat(63)}
@@ -436,14 +466,14 @@ const BUTTON_VARIANT_UTILITIES = `/* Button variant utilities ${"─".repeat(33)
 }
 `;
 
-function buttonUtilityBlocks(sizes: Record<string, { height: number; paddingX: number; radius: number; labelRole?: string }>): string {
+function buttonUtilityBlocks(sizes: Record<string, { height: number; paddingX: number; radius: string; labelRole?: string }>): string {
   let out = `/* Button size utilities ${"─".repeat(36)} */\n`;
   for (const [size, cfg] of Object.entries(sizes)) {
     out += `\n@utility btn-${size} {\n`;
     out += `  height: var(--button-${size}-height);\n`;
     out += `  padding-left: var(--button-${size}-padding-x);\n`;
     out += `  padding-right: var(--button-${size}-padding-x);\n`;
-    out += `  border-radius: var(--button-${size}-radius);\n`;
+    out += `  border-radius: var(--radius-${cfg.radius});\n`;
     if (cfg.labelRole) out += `  @apply ${cfg.labelRole};\n`;
     out += `}\n`;
   }

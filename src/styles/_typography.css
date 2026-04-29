@@ -1,5 +1,3 @@
-/* @import "./_theme.css"; */
-
 @utility headings {
   @apply font-display leading-headings;
 }
@@ -8,7 +6,8 @@
 }
 
 @layer components {
-  label {
+  label,
+  .label {
     @apply label-md;
   }
 }

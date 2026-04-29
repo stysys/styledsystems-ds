@@ -15,6 +15,7 @@ import { calculateRamp, generateTertiaryRamp, generateGrayRamp, RAMP_STEPS } fro
 import { generateFluidClamp } from "../utilities/utilities.js";
 import { calculateFontSize } from "../typography/typography.js";
 import type { TailwindCssTokens } from "./tailwind-css.js";
+import { DEFAULT_RADIUS, DEFAULT_SHADOWS } from "./tailwind-css.js";
 
 const MIN_VP = 320;
 const MAX_VP = 1200;
@@ -148,13 +149,29 @@ export function generateVanillaCSSVars(tokens: TailwindCssTokens, dsName?: strin
     lines.push("");
   }
 
+  // --- Styles (radius + shadows) — always output so var(--radius-*) refs are never undefined ---
+  {
+    const radius = tokens.styles?.radius ?? DEFAULT_RADIUS;
+    const shadows = tokens.styles?.shadows ?? DEFAULT_SHADOWS;
+    lines.push(ruler("Radius scale"));
+    for (const [name, px] of Object.entries(radius)) {
+      lines.push(`  --radius-${name}: ${px === 9999 ? "9999px" : `${px}px`};`);
+    }
+    lines.push("");
+    lines.push(ruler("Shadow scale"));
+    for (const [name, val] of Object.entries(shadows)) {
+      lines.push(`  --shadow-${name}: ${val};`);
+    }
+    lines.push("");
+  }
+
   // --- Button sizes ---
   if (tokens.buttonSizes && Object.keys(tokens.buttonSizes).length > 0) {
     lines.push(ruler("Button sizes"));
     for (const [size, cfg] of Object.entries(tokens.buttonSizes)) {
       lines.push(`  --button-${size}-height: ${cfg.height}px;`);
       lines.push(`  --button-${size}-padding-x: ${cfg.paddingX}px;`);
-      lines.push(`  --button-${size}-radius: ${cfg.radius === 9999 ? "9999px" : `${cfg.radius}px`};`);
+      lines.push(`  --button-${size}-radius: var(--radius-${cfg.radius});`);
     }
     lines.push("");
   }
