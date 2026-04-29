@@ -144,4 +144,16 @@
   --spacing-l-xl: clamp(2.0000rem, 1.5682rem + 2.159vw, 3.1875rem);
   --spacing-xl-2xl: clamp(3.0000rem, 2.5455rem + 2.273vw, 4.2500rem);
   --spacing-2xl-3xl: clamp(4.0000rem, 3.1364rem + 4.318vw, 6.3750rem);
+
+  /* Button sizes ---------------------------------------- */
+
+  --button-sm-height: 24px;
+  --button-sm-padding-x: 12px;
+  --button-sm-radius: 4px;
+  --button-md-height: 36px;
+  --button-md-padding-x: 16px;
+  --button-md-radius: 4px;
+  --button-lg-height: 40px;
+  --button-lg-padding-x: 20px;
+  --button-lg-radius: 9999px;
 }
