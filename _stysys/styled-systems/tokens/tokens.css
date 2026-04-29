@@ -145,15 +145,31 @@
   --spacing-xl-2xl: clamp(3.0000rem, 2.4545rem + 2.727vw, 4.5000rem);
   --spacing-2xl-3xl: clamp(4.0000rem, 3.0000rem + 5.000vw, 6.7500rem);
 
+  /* Radius scale ---------------------------------------- */
+
+  --radius-none: 0px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 9999px;
+
+  /* Shadow scale ---------------------------------------- */
+
+  --shadow-sm: 0 1px 3px 0 oklch(0% 0 0 / 0.10);
+  --shadow-md: 0 4px 6px -1px oklch(0% 0 0 / 0.10), 0 2px 4px -2px oklch(0% 0 0 / 0.10);
+  --shadow-lg: 0 10px 15px -3px oklch(0% 0 0 / 0.10), 0 4px 6px -4px oklch(0% 0 0 / 0.10);
+  --shadow-xl: 0 20px 25px -5px oklch(0% 0 0 / 0.10), 0 8px 10px -6px oklch(0% 0 0 / 0.10);
+
   /* Button sizes ---------------------------------------- */
 
   --button-sm-height: 28px;
   --button-sm-padding-x: 12px;
-  --button-sm-radius: 4px;
+  --button-sm-radius: var(--radius-sm);
   --button-md-height: 36px;
   --button-md-padding-x: 16px;
-  --button-md-radius: 4px;
+  --button-md-radius: var(--radius-sm);
   --button-lg-height: 40px;
   --button-lg-padding-x: 20px;
-  --button-lg-radius: 9999px;
+  --button-lg-radius: var(--radius-sm);
 }
