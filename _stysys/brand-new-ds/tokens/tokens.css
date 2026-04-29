@@ -8,17 +8,17 @@
 
 
   /* Primary */
-  --color-primary-50: #97ffff;
-  --color-primary-100: #89f3ff;
-  --color-primary-200: #6fd9ff;
-  --color-primary-300: #54bfff;
-  --color-primary-400: #36a5ff;
-  --color-primary-500: #0c8ce9;
-  --color-primary-600: #006dc7;
-  --color-primary-700: #004ea6;
-  --color-primary-800: #002f86;
-  --color-primary-900: #000a66;
-  --color-primary-950: #000057;
+  --color-primary-50: #53ffef;
+  --color-primary-100: #4dffeb;
+  --color-primary-200: #42ffe4;
+  --color-primary-300: #34ffde;
+  --color-primary-400: #23ffd7;
+  --color-primary-500: #02fdd0;
+  --color-primary-600: #00dbb0;
+  --color-primary-700: #00ba91;
+  --color-primary-800: #009a73;
+  --color-primary-900: #007b57;
+  --color-primary-950: #006c49;
 
   /* Secondary */
   --color-secondary-50: #ffccff;
@@ -47,17 +47,17 @@
   --color-neutral-950: #01030a;
 
   /* Tertiary */
-  --color-tertiary-50: #aebfff;
-  --color-tertiary-100: #a6b8ff;
-  --color-tertiary-200: #95aaff;
-  --color-tertiary-300: #859bff;
-  --color-tertiary-400: #758bff;
-  --color-tertiary-500: #596afb;
-  --color-tertiary-600: #5161e7;
-  --color-tertiary-700: #4a58d4;
-  --color-tertiary-800: #4250c1;
-  --color-tertiary-900: #3b47ae;
-  --color-tertiary-950: #3743a5;
+  --color-tertiary-50: #abdfff;
+  --color-tertiary-100: #a1dcff;
+  --color-tertiary-200: #8cd4ff;
+  --color-tertiary-300: #76cdff;
+  --color-tertiary-400: #5ec5ff;
+  --color-tertiary-500: #00b5ff;
+  --color-tertiary-600: #00a6eb;
+  --color-tertiary-700: #0098d7;
+  --color-tertiary-800: #008ac4;
+  --color-tertiary-900: #007cb1;
+  --color-tertiary-950: #0076a8;
 
   /* Gray */
   --color-gray-50: #f8f8f8;
@@ -81,8 +81,8 @@
   --color-border: #a4acbb;
   --color-foreground: #01030a;
   --color-foreground-muted: #4f5663;
-  --color-primary: #0c8ce9;
-  --color-primary-subtle: #89f3ff;
+  --color-primary: #02fdd0;
+  --color-primary-subtle: #4dffeb;
   --color-on-primary: #f1f9ff;
   --color-secondary: #8a38f5;
   --color-secondary-subtle: #fdbcff;
@@ -92,15 +92,15 @@
   --color-on-destructive: #f8f8f8;
   --color-success: #006b00;
   --color-success-subtle: #9bffa0;
-  --color-on-success: #abffb0;
+  --color-on-success: #abffaf;
   --color-warning: #894000;
   --color-warning-subtle: #ffd48d;
   --color-on-warning: #ffe39c;
   --color-info: #005ba8;
   --color-info-subtle: #92f1ff;
   --color-on-info: #a1ffff;
-  --color-focus: #0c8ce9;
-  --color-link: #006dc7;
+  --color-focus: #02fdd0;
+  --color-link: #00dbb0;
 
   /* Typography scale — fluid clamp ---------------------- */
 
