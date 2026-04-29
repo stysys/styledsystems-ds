@@ -34,17 +34,30 @@
   --color-ikea-yellow-950: #724e00;
 
   /* Neutral */
-  --color-neutral-50: #fff6f6;
-  --color-neutral-100: #f0e6e6;
-  --color-neutral-200: #d1c7c7;
-  --color-neutral-300: #b3aaaa;
-  --color-neutral-400: #968d8d;
-  --color-neutral-500: #7a7171;
-  --color-neutral-600: #5d5555;
-  --color-neutral-700: #423a3a;
-  --color-neutral-800: #282121;
-  --color-neutral-900: #110b0b;
-  --color-neutral-950: #070303;
+  --color-neutral-50: #f8f8f8;
+  --color-neutral-100: #eaeaea;
+  --color-neutral-200: #cdcdcd;
+  --color-neutral-300: #b1b1b1;
+  --color-neutral-400: #959595;
+  --color-neutral-500: #7b7b7b;
+  --color-neutral-600: #5e5e5e;
+  --color-neutral-700: #434343;
+  --color-neutral-800: #292929;
+  --color-neutral-900: #121212;
+  --color-neutral-950: #080808;
+
+  /* Color 4 */
+  --color-color-4-50: #f8f8f8;
+  --color-color-4-100: #ebebeb;
+  --color-color-4-200: #d2d2d2;
+  --color-color-4-300: #b8b8b8;
+  --color-color-4-400: #a0a0a0;
+  --color-color-4-500: #888888;
+  --color-color-4-600: #6b6b6b;
+  --color-color-4-700: #4f4f4f;
+  --color-color-4-800: #343434;
+  --color-color-4-900: #1c1c1c;
+  --color-color-4-950: #111111;
 
   /* Tertiary */
   --color-tertiary-50: #aadfcc;
@@ -74,19 +87,19 @@
 
   /* Semantic colors ------------------------------------- */
 
-  --color-background: #070303;
-  --color-surface: #110b0b;
-  --color-surface-raised: #282121;
-  --color-border-subtle: #423a3a;
-  --color-border: #5d5555;
-  --color-foreground: #fff6f6;
-  --color-foreground-muted: #968d8d;
+  --color-background: #080808;
+  --color-surface: #121212;
+  --color-surface-raised: #292929;
+  --color-border-subtle: #434343;
+  --color-border: #5e5e5e;
+  --color-foreground: #f8f8f8;
+  --color-foreground-muted: #959595;
   --color-primary: #0058a3;
   --color-primary-subtle: #030033;
-  --color-on-primary: #fff6f6;
+  --color-on-primary: #f8f8f8;
   --color-secondary: #ffdb00;
   --color-secondary-subtle: #805d00;
-  --color-on-secondary: #fff6f6;
+  --color-on-secondary: #f8f8f8;
   --color-destructive: #b54a46;
   --color-destructive-subtle: #320000;
   --color-on-destructive: #f8f8f8;
