@@ -104,24 +104,60 @@
 
   /* Typography scale — fluid clamp ---------------------- */
 
-  --text-3xs: clamp(0.5000rem, 0.5455rem + -0.227vw, 0.3750rem);
-  --text-2xs: clamp(0.5625rem, 0.6080rem + -0.227vw, 0.4375rem);
-  --text-xs: clamp(0.6250rem, 0.6705rem + -0.227vw, 0.5000rem);
-  --text-sm: clamp(0.6250rem, 0.6250rem + 0.000vw, 0.6250rem);
-  --text-base: clamp(0.6875rem, 0.6648rem + 0.114vw, 0.7500rem);
-  --text-lg: clamp(0.7500rem, 0.7045rem + 0.227vw, 0.8750rem);
-  --text-xl: clamp(0.8125rem, 0.7216rem + 0.455vw, 1.0625rem);
-  --text-2xl: clamp(0.8750rem, 0.7159rem + 0.795vw, 1.3125rem);
-  --text-3xl: clamp(0.9375rem, 0.7102rem + 1.136vw, 1.5625rem);
-  --text-4xl: clamp(1.0000rem, 0.6818rem + 1.591vw, 1.8750rem);
-  --text-5xl: clamp(1.0625rem, 0.6307rem + 2.159vw, 2.2500rem);
-  --text-6xl: clamp(1.1250rem, 0.5568rem + 2.841vw, 2.6875rem);
-  --text-7xl: clamp(1.2500rem, 0.5227rem + 3.636vw, 3.2500rem);
-  --text-8xl: clamp(1.3125rem, 0.3807rem + 4.659vw, 3.8750rem);
-  --text-9xl: clamp(1.4375rem, 0.2784rem + 5.795vw, 4.6250rem);
+  --text-3xs: clamp(0.6250rem, 0.6705rem + -0.227vw, 0.5000rem);
+  --text-2xs: clamp(0.6875rem, 0.7102rem + -0.114vw, 0.6250rem);
+  --text-xs: clamp(0.7500rem, 0.7500rem + 0.000vw, 0.7500rem);
+  --text-sm: clamp(0.8125rem, 0.7898rem + 0.114vw, 0.8750rem);
+  --text-base: clamp(0.8750rem, 0.8068rem + 0.341vw, 1.0625rem);
+  --text-lg: clamp(0.9375rem, 0.8239rem + 0.568vw, 1.2500rem);
+  --text-xl: clamp(1.0000rem, 0.8182rem + 0.909vw, 1.5000rem);
+  --text-2xl: clamp(1.0625rem, 0.7898rem + 1.364vw, 1.8125rem);
+  --text-3xl: clamp(1.1875rem, 0.8239rem + 1.818vw, 2.1875rem);
+  --text-4xl: clamp(1.2500rem, 0.7500rem + 2.500vw, 2.6250rem);
+  --text-5xl: clamp(1.3750rem, 0.7159rem + 3.295vw, 3.1875rem);
+  --text-6xl: clamp(1.4375rem, 0.5739rem + 4.318vw, 3.8125rem);
+  --text-7xl: clamp(1.5625rem, 0.4716rem + 5.455vw, 4.5625rem);
+  --text-8xl: clamp(1.6875rem, 0.3011rem + 6.932vw, 5.5000rem);
+  --text-9xl: clamp(1.8125rem, 0.0852rem + 8.636vw, 6.5625rem);
 
   /* Font families --------------------------------------- */
 
   --font-display: "Helvetica";
   --font-body: "Helvetica";
+
+  /* Fluid space scale ----------------------------------- */
+
+  --spacing-3xs: clamp(0.2188rem, 0.2017rem + 0.085vw, 0.2656rem);
+  --spacing-2xs: clamp(0.4375rem, 0.4034rem + 0.170vw, 0.5313rem);
+  --spacing-xs: clamp(0.6563rem, 0.6051rem + 0.256vw, 0.7969rem);
+  --spacing-s: clamp(0.8750rem, 0.8068rem + 0.341vw, 1.0625rem);
+  --spacing-m: clamp(1.3125rem, 1.2102rem + 0.511vw, 1.5938rem);
+  --spacing-l: clamp(1.7500rem, 1.6136rem + 0.682vw, 2.1250rem);
+  --spacing-xl: clamp(2.6250rem, 2.4205rem + 1.023vw, 3.1875rem);
+  --spacing-2xl: clamp(3.5000rem, 3.2273rem + 1.364vw, 4.2500rem);
+  --spacing-3xl: clamp(5.2500rem, 4.8409rem + 2.045vw, 6.3750rem);
+  --spacing-3xs-2xs: clamp(0.2188rem, 0.1051rem + 0.568vw, 0.5313rem);
+  --spacing-2xs-xs: clamp(0.4375rem, 0.3068rem + 0.653vw, 0.7969rem);
+  --spacing-xs-s: clamp(0.6563rem, 0.5085rem + 0.739vw, 1.0625rem);
+  --spacing-s-m: clamp(0.8750rem, 0.6136rem + 1.307vw, 1.5938rem);
+  --spacing-m-l: clamp(1.3125rem, 1.0170rem + 1.477vw, 2.1250rem);
+  --spacing-l-xl: clamp(1.7500rem, 1.2273rem + 2.614vw, 3.1875rem);
+  --spacing-xl-2xl: clamp(2.6250rem, 2.0341rem + 2.955vw, 4.2500rem);
+  --spacing-2xl-3xl: clamp(3.5000rem, 2.4545rem + 5.227vw, 6.3750rem);
+
+  /* Radius scale ---------------------------------------- */
+
+  --radius-none: 0px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 9999px;
+
+  /* Shadow scale ---------------------------------------- */
+
+  --shadow-sm: 0 1px 3px 0 oklch(0% 0 0 / 0.10);
+  --shadow-md: 0 4px 6px -1px oklch(0% 0 0 / 0.10), 0 2px 4px -2px oklch(0% 0 0 / 0.10);
+  --shadow-lg: 0 10px 15px -3px oklch(0% 0 0 / 0.10), 0 4px 6px -4px oklch(0% 0 0 / 0.10);
+  --shadow-xl: 0 20px 25px -5px oklch(0% 0 0 / 0.10), 0 8px 10px -6px oklch(0% 0 0 / 0.10);
 }
