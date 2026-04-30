@@ -141,7 +141,7 @@
 @utility display-lg {
   font-size: var(--text-9xl);
   font-family: var(--font-display);
-  font-weight: 300;
+  font-weight: 500;
   line-height: 1;
   letter-spacing: -0.03em;
 }
@@ -157,7 +157,7 @@
 @utility display-sm {
   font-size: var(--text-7xl);
   font-family: var(--font-display);
-  font-weight: 300;
+  font-weight: 500;
   line-height: 1;
   letter-spacing: -0.02em;
 }
