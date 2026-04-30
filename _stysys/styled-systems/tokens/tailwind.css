@@ -347,3 +347,28 @@
   @apply border-transparent text-muted;
   &:hover { @apply bg-destructive/10 text-destructive; }
 }
+
+@utility btn-icon {
+  aspect-ratio: 1/1;
+  padding: 0;
+}
+
+/* Card utilities ──────────────────────────────────────────── */
+
+@utility card-sm {
+  padding: var(--card-sm-padding);
+  border-radius: var(--card-sm-radius);
+  box-shadow: var(--card-sm-shadow);
+}
+
+@utility card-md {
+  padding: var(--card-md-padding);
+  border-radius: var(--card-md-radius);
+  box-shadow: var(--card-md-shadow);
+}
+
+@utility card-lg {
+  padding: var(--card-lg-padding);
+  border-radius: var(--card-lg-radius);
+  box-shadow: var(--card-lg-shadow);
+}
