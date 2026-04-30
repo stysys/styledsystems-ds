@@ -68,18 +68,41 @@
     }
   }
 
-  .btn--solid            { @apply btn-solid; }
-  .btn--outline          { @apply btn-outline; }
-  .btn--primary          { @apply btn-primary; }
-  .btn--secondary        { @apply btn-secondary; }
-  .btn--ghost            { @apply btn-ghost; }
-  .btn--link             { @apply btn-link; }
-  .btn--destructive      { @apply btn-destructive; }
-  .btn--ghost-destructive { @apply btn-ghost-destructive; }
+  .btn--solid {
+    @apply btn-solid;
+  }
+  .btn--outline {
+    @apply btn-outline;
+  }
+  .btn--primary {
+    @apply btn-primary;
+  }
+  .btn--secondary {
+    @apply btn-secondary;
+  }
+  .btn--ghost {
+    @apply btn-ghost;
+  }
+  .btn--link {
+    @apply btn-link;
+  }
+  .btn--destructive {
+    @apply btn-destructive;
+  }
+  .btn--ghost-destructive {
+    @apply btn-ghost-destructive;
+  }
 
   /* Size variants — explicit heights, keep px padding */
-  .btn--sm { @apply btn-sm; }
-  .btn--lg { @apply btn-lg; }
+  .btn--sm {
+    @apply btn-sm;
+  }
+  .btn--lg {
+    @apply btn-lg;
+  }
 
-  .btn--icon { @apply h-10 w-10 px-0; }
+  .btn--icon {
+    aspect-ratio: 1/1;
+    @apply px-0 flex items-center justify-center;
+  }
 }

@@ -22,10 +22,24 @@
       "import": "./dist/core/versions/index.js",
       "types": "./dist/core/versions/index.d.ts"
     },
-    "./dist/styles/*": "./dist/styles/*",
+    "./dist/styles/*": {
+      "style": "./dist/styles/*",
+      "default": "./dist/styles/*"
+    },
     "./dist/fonts/*": "./dist/fonts/*",
     "./dist/types/*": "./dist/types/*",
-    "./_stysys/*": "./_stysys/*"
+    "./_stysys/*": {
+      "style": "./_stysys/*",
+      "default": "./_stysys/*"
+    },
+    "./_stysys/styled-systems/tokens/tailwind.css": {
+      "style": "./_stysys/styled-systems/tokens/tailwind.css",
+      "default": "./_stysys/styled-systems/tokens/tailwind.css"
+    },
+    "./_stysys/styled-systems/tokens/tokens.css": {
+      "style": "./_stysys/styled-systems/tokens/tokens.css",
+      "default": "./_stysys/styled-systems/tokens/tokens.css"
+    }
   },
   "repository": {
     "type": "git",

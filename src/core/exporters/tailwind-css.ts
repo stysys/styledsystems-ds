@@ -78,6 +78,13 @@ export interface TailwindCssTokens {
     radius?: Record<string, number>;
     shadows?: Record<string, string>;
   };
+  /** Card config — generates --card-{size}-* and --card-background vars. */
+  cardConfig?: {
+    sm?: { padding: number; radius: string; shadow: string; titleRole?: string; bodyRole?: string };
+    md?: { padding: number; radius: string; shadow: string; titleRole?: string; bodyRole?: string };
+    lg?: { padding: number; radius: string; shadow: string; titleRole?: string; bodyRole?: string };
+    background?: string;
+  };
 }
 
 // ---------------------------------------------------------------------------
@@ -344,13 +351,22 @@ export function generateTailwindWrapper(tokens: TailwindCssTokens): string {
   }
 
   // --- Semantic color var references ---
-  if (tokens.semanticColors && Object.keys(tokens.semanticColors).length > 0) {
-    lines.push(`  ${ruler("Semantic colors").trim()}`);
-    for (const role of Object.keys(tokens.semanticColors)) {
-      lines.push(`  --color-${role}: var(--color-${role});`);
-    }
-    lines.push("");
+  // Always include baseline roles so bg-background, text-foreground etc. are always valid Tailwind utilities
+  const BASELINE_SEMANTIC = [
+    "background", "surface", "surface-raised",
+    "foreground", "foreground-muted", "muted",
+    "border", "border-subtle", "outline",
+    "primary", "on-primary", "primary-subtle",
+    "secondary", "on-secondary", "secondary-subtle",
+    "destructive", "on-destructive",
+  ];
+  const publishedRoles = tokens.semanticColors ? Object.keys(tokens.semanticColors) : [];
+  const allSemanticRoles = [...new Set([...BASELINE_SEMANTIC, ...publishedRoles])];
+  lines.push(`  ${ruler("Semantic colors").trim()}`);
+  for (const role of allSemanticRoles) {
+    lines.push(`  --color-${role}: var(--color-${role});`);
   }
+  lines.push("");
 
   // --- Typography var references ---
   if (tokens.typography) {
@@ -391,7 +407,7 @@ ${"=".repeat(66)} */`;
 
   const buttonBlock = tokens.buttonSizes ? `\n${buttonUtilityBlocks(tokens.buttonSizes)}` : "";
 
-  return `${header}\n\n@import "./tokens.css";\n${themeBlock}${utilityBlock}${buttonBlock}\n${FORM_UTILITIES}\n${BUTTON_VARIANT_UTILITIES}`;
+  return `${header}\n\n@import "./tokens.css";\n${themeBlock}${utilityBlock}${buttonBlock}\n${FORM_UTILITIES}\n${BUTTON_VARIANT_UTILITIES}\n${CARD_UTILITIES}`;
 }
 
 const FORM_UTILITIES = `/* Form utilities ${"─".repeat(42)} */
@@ -463,6 +479,32 @@ const BUTTON_VARIANT_UTILITIES = `/* Button variant utilities ${"─".repeat(33)
 @utility btn-ghost-destructive {
   @apply border-transparent text-muted;
   &:hover { @apply bg-destructive/10 text-destructive; }
+}
+
+@utility btn-icon {
+  aspect-ratio: 1/1;
+  padding: 0;
+}
+`;
+
+const CARD_UTILITIES = `/* Card utilities ${"─".repeat(44)} */
+
+@utility card-sm {
+  padding: var(--card-sm-padding);
+  border-radius: var(--card-sm-radius);
+  box-shadow: var(--card-sm-shadow);
+}
+
+@utility card-md {
+  padding: var(--card-md-padding);
+  border-radius: var(--card-md-radius);
+  box-shadow: var(--card-md-shadow);
+}
+
+@utility card-lg {
+  padding: var(--card-lg-padding);
+  border-radius: var(--card-lg-radius);
+  box-shadow: var(--card-lg-shadow);
 }
 `;
 

@@ -1,6 +1,6 @@
 @layer components {
   .card {
-    @apply bg-surface rounded-lg border border-subtle shadow-sm;
+    @apply bg-surface rounded-lg border border-transparent;
   }
   .card__header {
     @apply p-2xs-xs flex flex-col gap-1.5;

@@ -165,6 +165,41 @@ export function generateVanillaCSSVars(tokens: TailwindCssTokens, dsName?: strin
     lines.push("");
   }
 
+  // --- Card config ---
+  // Maps semantic role name → TEXT_SCALE step name for CSS var reference
+  function roleToCssStep(role: string): string {
+    const map: Record<string, string> = {
+      "display-lg": "9xl", "display": "9xl", "display-sm": "7xl",
+      "heading-xl": "8xl", "heading-lg": "7xl", "heading-md": "6xl",
+      "title-lg": "5xl", "title-md": "4xl", "title-sm": "3xl",
+      "body-lg": "xl", "body": "base", "body-sm": "sm",
+      "label-lg": "xs", "label-md": "2xs", "label-sm": "3xs",
+    };
+    return map[role] ?? "base";
+  }
+
+  if (tokens.cardConfig && Object.keys(tokens.cardConfig).length > 0) {
+    lines.push(ruler("Card sizes"));
+    for (const size of ["sm", "md", "lg"] as const) {
+      const cfg = tokens.cardConfig[size];
+      if (!cfg) continue;
+      lines.push(`  --card-${size}-padding: ${cfg.padding}px;`);
+      lines.push(`  --card-${size}-radius: var(--radius-${cfg.radius});`);
+      lines.push(`  --card-${size}-shadow: var(--shadow-${cfg.shadow});`);
+      if (cfg.titleRole) lines.push(`  --card-${size}-title: var(--text-${roleToCssStep(cfg.titleRole)});`);
+      if (cfg.bodyRole)  lines.push(`  --card-${size}-body:  var(--text-${roleToCssStep(cfg.bodyRole)});`);
+    }
+    if (tokens.cardConfig.background) {
+      const bg = tokens.cardConfig.background as string;
+      const fgMap: Record<string, string> = { primary: "on-primary", secondary: "on-secondary" };
+      lines.push(`  --card-background: ${bg === "transparent" ? "transparent" : `var(--color-${bg})`};`);
+      const fg = fgMap[bg];
+      if (fg) lines.push(`  --card-foreground: var(--color-${fg});`);
+      else lines.push(`  --card-foreground: var(--color-foreground);`);
+    }
+    lines.push("");
+  }
+
   // --- Button sizes ---
   if (tokens.buttonSizes && Object.keys(tokens.buttonSizes).length > 0) {
     lines.push(ruler("Button sizes"));
