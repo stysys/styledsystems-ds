@@ -102,7 +102,7 @@
 
   /* --- Footer --- */
   .footer {
-    @apply text-muted bg-surface inset-x-0 bottom-0 left-0 mt-4 flex flex-col items-center justify-between pt-2 pb-2;
+    @apply text-muted fixed inset-x-0 bottom-0 left-0 mt-4 flex flex-col items-center justify-between pt-2 pb-xs-s;
   }
   .footer__inner {
     @apply w-full px-4;
@@ -139,5 +139,18 @@
   #credits-overlay .overlay__actions,
   #gd-foundry-overlay .overlay__actions {
     @apply justify-center;
+  }
+
+  .footer__bottom {
+    @apply w-full flex;
+  }
+  .footer__bottom-content {
+    @apply gap-s items-center flex w-full justify-between;
+  }
+  .footer__container {
+    @apply w-full;
+  }
+  .tag {
+    @apply bg-subtle text-background label-sm leading-none px-3xs py-3xs rounded-sm justify-center uppercase items-center flex;
   }
 }
