@@ -11,7 +11,7 @@ jobs:
     permissions:
       contents: write
       packages: write
-      id-token: write
+      id-token: write # Useful for provenance/security
 
     steps:
       - uses: actions/checkout@v4
@@ -21,18 +21,18 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "18"
+          # This tells GitHub to automatically create a valid .npmrc for you
+          registry-url: "https://npm.pkg.github.com"
+          scope: "@stysys"
 
       - run: npm ci
 
       - run: npm run build
 
-      - name: Configure npm for GitHub Packages
-        run: |
-          echo "@stysys:registry=https://npm.pkg.github.com" >> ~/.npmrc
-          echo "//npm.pkg.github.com/:_authToken=${{ secrets.NPM_PUBLISH_TOKEN }}" >> ~/.npmrc
-
       - name: Release
         env:
+          # We use GITHUB_TOKEN for both.
+          # It has the 'packages: write' permission from the block above.
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
+          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: npx semantic-release
