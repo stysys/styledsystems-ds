@@ -1,6 +1,6 @@
 @layer components {
   .btn {
-    @apply inline-flex w-fit cursor-pointer items-center whitespace-nowrap btn-md border  transition-base;
+    @apply inline-flex w-fit cursor-pointer items-center whitespace-nowrap border  transition-base;
     &:hover {
       @apply scale-[1.02] shadow-lg border-transparent;
     }
