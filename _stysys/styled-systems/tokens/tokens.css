@@ -101,16 +101,6 @@
   --color-on-info: #9effff;
   --color-focus: #5905ac;
   --color-link: #7437ce;
-  --color-muted: var(--color-foreground-muted);
-  --color-outline: var(--color-border);
-  --color-primary-muted: var(--color-primary-subtle);
-  --color-secondary-muted: var(--color-secondary-subtle);
-  /* Error aliases — maps shadcn/ui error naming to destructive token */
-  --color-error-100: color-mix(in oklch, var(--color-destructive) 15%, var(--color-background));
-  --color-error-500: var(--color-destructive);
-  --color-error-600: color-mix(in oklch, var(--color-destructive) 90%, black);
-  --color-error-700: color-mix(in oklch, var(--color-destructive) 75%, black);
-  --color-error-950: color-mix(in oklch, var(--color-destructive) 5%, var(--color-background));
 
   /* Typography scale — fluid clamp ---------------------- */
 
@@ -175,11 +165,11 @@
 
   --button-sm-height: 20px;
   --button-sm-padding-x: 12px;
-  --button-sm-radius: var(--radius-full);
+  --button-sm-radius: var(--radius-sm);
   --button-md-height: 32px;
   --button-md-padding-x: 16px;
-  --button-md-radius: var(--radius-full);
+  --button-md-radius: var(--radius-sm);
   --button-lg-height: 44px;
   --button-lg-padding-x: 20px;
-  --button-lg-radius: var(--radius-full);
+  --button-lg-radius: var(--radius-sm);
 }
