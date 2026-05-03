@@ -101,6 +101,16 @@
   --color-on-info: #9effff;
   --color-focus: #5905ac;
   --color-link: #7437ce;
+  --color-muted: var(--color-foreground-muted);
+  --color-outline: var(--color-border);
+  --color-primary-muted: var(--color-primary-subtle);
+  --color-secondary-muted: var(--color-secondary-subtle);
+  /* Error aliases — maps shadcn/ui error naming to destructive token */
+  --color-error-100: color-mix(in oklch, var(--color-destructive) 15%, var(--color-background));
+  --color-error-500: var(--color-destructive);
+  --color-error-600: color-mix(in oklch, var(--color-destructive) 90%, black);
+  --color-error-700: color-mix(in oklch, var(--color-destructive) 75%, black);
+  --color-error-950: color-mix(in oklch, var(--color-destructive) 5%, var(--color-background));
 
   /* Typography scale — fluid clamp ---------------------- */
 

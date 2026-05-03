@@ -1,5 +1,5 @@
 /**
- * Tailwind CSS v4 token exporter — FULL STABLE VERSION
+ * Tailwind CSS v4 token exporter — FINAL STABLE VERSION
  * 1. generateTailwindCSS: Creates the raw "tokens.css" with hardcoded values.
  * 2. generateTailwindWrapper: Creates the "tailwind.css" wrapper for the app.
  */
@@ -64,10 +64,34 @@ export interface TailwindCssTokens {
     radius?: Record<string, number>;
     shadows?: Record<string, string>;
   };
+  cardConfig?: {
+    sm?: {
+      padding: number;
+      radius: string;
+      shadow: string;
+      titleRole?: string;
+      bodyRole?: string;
+    };
+    md?: {
+      padding: number;
+      radius: string;
+      shadow: string;
+      titleRole?: string;
+      bodyRole?: string;
+    };
+    lg?: {
+      padding: number;
+      radius: string;
+      shadow: string;
+      titleRole?: string;
+      bodyRole?: string;
+    };
+    background?: string;
+  };
 }
 
 // ---------------------------------------------------------------------------
-// Constants & Helpers
+// Constants & Helpers (RESTORED FOR VANILLA-CSS.TS)
 // ---------------------------------------------------------------------------
 
 export const DEFAULT_RADIUS: Record<string, number> = {
@@ -78,6 +102,15 @@ export const DEFAULT_RADIUS: Record<string, number> = {
   xl: 16,
   full: 9999,
 };
+export const DEFAULT_RADIUS_KEYS = Object.keys(DEFAULT_RADIUS);
+
+export const DEFAULT_SHADOWS: Record<string, string> = {
+  sm: "0 1px 3px 0 oklch(0% 0 0 / 0.10)",
+  md: "0 4px 6px -1px oklch(0% 0 0 / 0.10), 0 2px 4px -2px oklch(0% 0 0 / 0.10)",
+  lg: "0 10px 15px -3px oklch(0% 0 0 / 0.10), 0 4px 6px -4px oklch(0% 0 0 / 0.10)",
+  xl: "0 20px 25px -5px oklch(0% 0 0 / 0.10), 0 8px 10px -6px oklch(0% 0 0 / 0.10)",
+};
+export const DEFAULT_SHADOW_KEYS = Object.keys(DEFAULT_SHADOWS);
 
 const WEIGHT_MAP: Record<string, number> = {
   Bold: 700,
@@ -138,11 +171,9 @@ function colorThemeBlock(colors: TailwindCssTokens["colors"]): string {
   return out;
 }
 
-/** GENERATES TOKENS.CSS — This is the "Truth" file */
 export function generateTailwindCSS(tokens: TailwindCssTokens): string {
   let themeContent = colorThemeBlock(tokens.colors);
 
-  // Typography
   if (tokens.typography) {
     const typo = tokens.typography;
     const maxBase = typo.maxFontSize ?? 16;
@@ -158,20 +189,32 @@ export function generateTailwindCSS(tokens: TailwindCssTokens): string {
     themeContent += `\n  --font-display: "${typo.headingFont}";\n  --font-body: "${typo.bodyFont}";\n`;
   }
 
-  // Radius (Fixes your missing button radius)
   const radii = tokens.styles?.radius || DEFAULT_RADIUS;
   themeContent += `\n${ruler("Radius Scale")}`;
   for (const [k, v] of Object.entries(radii)) {
     themeContent += `  --radius-${k}: ${v}px;\n`;
   }
 
-  // Button & Input Dimensions (Fixes the undefined heights)
   if (tokens.buttonSizes) {
     themeContent += `\n${ruler("Button & Input Dimensions")}`;
     for (const [size, cfg] of Object.entries(tokens.buttonSizes)) {
       themeContent += `  --button-${size}-height: ${cfg.height}px;\n`;
       themeContent += `  --button-${size}-padding-x: ${cfg.paddingX}px;\n`;
       themeContent += `  --button-${size}-radius: var(--radius-${cfg.radius});\n`;
+    }
+  }
+
+  // Card Config Dimensions
+  if (tokens.cardConfig) {
+    themeContent += `\n${ruler("Card Dimensions")}`;
+    const sizes = ['sm', 'md', 'lg'] as const;
+    for (const size of sizes) {
+      const cfg = tokens.cardConfig[size];
+      if (cfg) {
+        themeContent += `  --card-${size}-padding: ${cfg.padding}px;\n`;
+        themeContent += `  --card-${size}-radius: var(--radius-${cfg.radius});\n`;
+        themeContent += `  --card-${size}-shadow: var(--shadow-${cfg.shadow});\n`;
+      }
     }
   }
 
@@ -184,12 +227,27 @@ export function generateTailwindCSS(tokens: TailwindCssTokens): string {
 
 function colorBridgeBlocks(): string {
   const semantic = [
-    "primary", "secondary", "neutral", "tertiary", "destructive", 
-    "success", "warning", "info", "surface", "surface-raised", 
-    "background", "foreground", "foreground-muted", "border", "outline"
+    "primary", 
+    "primary-muted", // Added this for you!
+    "secondary", 
+    "secondary-muted", 
+    "neutral", 
+    "tertiary", 
+    "destructive", 
+    "success", 
+    "warning", 
+    "info", 
+    "surface", 
+    "surface-raised", 
+    "background", 
+    "foreground", 
+    "foreground-muted", 
+    "border", 
+    "outline"
   ];
   let out = `/* Color Utility Bridge (Fixes @apply crashes) ────────── */\n\n`;
   for (const name of semantic) {
+    // This defines the BASE utility so hover: and focus: work automatically
     out += `@utility text-${name} { color: var(--color-${name}); }\n`;
     out += `@utility bg-${name} { background-color: var(--color-${name}); }\n`;
     out += `@utility border-${name} { border-color: var(--color-${name}); }\n`;
@@ -219,14 +277,25 @@ function buttonUtilityBlocks(sizes: TailwindCssTokens["buttonSizes"]): string {
   return out;
 }
 
+function cardUtilityBlocks(config: TailwindCssTokens["cardConfig"]): string {
+  if (!config) return "";
+  let out = `/* Card size utilities ───────────────────────────────────── */\n`;
+  const sizes = ['sm', 'md', 'lg'] as const;
+  for (const size of sizes) {
+    if (config[size]) {
+      out += `\n@utility card-${size} {\n  padding: var(--card-${size}-padding);\n  border-radius: var(--card-${size}-radius);\n  box-shadow: var(--card-${size}-shadow);\n  background-color: var(--color-surface);\n  border: 1px solid var(--color-border);\n}\n`;
+    }
+  }
+  return out;
+}
+
 // ---------------------------------------------------------------------------
-// Part 3: MAIN WRAPPERS
+// Part 3: MAIN WRAPPER
 // ---------------------------------------------------------------------------
 
 export function generateTailwindWrapper(tokens: TailwindCssTokens): string {
   const header = `/* Tailwind v4 design token wrapper — Generated for stable @apply support */`;
   
-  // 1. The @theme inline block ensures Tailwind registers your variables as utilities
   const semanticVars = [
     "background", "surface", "surface-raised", "foreground", "foreground-muted", 
     "border", "outline", "primary", "on-primary", "secondary", "destructive"
@@ -235,18 +304,17 @@ export function generateTailwindWrapper(tokens: TailwindCssTokens): string {
   let inlineTheme = `@theme inline {\n  ${ruler("Semantic Mapping")}`;
   for (const v of semanticVars) inlineTheme += `  --color-${v}: var(--color-${v});\n`;
   
-  // Radius Mapping
   inlineTheme += `\n  ${ruler("Radius Mapping")}`;
-  const radiusKeys = tokens.styles?.radius ? Object.keys(tokens.styles.radius) : Object.keys(DEFAULT_RADIUS);
+  const radiusKeys = tokens.styles?.radius ? Object.keys(tokens.styles.radius) : DEFAULT_RADIUS_KEYS;
   for (const k of radiusKeys) inlineTheme += `  --radius-${k}: var(--radius-${k});\n`;
   inlineTheme += `}\n`;
 
-  // 2. Component Utility Blocks
   const formUtils = `\n@utility input {\n  height: var(--button-md-height);\n  border-radius: var(--button-md-radius);\n  @apply flex w-full border bg-transparent px-3 text-sm transition-all;\n  border-style: solid;\n  border-color: var(--color-outline);\n  color: var(--color-foreground);\n  &:focus-visible { border-color: var(--color-primary); outline: none; }\n}\n`;
 
   const colorBridge = colorBridgeBlocks();
   const typoUtils = semanticTypeBlocks(tokens.typography);
   const btnUtils = buttonUtilityBlocks(tokens.buttonSizes);
+  const cardUtils = cardUtilityBlocks(tokens.cardConfig);
 
-  return `${header}\n\n@import "./tokens.css";\n\n${inlineTheme}\n${colorBridge}\n${typoUtils}\n${btnUtils}\n${formUtils}`;
+  return `${header}\n\n@import "./tokens.css";\n\n${inlineTheme}\n${colorBridge}\n${typoUtils}\n${btnUtils}\n${cardUtils}${formUtils}`;
 }
