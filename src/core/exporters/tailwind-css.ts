@@ -1,6 +1,6 @@
 /**
- * Tailwind CSS v4 token exporter — Full Suite
- * * 1. generateTailwindCSS: Creates the raw "tokens.css" with hardcoded values.
+ * Tailwind CSS v4 token exporter — FULL STABLE VERSION
+ * 1. generateTailwindCSS: Creates the raw "tokens.css" with hardcoded values.
  * 2. generateTailwindWrapper: Creates the "tailwind.css" wrapper for the app.
  */
 
@@ -64,34 +64,10 @@ export interface TailwindCssTokens {
     radius?: Record<string, number>;
     shadows?: Record<string, string>;
   };
-  cardConfig?: {
-    sm?: {
-      padding: number;
-      radius: string;
-      shadow: string;
-      titleRole?: string;
-      bodyRole?: string;
-    };
-    md?: {
-      padding: number;
-      radius: string;
-      shadow: string;
-      titleRole?: string;
-      bodyRole?: string;
-    };
-    lg?: {
-      padding: number;
-      radius: string;
-      shadow: string;
-      titleRole?: string;
-      bodyRole?: string;
-    };
-    background?: string;
-  };
 }
 
 // ---------------------------------------------------------------------------
-// Constants & Logic Helpers
+// Constants & Helpers
 // ---------------------------------------------------------------------------
 
 export const DEFAULT_RADIUS: Record<string, number> = {
@@ -102,15 +78,6 @@ export const DEFAULT_RADIUS: Record<string, number> = {
   xl: 16,
   full: 9999,
 };
-const DEFAULT_RADIUS_KEYS = Object.keys(DEFAULT_RADIUS);
-
-export const DEFAULT_SHADOWS: Record<string, string> = {
-  sm: "0 1px 3px 0 oklch(0% 0 0 / 0.10)",
-  md: "0 4px 6px -1px oklch(0% 0 0 / 0.10), 0 2px 4px -2px oklch(0% 0 0 / 0.10)",
-  lg: "0 10px 15px -3px oklch(0% 0 0 / 0.10), 0 4px 6px -4px oklch(0% 0 0 / 0.10)",
-  xl: "0 20px 25px -5px oklch(0% 0 0 / 0.10), 0 8px 10px -6px oklch(0% 0 0 / 0.10)",
-};
-const DEFAULT_SHADOW_KEYS = Object.keys(DEFAULT_SHADOWS);
 
 const WEIGHT_MAP: Record<string, number> = {
   Bold: 700,
@@ -120,39 +87,16 @@ const WEIGHT_MAP: Record<string, number> = {
 };
 
 const HEADING_TOKENS = new Set([
-  "display-lg",
-  "display",
-  "display-sm",
-  "heading-xl",
-  "heading-lg",
-  "heading-md",
-  "title-lg",
-  "title-md",
-  "title-sm",
-  "label-lg",
-  "label-md",
-  "label-sm",
+  "display-lg", "display", "display-sm", "heading-xl", "heading-lg",
+  "heading-md", "title-lg", "title-md", "title-sm", "label-lg", "label-md", "label-sm",
 ]);
 
-const MIN_VP = 320;
-const MAX_VP = 1200;
-
 const TEXT_SCALE: ReadonlyArray<{ name: string; power: number }> = [
-  { name: "3xs", power: -4 },
-  { name: "2xs", power: -3 },
-  { name: "xs", power: -2 },
-  { name: "sm", power: -1 },
-  { name: "base", power: 0 },
-  { name: "lg", power: 1 },
-  { name: "xl", power: 2 },
-  { name: "2xl", power: 3 },
-  { name: "3xl", power: 4 },
-  { name: "4xl", power: 5 },
-  { name: "5xl", power: 6 },
-  { name: "6xl", power: 7 },
-  { name: "7xl", power: 8 },
-  { name: "8xl", power: 9 },
-  { name: "9xl", power: 10 },
+  { name: "3xs", power: -4 }, { name: "2xs", power: -3 }, { name: "xs", power: -2 },
+  { name: "sm", power: -1 }, { name: "base", power: 0 }, { name: "lg", power: 1 },
+  { name: "xl", power: 2 }, { name: "2xl", power: 3 }, { name: "3xl", power: 4 },
+  { name: "4xl", power: 5 }, { name: "5xl", power: 6 }, { name: "6xl", power: 7 },
+  { name: "7xl", power: 8 }, { name: "8xl", power: 9 }, { name: "9xl", power: 10 },
 ];
 
 function tailwindTextVar(power: number): string {
@@ -168,7 +112,7 @@ function ruler(title: string): string {
 }
 
 // ---------------------------------------------------------------------------
-// Part 1: Tokens Generation (Uses ColorRamps, FluidClamp, calculateFontSize)
+// Part 1: THEME DATA GENERATION (tokens.css)
 // ---------------------------------------------------------------------------
 
 function colorThemeBlock(colors: TailwindCssTokens["colors"]): string {
@@ -180,14 +124,7 @@ function colorThemeBlock(colors: TailwindCssTokens["colors"]): string {
   }));
   const derived = [];
   if (userRamps.length >= 2) {
-    derived.push({
-      cssKey: "tertiary",
-      label: "Tertiary",
-      ramp: generateTertiaryRamp(
-        userRamps[0].ramp as any,
-        userRamps[1].ramp as any,
-      ),
-    });
+    derived.push({ cssKey: "tertiary", label: "Tertiary", ramp: generateTertiaryRamp(userRamps[0].ramp as any, userRamps[1].ramp as any) });
   }
   derived.push({ cssKey: "gray", label: "Gray", ramp: generateGrayRamp() });
 
@@ -201,129 +138,81 @@ function colorThemeBlock(colors: TailwindCssTokens["colors"]): string {
   return out;
 }
 
-function typographyThemeBlock(typo: TailwindCssTokens["typography"]): string {
-  if (!typo) return "";
-  const maxBase = typo.maxFontSize ?? typo.baseSize ?? 16;
-  const maxScale = typo.maxTypeScale ?? typo.scaleRatio ?? 1.25;
-  const minBase = typo.minFontSize ?? Math.round(maxBase * 0.875);
-  const minScale = typo.minTypeScale ?? Math.max(maxScale - 0.125, 1.0);
-  const { headingFont, bodyFont } = typo;
-  const minVp = typo.minViewportWidth ?? MIN_VP;
-  const maxVp = typo.maxViewportWidth ?? MAX_VP;
-
-  let out = ruler("Typography scale — fluid clamp");
-  for (const { name, power } of TEXT_SCALE) {
-    const minPx = calculateFontSize(minBase, minScale, power);
-    const maxPx = calculateFontSize(maxBase, maxScale, power);
-    out += `  --text-${name}: ${generateFluidClamp(minPx, maxPx, minVp, maxVp)};\n`;
-  }
-  out += `\n${ruler("Font families")}  --font-display: "${headingFont}";\n  --font-body: "${bodyFont}";\n`;
-  return out;
-}
-
-/** GENERATES TOKENS.CSS */
+/** GENERATES TOKENS.CSS — This is the "Truth" file */
 export function generateTailwindCSS(tokens: TailwindCssTokens): string {
-  const themeContent = [
-    colorThemeBlock(tokens.colors),
-    typographyThemeBlock(tokens.typography),
-  ]
-    .filter(Boolean)
-    .join("\n");
-  const parts = [
-    `/* ===============================================================\n   Design tokens — generated by @stysys/design-system\n================================================================== */\n`,
+  let themeContent = colorThemeBlock(tokens.colors);
+
+  // Typography
+  if (tokens.typography) {
+    const typo = tokens.typography;
+    const maxBase = typo.maxFontSize ?? 16;
+    const maxScale = typo.maxTypeScale ?? 1.25;
+    const minBase = typo.minFontSize ?? Math.round(maxBase * 0.875);
+    const minScale = typo.minTypeScale ?? 1.125;
+    themeContent += `\n${ruler("Typography scale — fluid")}`;
+    for (const { name, power } of TEXT_SCALE) {
+      const minPx = calculateFontSize(minBase, minScale, power);
+      const maxPx = calculateFontSize(maxBase, maxScale, power);
+      themeContent += `  --text-${name}: ${generateFluidClamp(minPx, maxPx, 320, 1200)};\n`;
+    }
+    themeContent += `\n  --font-display: "${typo.headingFont}";\n  --font-body: "${typo.bodyFont}";\n`;
+  }
+
+  // Radius (Fixes your missing button radius)
+  const radii = tokens.styles?.radius || DEFAULT_RADIUS;
+  themeContent += `\n${ruler("Radius Scale")}`;
+  for (const [k, v] of Object.entries(radii)) {
+    themeContent += `  --radius-${k}: ${v}px;\n`;
+  }
+
+  // Button & Input Dimensions (Fixes the undefined heights)
+  if (tokens.buttonSizes) {
+    themeContent += `\n${ruler("Button & Input Dimensions")}`;
+    for (const [size, cfg] of Object.entries(tokens.buttonSizes)) {
+      themeContent += `  --button-${size}-height: ${cfg.height}px;\n`;
+      themeContent += `  --button-${size}-padding-x: ${cfg.paddingX}px;\n`;
+      themeContent += `  --button-${size}-radius: var(--radius-${cfg.radius});\n`;
+    }
+  }
+
+  return `/* ===============================================================\n   Design tokens — generated by @stysys/design-system\n================================================================== */\n\n@theme {\n${themeContent}}\n`;
+}
+
+// ---------------------------------------------------------------------------
+// Part 2: UTILITY BRIDGES (tailwind.css)
+// ---------------------------------------------------------------------------
+
+function colorBridgeBlocks(): string {
+  const semantic = [
+    "primary", "secondary", "neutral", "tertiary", "destructive", 
+    "success", "warning", "info", "surface", "surface-raised", 
+    "background", "foreground", "foreground-muted", "border", "outline"
   ];
-  if (themeContent) parts.push(`@theme {\n${themeContent}}\n`);
-  return parts.join("\n");
-}
-
-// ---------------------------------------------------------------------------
-// Part 2: Utilities (Fixed for v4 with direct var() calls)
-// ---------------------------------------------------------------------------
-
-const FORM_UTILITIES = `/* Form utilities ────────────────────────────────────────── */
-
-@utility input {
-  height: var(--button-md-height);
-  border-radius: var(--button-md-radius);
-  @apply flex w-full border bg-transparent px-3 text-sm transition-all;
-  border-style: solid;
-  border-color: var(--color-outline);
-  color: var(--color-foreground);
-  &::placeholder { color: var(--color-muted); }
-  &:focus-visible { border-color: var(--color-primary); outline: none; }
-  &:disabled { @apply cursor-not-allowed opacity-50; }
-}
-
-@utility input-select {
-  @apply input pr-8;
-  appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23ffffff' d='M6 8L2 4h8z'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 0.5rem center;
-  background-size: 12px;
-}
-`;
-
-const BUTTON_VARIANT_UTILITIES = `/* Button variant utilities ───────────────────────────────── */
-
-@utility btn-solid {
-  border-color: var(--color-neutral-500);
-  background-color: var(--color-neutral-500);
-  color: var(--color-neutral-950);
-  &:hover { background-color: var(--color-primary); color: var(--color-on-primary); border-color: var(--color-primary); }
-}
-
-@utility btn-outline {
-  border-color: var(--color-border);
-  background-color: transparent;
-  color: var(--color-foreground);
-  &:hover { background-color: var(--color-surface-raised); }
-}
-
-@utility btn-primary {
-  border-color: transparent;
-  background-color: var(--color-primary);
-  color: var(--color-on-primary);
-  &:hover { opacity: 0.9; }
-}
-/* ... rest of variants (btn-secondary, btn-destructive, etc) follow same pattern ... */
-`;
-
-function semanticUtilityBlocks(typo: TailwindCssTokens["typography"]): string {
-  if (!typo) return "";
-  let out = `/* Semantic type utilities ${"─".repeat(34)} */\n`;
-
-  if (typo.semanticRoles && Object.keys(typo.semanticRoles).length > 0) {
-    for (const [token, role] of Object.entries(typo.semanticRoles)) {
-      const sizeVar = role.step
-        ? `var(--text-${role.step})`
-        : `${role.fontSize}px`;
-      const fontVar = HEADING_TOKENS.has(token)
-        ? "var(--font-display)"
-        : "var(--font-body)";
-      out += `\n@utility ${token} {\n  font-size: ${sizeVar};\n  font-family: ${fontVar};\n  font-weight: ${role.fontWeight};\n  line-height: ${role.lineHeight};\n}\n`;
-    }
-  } else {
-    for (const entry of SEMANTIC_SCALE) {
-      const fontVar = HEADING_TOKENS.has(entry.token)
-        ? "var(--font-display)"
-        : "var(--font-body)";
-      const weight = WEIGHT_MAP[entry.weight] ?? 400;
-      out += `\n@utility ${entry.token} {\n  font-size: var(${tailwindTextVar(entry.power)});\n  font-family: ${fontVar};\n  font-weight: ${weight};\n  line-height: ${entry.leading};\n}\n`;
-    }
+  let out = `/* Color Utility Bridge (Fixes @apply crashes) ────────── */\n\n`;
+  for (const name of semantic) {
+    out += `@utility text-${name} { color: var(--color-${name}); }\n`;
+    out += `@utility bg-${name} { background-color: var(--color-${name}); }\n`;
+    out += `@utility border-${name} { border-color: var(--color-${name}); }\n`;
   }
   return out;
 }
 
-function buttonUtilityBlocks(
-  sizes: Record<
-    string,
-    { height: number; paddingX: number; radius: string; labelRole?: string }
-  >,
-): string {
-  let out = `/* Button size utilities ${"─".repeat(36)} */\n`;
+function semanticTypeBlocks(typo: TailwindCssTokens["typography"]): string {
+  if (!typo) return "";
+  let out = `/* Semantic type utilities ────────────────────────────────── */\n`;
+  for (const entry of SEMANTIC_SCALE) {
+    const font = HEADING_TOKENS.has(entry.token) ? "var(--font-display)" : "var(--font-body)";
+    const weight = WEIGHT_MAP[entry.weight] ?? 400;
+    out += `\n@utility ${entry.token} {\n  font-size: var(${tailwindTextVar(entry.power)});\n  font-family: ${font};\n  font-weight: ${weight};\n  line-height: ${entry.leading};\n}\n`;
+  }
+  return out;
+}
+
+function buttonUtilityBlocks(sizes: TailwindCssTokens["buttonSizes"]): string {
+  if (!sizes) return "";
+  let out = `/* Button size utilities ─────────────────────────────────── */\n`;
   for (const [size, cfg] of Object.entries(sizes)) {
-    out += `\n@utility btn-${size} {\n  height: var(--button-${size}-height);\n  padding-left: var(--button-${size}-padding-x);\n  padding-right: var(--button-${size}-padding-x);\n  border-radius: var(--radius-${cfg.radius});\n`;
+    out += `\n@utility btn-${size} {\n  height: var(--button-${size}-height);\n  padding-left: var(--button-${size}-padding-x);\n  padding-right: var(--button-${size}-padding-x);\n  border-radius: var(--button-${size}-radius);\n`;
     if (cfg.labelRole) out += `  @apply ${cfg.labelRole};\n`;
     out += `}\n`;
   }
@@ -331,62 +220,33 @@ function buttonUtilityBlocks(
 }
 
 // ---------------------------------------------------------------------------
-// Part 3: Wrapper Export (The main entry point for the App)
+// Part 3: MAIN WRAPPERS
 // ---------------------------------------------------------------------------
 
 export function generateTailwindWrapper(tokens: TailwindCssTokens): string {
-  const lines: string[] = [];
-
-  // Colors
-  if (tokens.colors && tokens.colors.length > 0) {
-    const userKeys = tokens.colors.map((c) => c.key);
-    const allKeys = [
-      ...userKeys,
-      ...(userKeys.length >= 2 ? ["tertiary"] : []),
-      "gray",
-    ];
-    lines.push(`  ${ruler("Colors").trim()}`);
-    for (const key of allKeys) {
-      for (const step of RAMP_STEPS) {
-        lines.push(`  --color-${key}-${step}: var(--color-${key}-${step});`);
-      }
-    }
-  }
-
-  // Semantic Colors
-  const BASELINE_SEMANTIC = [
-    "background",
-    "surface",
-    "foreground",
-    "muted",
-    "border",
-    "outline",
-    "primary",
-    "on-primary",
-    "secondary",
-    "destructive",
+  const header = `/* Tailwind v4 design token wrapper — Generated for stable @apply support */`;
+  
+  // 1. The @theme inline block ensures Tailwind registers your variables as utilities
+  const semanticVars = [
+    "background", "surface", "surface-raised", "foreground", "foreground-muted", 
+    "border", "outline", "primary", "on-primary", "secondary", "destructive"
   ];
-  lines.push(`\n  ${ruler("Semantic colors").trim()}`);
-  for (const role of BASELINE_SEMANTIC) {
-    lines.push(`  --color-${role}: var(--color-${role});`);
-  }
+  
+  let inlineTheme = `@theme inline {\n  ${ruler("Semantic Mapping")}`;
+  for (const v of semanticVars) inlineTheme += `  --color-${v}: var(--color-${v});\n`;
+  
+  // Radius Mapping
+  inlineTheme += `\n  ${ruler("Radius Mapping")}`;
+  const radiusKeys = tokens.styles?.radius ? Object.keys(tokens.styles.radius) : Object.keys(DEFAULT_RADIUS);
+  for (const k of radiusKeys) inlineTheme += `  --radius-${k}: var(--radius-${k});\n`;
+  inlineTheme += `}\n`;
 
-  // Radius & Shadows
-  const radiusKeys = tokens.styles?.radius
-    ? Object.keys(tokens.styles.radius)
-    : DEFAULT_RADIUS_KEYS;
-  lines.push(`\n  ${ruler("Radius scale").trim()}`);
-  for (const k of radiusKeys)
-    lines.push(`  --radius-${k}: var(--radius-${k});`);
+  // 2. Component Utility Blocks
+  const formUtils = `\n@utility input {\n  height: var(--button-md-height);\n  border-radius: var(--button-md-radius);\n  @apply flex w-full border bg-transparent px-3 text-sm transition-all;\n  border-style: solid;\n  border-color: var(--color-outline);\n  color: var(--color-foreground);\n  &:focus-visible { border-color: var(--color-primary); outline: none; }\n}\n`;
 
-  const header = `/* Tailwind v4 design token wrapper — generated by styled.systems */`;
-  const themeBlock = `\n@theme inline {\n${lines.join("\n")}\n}\n`;
-  const utilityBlock = tokens.typography
-    ? `\n${semanticUtilityBlocks(tokens.typography)}`
-    : "";
-  const buttonBlock = tokens.buttonSizes
-    ? `\n${buttonUtilityBlocks(tokens.buttonSizes)}`
-    : "";
+  const colorBridge = colorBridgeBlocks();
+  const typoUtils = semanticTypeBlocks(tokens.typography);
+  const btnUtils = buttonUtilityBlocks(tokens.buttonSizes);
 
-  return `${header}\n\n@import "./tokens.css";\n${themeBlock}${utilityBlock}${buttonBlock}\n${FORM_UTILITIES}\n${BUTTON_VARIANT_UTILITIES}`;
+  return `${header}\n\n@import "./tokens.css";\n\n${inlineTheme}\n${colorBridge}\n${typoUtils}\n${btnUtils}\n${formUtils}`;
 }

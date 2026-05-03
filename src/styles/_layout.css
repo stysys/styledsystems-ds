@@ -56,11 +56,11 @@
   }
 
   .tab--active {
-    @apply text-primary border-primary hover:text-primary/90 hover:border-primary/90 border-b-2;
+    @apply text-primary border-primary hover:text-primary-muted hover:border-primary/90 border-b-2;
   }
 
   .tab--active {
-    @apply text-primary border-primary hover:text-primary/90 hover:border-primary/90 border-b-2;
+    @apply text-primary border-primary hover:text-primary-muted hover:border-primary/90 border-b-2;
   }
 
   .tab--disabled {

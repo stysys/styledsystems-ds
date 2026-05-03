@@ -26,7 +26,7 @@
 
 @theme {
   /* Reset default Tailwind colors */
-  --color-*: initial;
+  /* --color-*: initial; */
 
   /* Typography - Font Families */
   --font-body: "GDGaioVF", sans-serif;
