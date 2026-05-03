@@ -161,23 +161,15 @@
   --shadow-lg: 0 10px 15px -3px oklch(0% 0 0 / 0.10), 0 4px 6px -4px oklch(0% 0 0 / 0.10);
   --shadow-xl: 0 20px 25px -5px oklch(0% 0 0 / 0.10), 0 8px 10px -6px oklch(0% 0 0 / 0.10);
 
-  /* Card sizes ------------------------------------------ */
+  /* Button sizes ---------------------------------------- */
 
-  --card-sm-padding: 12px;
-  --card-sm-radius: var(--radius-sm);
-  --card-sm-shadow: var(--shadow-sm);
-  --card-sm-title: var(--text-xs);
-  --card-sm-body:  var(--text-2xs);
-  --card-md-padding: 16px;
-  --card-md-radius: var(--radius-lg);
-  --card-md-shadow: var(--shadow-sm);
-  --card-md-title: var(--text-3xl);
-  --card-md-body:  var(--text-sm);
-  --card-lg-padding: 24px;
-  --card-lg-radius: var(--radius-lg);
-  --card-lg-shadow: var(--shadow-md);
-  --card-lg-title: var(--text-4xl);
-  --card-lg-body:  var(--text-base);
-  --card-background: var(--color-surface);
-  --card-foreground: var(--color-foreground);
+  --button-sm-height: 20px;
+  --button-sm-padding-x: 12px;
+  --button-sm-radius: var(--radius-full);
+  --button-md-height: 32px;
+  --button-md-padding-x: 16px;
+  --button-md-radius: var(--radius-full);
+  --button-lg-height: 44px;
+  --button-lg-padding-x: 20px;
+  --button-lg-radius: var(--radius-full);
 }
