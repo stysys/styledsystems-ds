@@ -161,15 +161,20 @@
   --shadow-lg: 0 10px 15px -3px oklch(0% 0 0 / 0.10), 0 4px 6px -4px oklch(0% 0 0 / 0.10);
   --shadow-xl: 0 20px 25px -5px oklch(0% 0 0 / 0.10), 0 8px 10px -6px oklch(0% 0 0 / 0.10);
 
-  /* Button sizes ---------------------------------------- */
+  /* Card sizes ------------------------------------------ */
 
-  --button-sm-height: 20px;
-  --button-sm-padding-x: 12px;
-  --button-sm-radius: var(--radius-sm);
-  --button-md-height: 32px;
-  --button-md-padding-x: 16px;
-  --button-md-radius: var(--radius-sm);
-  --button-lg-height: 44px;
-  --button-lg-padding-x: 20px;
-  --button-lg-radius: var(--radius-sm);
+  --card-sm-radius: var(--radius-md);
+  --card-sm-inset: var(--spacing-undefined);
+  --card-sm-squish-block: var(--spacing-undefined);
+  --card-sm-squish-inline: var(--spacing-undefined);
+  --card-md-radius: var(--radius-md);
+  --card-md-inset: var(--spacing-undefined);
+  --card-md-squish-block: var(--spacing-undefined);
+  --card-md-squish-inline: var(--spacing-undefined);
+  --card-lg-radius: var(--radius-md);
+  --card-lg-inset: var(--spacing-undefined);
+  --card-lg-squish-block: var(--spacing-undefined);
+  --card-lg-squish-inline: var(--spacing-undefined);
+  --card-background: var(--color-primary);
+  --card-foreground: var(--color-on-primary);
 }
