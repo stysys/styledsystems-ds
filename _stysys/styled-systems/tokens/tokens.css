@@ -163,7 +163,7 @@
 
   /* Card sizes ------------------------------------------ */
 
-  --card-sm-radius: var(--radius-md);
+  --card-sm-radius: var(--radius-sm);
   --card-sm-inset: var(--spacing-undefined);
   --card-sm-squish-block: var(--spacing-undefined);
   --card-sm-squish-inline: var(--spacing-undefined);

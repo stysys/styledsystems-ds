@@ -237,7 +237,7 @@
   --card-inset: var(--spacing-xs);
   --card-squish-block: var(--spacing-3xs);
   --card-squish-inline: var(--spacing-xs);
-  border-radius: var(--card-sm-radius, var(--radius-md));
+  border-radius: var(--card-sm-radius, var(--radius-sm));
   background-color: var(--color-surface);
   border: 1px solid transparent;
   overflow: hidden;
