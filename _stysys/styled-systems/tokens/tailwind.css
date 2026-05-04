@@ -212,6 +212,65 @@
   @apply label-lg;
 }
 
+/* Card Utilities — Shell only ───────────────────────────────
+   No padding on the shell. Use inset-card / inset-squish-card on children.
+   ─────────────────────────────────────────────────────────── */
+
+@utility card-sm {
+  --card-inset: var(--spacing-xs);
+  --card-squish-block: var(--spacing-3xs);
+  --card-squish-inline: var(--spacing-xs);
+  border-radius: var(--card-sm-radius, var(--radius-sm));
+  background-color: var(--color-surface);
+  border: 1px solid transparent;
+  overflow: hidden;
+}
+
+@utility card-md {
+  --card-inset: var(--spacing-m);
+  --card-squish-block: var(--spacing-2xs);
+  --card-squish-inline: var(--spacing-s);
+  border-radius: var(--card-md-radius, var(--radius-md));
+  background-color: var(--color-surface);
+  border: 1px solid transparent;
+  overflow: hidden;
+}
+
+@utility card-lg {
+  --card-inset: var(--spacing-l);
+  --card-squish-block: var(--spacing-s);
+  --card-squish-inline: var(--spacing-l);
+  border-radius: var(--card-lg-radius, var(--radius-lg));
+  background-color: var(--color-surface);
+  border: 1px solid transparent;
+  overflow: hidden;
+}
+
+/* inset-card — children opt into the card's declared rhythm */
+@utility inset-card {
+  padding-block: var(--card-inset, var(--spacing-m));
+  padding-inline: var(--card-inset, var(--spacing-m));
+}
+
+/* inset-squish-card — tighter vertical, used for headers/footers */
+@utility inset-squish-card {
+  padding-block: var(--card-squish-block, var(--spacing-xs));
+  padding-inline: var(--card-squish-inline, var(--spacing-m));
+}
+
+/* inset-x-card / inset-y-card — single-axis inset using card rhythm */
+@utility inset-x-card {
+  padding-inline: var(--card-inset, var(--spacing-m));
+}
+@utility inset-y-card {
+  padding-block: var(--card-inset, var(--spacing-m));
+}
+
+/* Card variant modifiers */
+@utility card-danger  { border-width: 2px; border-color: color-mix(in oklch, var(--color-error-500) 30%, transparent); background-color: color-mix(in oklch, var(--color-error-500) 10%, var(--color-background)); color: var(--color-error-500); }
+@utility card-success { border-width: 2px; border-color: color-mix(in oklch, var(--color-success) 30%, transparent); background-color: color-mix(in oklch, var(--color-success) 10%, var(--color-background)); }
+@utility card-warning { border-width: 2px; border-color: color-mix(in oklch, var(--color-warning) 30%, transparent); background-color: color-mix(in oklch, var(--color-warning) 10%, var(--color-background)); }
+@utility card-raised  { background-color: var(--color-surface-raised); }
 
 @utility input {
   height: var(--button-md-height);
